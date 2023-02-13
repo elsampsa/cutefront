@@ -279,7 +279,7 @@ callbacks (as suggested above).
 
 ``this`` can be bound explicitly to the current object with
 `bind <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind>`_.
-This is used in connecting signals to slots as discussed above.
+This is used when connecting signals to slots as discussed above.
 
 As a rule of thumb, always when passing an object member function as a parameter,
 always use ``bind``.  When creating callbacks in object methods, 

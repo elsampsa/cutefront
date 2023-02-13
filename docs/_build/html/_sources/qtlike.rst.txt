@@ -71,8 +71,6 @@ Here is an image of the working web-page:
 
 .. image:: images/ballgame.png
 
-.. For an online demo, please go here (TODO)
-
 Anatomy of a Widget
 -------------------
 

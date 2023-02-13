@@ -7,11 +7,12 @@ Installing
 Download the Repo
 -----------------
 
-Get the code (for example) with:
+Get the code (for example) with either of these:
 
 .. code:: bash
 
-    git clone TODO
+    git clone https://github.com/elsampsa/cutefront.git
+    git clone git@github.com:elsampsa/cutefront.git
 
 You'll get this directory structure:
 

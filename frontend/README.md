@@ -1,6 +1,6 @@
 # CuteFront Frontend Framework
 
-Nothing much in this file - please refer to the full documentation in here (TODO)
+Nothing much in this file - please refer to the full documentation in [here](https://elsampsa.github.io/cutefront/_build/html/index.html)
 
 Frontend app files:
 ```

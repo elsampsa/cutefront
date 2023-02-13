@@ -13,8 +13,9 @@ CuteFront is a frontend framework, featuring:
 - No templating languages, just pure js and html
 - Qt's touch'n'feel with widgets, signals and slots
 
-For full documentation, please go here (TODO).  You should read and understand the documentation
-before going further.
+For full documentation, please go [here](https://elsampsa.github.io/cutefront/_build/html/index.html)
+
+You should read and understand the documentation before going further.
 
 This repo can also be used as a *fullstack scaffold* for your projects.  It features:
 
