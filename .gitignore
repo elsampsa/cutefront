@@ -1,0 +1,11 @@
+__pycache__/
+/build/
+/dist/
+/venv/
+*.egg-info/
+.ipynb_checkpoints/
+Untitled*.ipynb
+.vscode/
+scrap/
+frontend/bootstrap-*-dist
+backend/my_backend/api_v1/alembic/versions/*.py

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Development Environments &mdash; CuteFront  documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Creating and Using Widgets" href="creating.html" />
+    <link rel="prev" title="Code Organization" href="codeorg.html" />
+    <!-- as per https://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs -->
+    <link href="_static/rtd_override.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+  <a href="index.html" class="icon icon-home"> CuteFront<img src="_static/logo.png" class="logo" alt="Logo"/>
+</a>
+    <div class="version">
+      0.0.1
+    </div>
+
+
+<!-- font awesome comes with the rtd package.. use like this:-->
+<a href="https://github.com/elsampsa/skeleton" class="icon icon-github"> CuteFront @ github</a>
+<a href="https://github.com/elsampsa/skeleton/issues" class="fa fa-bug"> Issue Tracker @ github</a>
+
+<!-- don't even think about subclassing searchbox.html .. will never work!-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qtlike.html">Qt-like Widgets and Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library.html">Widget Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="codeorg.html">Code Organization</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Development Environments</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#plainfile">1. Plainfile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#native">2. Native</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#docker">3. Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="creating.html">Creating and Using Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fullstack.html">A Fullstack Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cheatsheet.html">Python vs JS Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="links.html">Links</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CuteFront</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Development Environments</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/devenvs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="development-environments">
+<h1>Development Environments<a class="headerlink" href="#development-environments" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="plainfile">
+<span id="id1"></span><h2>1. Plainfile<a class="headerlink" href="#plainfile" title="Permalink to this headline">¶</a></h2>
+<p>In this development you open your app’s entry point
+(<code class="docutils literal notranslate"><span class="pre">app.html</span></code> or <code class="docutils literal notranslate"><span class="pre">index.html</span></code>) directly with your browser from the disk.</p>
+<p>You would do the same for the html files in the <code class="docutils literal notranslate"><span class="pre">frontend/lib/base</span></code> directory, when
+developing and debugging a new widget.</p>
+<p>In firefox, type this into your browser’s address bar:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>file://abs/path/to/file.html
+</pre></div>
+</div>
+<p>(abs typically has one more extra <code class="docutils literal notranslate"><span class="pre">/</span></code>, i.e. the final url would look like <code class="docutils literal notranslate"><span class="pre">file:///home/user/etc</span></code>).</p>
+<p>Enable web developer tools in Firefox from the menu bar:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Tools -&gt; Browser Tools -&gt; Web Developer Tools
+</pre></div>
+</div>
+<p>And you have yourself a first class in-browser development / debugging environment.  On code
+changes you simply need to refresh the browser view.</p>
+<p>In order to be able to follow links in your <code class="docutils literal notranslate"><span class="pre">app.html</span></code>,
+you still need to give firefox a full file access and create a separate development
+profile for that.  Start firefox with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>firefox -ProfileManager
+</pre></div>
+</div>
+<p>Therein, create a separate profile for firefox, called “development” and use that profile.</p>
+<p>Within then development profile, type into your firefox’s address field:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>about:config
+</pre></div>
+</div>
+<p>Search for <code class="docutils literal notranslate"><span class="pre">fileuri</span></code> &amp; set the property</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>security.fileuri.strict_origin_policy
+</pre></div>
+</div>
+<p>to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<p>You can start firefox in that profile with</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>firefox -P development
+</pre></div>
+</div>
+<p><strong>WARNING</strong> : the <code class="docutils literal notranslate"><span class="pre">security.fileuri.strict_origin_policy</span></code> allows firefox to
+<strong>read any file on your filesystem</strong> so be carefull not to browse in the
+web using the “development” profile!</p>
+<p>You might also prefer a more sophisticated way of isolation, say “firejail” or the like.</p>
+<p>At this stage of the development (developing individual widgets and putting initially
+together your fullstack app), you would typically use a mock datasouce
+(for more details, see datasources in <a class="reference internal" href="fullstack.html#fullstack"><span class="std std-ref">here</span></a>)</p>
+</div>
+<div class="section" id="native">
+<h2>2. Native<a class="headerlink" href="#native" title="Permalink to this headline">¶</a></h2>
+<p>In this mode, a reverse-proxy server (nginx) is serving you the html and js files.</p>
+<p>When using this development mode, you’d already have a backend you want to play with.</p>
+<p>A single-shot python wrapper for nginx is provided in directory <code class="docutils literal notranslate"><span class="pre">frontend/</span></code>, please
+start it with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./nginx.py --help
+</pre></div>
+</div>
+<p>to see the options.</p>
+<p>Refer to the <a class="reference internal" href="fullstack.html#fullstack"><span class="std std-ref">Fullstack Example</span></a> to see an actual working example.</p>
+</div>
+<div class="section" id="docker">
+<h2>3. Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h2>
+<p>A docker image file <code class="docutils literal notranslate"><span class="pre">frontend/Dockerfile.dev</span></code> is provided.  It simply runs nginx with
+the provided <code class="docutils literal notranslate"><span class="pre">nginx.conf</span></code> from <code class="docutils literal notranslate"><span class="pre">frontend/docker/dev/</span></code> directory.</p>
+<p>All code in <code class="docutils literal notranslate"><span class="pre">frontend/</span></code> is mounted into a docker volume, allowing you to edit and
+“hot reload” the code live in <code class="docutils literal notranslate"><span class="pre">frontend/</span></code>.</p>
+<p>Refer to the <a class="reference internal" href="fullstack.html#fullstack"><span class="std std-ref">Fullstack Example</span></a> to see an actual working example.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="codeorg.html" class="btn btn-neutral float-left" title="Code Organization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="creating.html" class="btn btn-neutral float-right" title="Creating and Using Widgets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023 Sampsa Riikonen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

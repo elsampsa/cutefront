@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python vs JS Cheatsheet &mdash; CuteFront  documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Links" href="links.html" />
+    <link rel="prev" title="A Fullstack Example" href="fullstack.html" />
+    <!-- as per https://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs -->
+    <link href="_static/rtd_override.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+  <a href="index.html" class="icon icon-home"> CuteFront<img src="_static/logo.png" class="logo" alt="Logo"/>
+</a>
+    <div class="version">
+      0.0.1
+    </div>
+
+
+<!-- font awesome comes with the rtd package.. use like this:-->
+<a href="https://github.com/elsampsa/skeleton" class="icon icon-github"> CuteFront @ github</a>
+<a href="https://github.com/elsampsa/skeleton/issues" class="fa fa-bug"> Issue Tracker @ github</a>
+
+<!-- don't even think about subclassing searchbox.html .. will never work!-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qtlike.html">Qt-like Widgets and Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library.html">Widget Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="codeorg.html">Code Organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devenvs.html">Development Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating.html">Creating and Using Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fullstack.html">A Fullstack Example</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Python vs JS Cheatsheet</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#else-if">else if</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#strings">Strings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lists-arrays">Lists, Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sets">Sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#args">args</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dictionaries-objects">Dictionaries, Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deepcopy">Deepcopy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#traceback">Traceback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#subclassing">Subclassing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#object-instance-members">Object Instance Members</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lambda-functions">Lambda Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#js-scope">JS Scope</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="links.html">Links</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CuteFront</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Python vs JS Cheatsheet</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/cheatsheet.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="python-vs-js-cheatsheet">
+<h1>Python vs JS Cheatsheet<a class="headerlink" href="#python-vs-js-cheatsheet" title="Permalink to this headline">¶</a></h1>
+<p>Since the intended audience is for coders that have background in PyQt, this
+python-compared-to-javascript cheatsheet might come handy.</p>
+<div class="section" id="else-if">
+<h2>else if<a class="headerlink" href="#else-if" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>if val == 0: # python
+    pass
+elif val == 1:
+    pass
+else
+    pass
+
+if (val == 0) { // javascript
+}
+else if (val == 1) {
+}
+else {
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="strings">
+<h2>Strings<a class="headerlink" href="#strings" title="Permalink to this headline">¶</a></h2>
+<p><em>append</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>st = st + &#39;more&#39; # python
+st = st.concat(&#39;more&#39;) // javascript
+</pre></div>
+</div>
+<p><em>length</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>len(st) # python
+st.length // javascript
+</pre></div>
+</div>
+<p><em>interpolation</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&#39;kikkelis-kokkelis-{parameter}&#39;.format(parameter=1) # python
+f&#39;kikkelis-kokkelis-{parameter} # python
+`kikkelis-kokkelis-${parameter}&quot; // javascript
+</pre></div>
+</div>
+</div>
+<div class="section" id="lists-arrays">
+<h2>Lists, Arrays<a class="headerlink" href="#lists-arrays" title="Permalink to this headline">¶</a></h2>
+<p><em>iteration</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>for item in lis: # python
+    &lt;code&gt;
+list.forEach(item =&gt; { // javascript
+    &lt;code&gt; // NOTE: if you need early termination, don&#39;t use forEach
+})
+for (const item of lis) { // javascript
+    &lt;code&gt;
+}
+for i, item in enumerate(lis): # python
+    &lt;code&gt;
+for (var i = 0; i &lt; list.length; i++) { // javascript
+    var item = list[i]
+    &lt;code&gt;
+}
+</pre></div>
+</div>
+<p><em>creation</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>lis = [] # python
+lis.append(item)
+var lis = [] // javascript
+lis.push(item)
+</pre></div>
+</div>
+<p><em>modification</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>lis.pop(index) # python
+lis.splice(index, 1) // javascript
+</pre></div>
+</div>
+</div>
+<div class="section" id="sets">
+<h2>Sets<a class="headerlink" href="#sets" title="Permalink to this headline">¶</a></h2>
+<p><em>from a list</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>s = set(lis) # python
+s = Set(lis) // javascript
+</pre></div>
+</div>
+</div>
+<div class="section" id="args">
+<h2>args<a class="headerlink" href="#args" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>def func(*args): # python
+    pass # args is a list
+function func(...args) { // javascript
+    // args is an array
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="dictionaries-objects">
+<h2>Dictionaries, Objects<a class="headerlink" href="#dictionaries-objects" title="Permalink to this headline">¶</a></h2>
+<p><em>access per key</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>dic[key] # python
+dic[key] // javascript
+</pre></div>
+</div>
+<p><em>get iterarable / list</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>dic.keys() # python  iterable
+Object.keys(dic) // javascript list
+</pre></div>
+</div>
+<p><em>iteration</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>for key, value in dic.items(): # python
+    &lt;code&gt;
+for (const [key, value] of Object.entries(dict)) { // javascript
+    &lt;code&gt;
+}
+Object.entries(dict).forEach( // javascript
+    ([key, value]) =&gt; {
+        &lt;code&gt;
+    }
+)
+</pre></div>
+</div>
+<p><em>remove key-value</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>dic.pop(&quot;key&quot;) # python
+dic.delete[&quot;key&quot;] // javascript
+</pre></div>
+</div>
+<p><em>check for key</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&#39;key-name&#39; in dict # python
+dict.hasOwnProperty(&#39;key-name&#39;) // javascript
+</pre></div>
+</div>
+<p><em>catch unexisting key</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>try: # python
+    value = dict[key]
+except KeyError:
+    &lt;code&gt;
+
+let value = dict[key] // javascript
+if (value == undefined) { &lt;code&gt; }
+</pre></div>
+</div>
+</div>
+<div class="section" id="deepcopy">
+<h2>Deepcopy<a class="headerlink" href="#deepcopy" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>a = copy.deepcopy(b) # python
+a = structuredClone(b) // javascript
+</pre></div>
+</div>
+</div>
+<div class="section" id="traceback">
+<h2>Traceback<a class="headerlink" href="#traceback" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>import traceback # python
+traceback.print_stack()
+console.trace() // javascript
+</pre></div>
+</div>
+</div>
+<div class="section" id="subclassing">
+<h2>Subclassing<a class="headerlink" href="#subclassing" title="Permalink to this headline">¶</a></h2>
+<p><em>call superclass ctor</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>class ChildClass(ParentClass): # python
+    def __init__(self): # python
+        super() # python
+
+class ChildClass extends ParentClass { // javascript
+    constructor() { super() } // javascript
+</pre></div>
+</div>
+</div>
+<div class="section" id="object-instance-members">
+<h2>Object Instance Members<a class="headerlink" href="#object-instance-members" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>self.member = 1 # python
+this.member = 1 // javascript
+</pre></div>
+</div>
+<p>See also <a class="reference internal" href="creating.html#this-problem"><span class="std std-ref">this</span></a> about this.</p>
+</div>
+<div class="section" id="lambda-functions">
+<h2>Lambda Functions<a class="headerlink" href="#lambda-functions" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>f = lambda x: x+1 # python
+(x) =&gt; { return x+1 } // javascript
+x =&gt; x+1 // javascript
+</pre></div>
+</div>
+</div>
+<div class="section" id="js-scope">
+<h2>JS Scope<a class="headerlink" href="#js-scope" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>let x=1 // only withint current {} scope
+const x=1 // only withint current {} scope
+var x=1 // { var x=1 {seen also in this scope} }
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="fullstack.html" class="btn btn-neutral float-left" title="A Fullstack Example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="links.html" class="btn btn-neutral float-right" title="Links" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023 Sampsa Riikonen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

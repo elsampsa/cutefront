@@ -1,0 +1,6 @@
+FROM nginx
+
+# RUN mkdir /usr/app
+RUN mkdir /app
+COPY docker/dev/nginx.conf /etc/nginx/nginx.conf
+# no command here!  nginx is running by default

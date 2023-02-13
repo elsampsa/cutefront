@@ -1,0 +1,10 @@
+[Unit]
+Description="my_backend backend service"
+
+[Service]
+ExecStart=%h/.local/bin/my_backend --ini /complete/path/to/your/config.ini run
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creating and Using Widgets &mdash; CuteFront  documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="A Fullstack Example" href="fullstack.html" />
+    <link rel="prev" title="Development Environments" href="devenvs.html" />
+    <!-- as per https://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs -->
+    <link href="_static/rtd_override.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+  <a href="index.html" class="icon icon-home"> CuteFront<img src="_static/logo.png" class="logo" alt="Logo"/>
+</a>
+    <div class="version">
+      0.0.1
+    </div>
+
+
+<!-- font awesome comes with the rtd package.. use like this:-->
+<a href="https://github.com/elsampsa/skeleton" class="icon icon-github"> CuteFront @ github</a>
+<a href="https://github.com/elsampsa/skeleton/issues" class="fa fa-bug"> Issue Tracker @ github</a>
+
+<!-- don't even think about subclassing searchbox.html .. will never work!-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qtlike.html">Qt-like Widgets and Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library.html">Widget Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="codeorg.html">Code Organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devenvs.html">Development Environments</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating and Using Widgets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#subclassing-a-widget">Subclassing a Widget</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#constructor">Constructor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#logging">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#defining-signals">Defining Signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#initialize-state">Initialize State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#slot-methods">Slot Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#code-as-documentation">Code as Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-dom">Using the DOM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#emitting-signals">Emitting Signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#connecting-signals">Connecting Signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-trouble-with-this">The Trouble with “this”</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fullstack.html">A Fullstack Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cheatsheet.html">Python vs JS Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="links.html">Links</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CuteFront</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Creating and Using Widgets</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/creating.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="creating-and-using-widgets">
+<span id="creating"></span><h1>Creating and Using Widgets<a class="headerlink" href="#creating-and-using-widgets" title="Permalink to this headline">¶</a></h1>
+<p>The best way to learn to create widgets, is to study the code in
+the <span class="xref std std-ref">widget library</span>.  This section serves as a reference.</p>
+<div class="section" id="subclassing-a-widget">
+<h2>Subclassing a Widget<a class="headerlink" href="#subclassing-a-widget" title="Permalink to this headline">¶</a></h2>
+<p>Creating a new widget is always done in the same way:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="p">{</span> <span class="nx">Widget</span><span class="p">,</span> <span class="nx">Signal</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./widget.js&#39;</span><span class="p">;</span>
+<span class="kd">class</span> <span class="nx">CrudButtonsWidget</span> <span class="k">extends</span> <span class="nx">Widget</span> <span class="p">{</span>
+    <span class="c1">// widget definition here</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="constructor">
+<h2>Constructor<a class="headerlink" href="#constructor" title="Permalink to this headline">¶</a></h2>
+<p>Constructor typically takes in an <code class="docutils literal notranslate"><span class="pre">id</span></code> that identifies the html element
+the widget attaches to</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">constructor</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="o">=</span><span class="nx">id</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">createElement</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">createState</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">super()</span></code> calls <code class="docutils literal notranslate"><span class="pre">createSignals</span></code> (see below) automatically.</p>
+</div>
+<div class="section" id="logging">
+<h2>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h2>
+<p>Logging from within the widget code is done like this:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">err</span><span class="p">(</span><span class="s2">&quot;report an error&quot;</span><span class="p">)</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">,</span> <span class="s2">&quot;some logging&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>These work like <code class="docutils literal notranslate"><span class="pre">console.log</span></code>, i.e. feel free to add all optional arguments you want.</p>
+<p>When using the widget, you can set the loglevel like this:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">widget</span> <span class="o">=</span> <span class="nx">YouWidget</span><span class="p">(</span><span class="s2">&quot;some-id&quot;</span><span class="p">)</span>
+<span class="nx">widget</span><span class="p">.</span><span class="nx">setLogLevel</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">);</span> <span class="c1">// debugging</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="defining-signals">
+<h2>Defining Signals<a class="headerlink" href="#defining-signals" title="Permalink to this headline">¶</a></h2>
+<p>Define signals like this, into the <code class="docutils literal notranslate"><span class="pre">this.signals</span></code> “namespace”:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// UP: signals</span>
+<span class="nx">createSignals</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">create</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Signal</span><span class="p">();</span> <span class="c1">// C // carries nothing</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Signal</span><span class="p">();</span> <span class="c1">// U // carries nothing</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="k">delete</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Signal</span><span class="p">();</span> <span class="c1">// D // carries uuid of the datum</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the comments, you should always write what kind of variable / data
+structure the signal is carrying</p>
+</div>
+<div class="section" id="initialize-state">
+<h2>Initialize State<a class="headerlink" href="#initialize-state" title="Permalink to this headline">¶</a></h2>
+<p>An example of a widget that would cache a json object <code class="docutils literal notranslate"><span class="pre">current_datum</span></code>:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">createState</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">element</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">err</span><span class="p">(</span><span class="s2">&quot;no element created&quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">current_datum</span> <span class="o">=</span> <span class="kc">null</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="slot-methods">
+<h2>Slot Methods<a class="headerlink" href="#slot-methods" title="Permalink to this headline">¶</a></h2>
+<p>Let’s consider a slot that receives a signal carrying a json object “datum”</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">current_datum_slot</span><span class="p">(</span><span class="nx">datum</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">datum</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// change state, say hide buttons</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">current_datum</span> <span class="o">=</span> <span class="kc">null</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">current_datum</span> <span class="o">=</span> <span class="nx">structuredClone</span><span class="p">(</span><span class="nx">datum</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The signal that comes into the slot, alters the internal state of the
+widget (that was created in <code class="docutils literal notranslate"><span class="pre">createState</span></code> above).</p>
+<p>In this particular case we create a copy of the object.  You might or might not need
+to do this.  Consider situation where you send an object to a slot and then it is changed
+elsewhere in the code: in such situation your slot function needs to create its own copy
+of the object in order to keep it’s state under control.</p>
+</div>
+<div class="section" id="code-as-documentation">
+<h2>Code as Documentation<a class="headerlink" href="#code-as-documentation" title="Permalink to this headline">¶</a></h2>
+<p>Structuring the code in the CuteFront way, “autodocuments” the code to some extent.</p>
+<p>Taking a quick look into the the subclassed <code class="docutils literal notranslate"><span class="pre">createSignals</span></code> and
+various (well commented) <code class="docutils literal notranslate"><span class="pre">slot</span></code> functions immediately give you a clear
+idea of the widget’s API, while looking at <code class="docutils literal notranslate"><span class="pre">createState</span></code> shows you all the
+internal state variables of the widget.</p>
+<p>The associated, minimal testing <code class="docutils literal notranslate"><span class="pre">html</span></code> file demonstrates actual use with
+dummy data.</p>
+</div>
+<div class="section" id="using-the-dom">
+<h2>Using the DOM<a class="headerlink" href="#using-the-dom" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">createElement</span></code> method is used to hook into and manipulate the document object
+model (DOM).</p>
+<p>It should always start the same way:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">createElement</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">element</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">element</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">err</span><span class="p">(</span><span class="s2">&quot;could not find element with id&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="p">}</span>
+    <span class="c1">// create child elements to this.element</span>
+    <span class="c1">// attach callbacks to signals, etc.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Creating new child elements for <code class="docutils literal notranslate"><span class="pre">this.element</span></code> is most conveniently done like this:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="sb">`</span>
+<span class="sb">&lt;thead&gt;</span>
+<span class="sb">&lt;/thead&gt;</span>
+<span class="sb">&lt;tbody&gt;</span>
+<span class="sb">&lt;/tbody&gt;</span>
+<span class="sb">`</span>
+</pre></div>
+</div>
+<p>Where we have created table header and table body child elements under <code class="docutils literal notranslate"><span class="pre">this.element</span></code></p>
+<p>Then accessing <em>those</em> elements, you can continue like this:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">thead</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">&quot;thead&quot;</span><span class="p">).</span><span class="nx">item</span><span class="p">(</span><span class="mf">0</span><span class="p">)</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">body</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">&quot;tbody&quot;</span><span class="p">).</span><span class="nx">item</span><span class="p">(</span><span class="mf">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or access them on a per-class basis:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">some_element</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s2">&quot;some-class&quot;</span><span class="p">)[</span><span class="mf">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Or access them consecutively:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">some_element</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">children</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Alternatively, you can create them in js, and then attach as children to
+<code class="docutils literal notranslate"><span class="pre">this.element</span></code>:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">thead</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;thread&quot;</span><span class="p">)</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">thread</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Assuming you have created a button element <code class="docutils literal notranslate"><span class="pre">this.alert_button</span></code> in <code class="docutils literal notranslate"><span class="pre">createElement</span></code>
+method, and want to call a method named <code class="docutils literal notranslate"><span class="pre">internalMethod</span></code> in your widget when a button is
+clicked, you would do this in <code class="docutils literal notranslate"><span class="pre">createElement</span></code>:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">alert_button</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="c1">// CORRECT</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">internalMethod</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>However, NOT like this:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">alert_button</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span>  <span class="k">this</span><span class="p">.</span><span class="nx">internalMethod</span> <span class="c1">// WRONG WRONG WRONG</span>
+</pre></div>
+</div>
+<p>i.e. <em>always</em> define a lambda function.</p>
+<p>In the former case, <code class="docutils literal notranslate"><span class="pre">this</span></code> refers correctly to the present widget object
+instance while in the latter case <code class="docutils literal notranslate"><span class="pre">this</span></code> will become foobar.  Please see below
+for the pitfalls with <code class="docutils literal notranslate"><span class="pre">this</span></code>.</p>
+</div>
+<div class="section" id="emitting-signals">
+<h2>Emitting Signals<a class="headerlink" href="#emitting-signals" title="Permalink to this headline">¶</a></h2>
+<p>Emitting signals from within your widget is as simple as:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">signal_name</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="nx">variable</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">variable</span></code> is whatever (typically a json object) you want to
+carry with the signal and what the corresponding receiving slot (in another widget)
+knows how to handle.</p>
+<p>Many times you just send nothing with the signal, i.e. like this:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">signal_name</span><span class="p">.</span><span class="nx">emit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If you want to emit a signal directly from an html element callback, this is the correct
+way to do it (see previous subsection and the “The Trouble with This” subsection below):</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">some_button</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">signal_name</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="nx">variable</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="connecting-signals">
+<h2>Connecting Signals<a class="headerlink" href="#connecting-signals" title="Permalink to this headline">¶</a></h2>
+<p>Considering two widget instances, <code class="docutils literal notranslate"><span class="pre">from_widget</span></code> and <code class="docutils literal notranslate"><span class="pre">to_widget</span></code>, connecting
+a signal from the former to a slot of the latter, is done like this:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">from_widget</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">signal_name</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
+    <span class="nx">to_widget</span><span class="p">.</span><span class="nx">slot_name</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">to_widget</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Let’s recap that:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">FROM</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">signal_name</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
+    <span class="nx">TO</span><span class="p">.</span><span class="nx">slot_name</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">TO</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>What is that <code class="docutils literal notranslate"><span class="pre">bind</span></code> and why <code class="docutils literal notranslate"><span class="pre">TO</span></code> is repeated?  This has to do with
+the curiosities of <code class="docutils literal notranslate"><span class="pre">this</span></code> in javascript, please see below.</p>
+</div>
+<div class="section" id="the-trouble-with-this">
+<span id="this-problem"></span><h2>The Trouble with “this”<a class="headerlink" href="#the-trouble-with-this" title="Permalink to this headline">¶</a></h2>
+<p>Javascript’s <code class="docutils literal notranslate"><span class="pre">this</span></code> object is not, unfortunately completely equivalent
+to python’s <code class="docutils literal notranslate"><span class="pre">self</span></code> object, but a much more
+<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this">tedious thing</a></p>
+<p>When called inside an object instance’s member function <code class="docutils literal notranslate"><span class="pre">this</span></code> refers
+to the current object (like in Python).  However, if the member function is
+passed to another function, <code class="docutils literal notranslate"><span class="pre">this</span></code> context changes and refers to the another
+function instead - in order to avoid this, use lambda functions to define signal
+callbacks (as suggested above).</p>
+<p><code class="docutils literal notranslate"><span class="pre">this</span></code> can be bound explicitly to the current object with
+<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind">bind</a>.
+This is used in connecting signals to slots as discussed above.</p>
+<p>As a rule of thumb, always when passing an object member function as a parameter,
+always use <code class="docutils literal notranslate"><span class="pre">bind</span></code>.  When creating callbacks in object methods,
+always define a local lambda function.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="devenvs.html" class="btn btn-neutral float-left" title="Development Environments" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fullstack.html" class="btn btn-neutral float-right" title="A Fullstack Example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023 Sampsa Riikonen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+version: "2.3"
+
+## bind mounts: make host machine dirs visible in container
+## volumes    : persistent mounts, only inside the container
+## volumes+   : put a volume on top of a bind mount (+)
+
+volumes:
+  # bucket: # mount at each container in /app/bucket # this is a "simulated bucket" as a shared mount # TODO: enable if you need to
+  # database: # persistent db for postgresql # TODO: enable postgres if you need to
+  litebase: # persistent db for sqlite
+
+services:
+
+  ## TODO: enable postgres if you need to
+  #possu:
+  #  container_name: possu
+  #  image: postgres:10-alpine
+  #  # restart: always
+  #  volumes:
+  #    - database:/var/lib/postgresql/data
+  #  environment:
+  #    # in local dev environment, no password required:
+  #    POSTGRES_HOST_AUTH_METHOD: trust
+  #  networks:
+  #    default:
+  #      aliases:
+  #        - possu
+  #  ports:
+  #    - "5532:5432"
+  #    # access database in jupyter notebook running in docker from port 5532
+
+  backend:
+      container_name: backend
+      image: backend
+      # restart: always
+      #depends_on:
+      #  - possu
+      build:
+        context: ./backend
+        dockerfile: Dockerfile.dev
+      # endpoint from my_backend/docker/dev have been copied to /app/dev
+      command: /app/dev/run.bash
+      volumes:
+        # persistent data for sqlite
+        - litebase:/app/sqlite
+        # bind mounts: code we're editing live
+        - ./backend:/app/mount
+        # simulated bucket:
+        # - bucket:/app/bucket
+        # cloud bucket credentials:
+        # - ./secrets/bucket:/app/secrets/bucket
+        # put "dev.ini" here: it is used by /app/dev/run.bash
+        - ./secrets/common:/app/secrets/common
+      ports:
+        - "8088:80"
+      networks:
+        default:
+          aliases:
+            - backend
+
+  frontend: # nginx serving javascript & rerouting
+      ## end-point for all requests outside docker and into 
+      ## your native system is port 8086
+      ## see frontend/docker/dev/nginx.conf:
+      ## localhost:8086 --> frontend
+      ## localhost:8086/api_v1/etc --> backend
+      ## localhost:8086/ws --> streamer
+      container_name: frontend
+      image: frontend
+      # restart: always
+      depends_on:
+        - backend
+      build:
+        context: ./frontend
+        dockerfile: Dockerfile.dev
+      # command: # runs nginx as per frontend/Dockerfile.dev
+      volumes:
+        - ./frontend:/app/mount
+      ports:
+        - "8086:80"
+      networks:
+        default:
+          aliases:
+            - frontend

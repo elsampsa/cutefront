@@ -1,0 +1,190 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<title>Widget Demo App</title>
+<link href="./bootstrap-5.2.3-dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+    }
+
+    @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+        }
+    }
+</style>
+<!-- Custom styles for this template -->
+<link href="./css/starter-template.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="col-lg-8 mx-auto p-3 py-md-5">
+    <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+        <!--a href="/" class="d-flex align-items-center text-dark text-decoration-none"-->
+        <!--svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" class="me-2" viewBox="0 0 118 94" role="img"><title>Bootstrap</title><path fill-rule="evenodd" clip-rule="evenodd" d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z" fill="currentColor"></path></svg-->
+        <img src="assets/logo.png" width="60px">
+        <span class="fs-4">&nbsp CuteFront mini demo</span>
+        </a>
+    </header>
+    
+    <main>
+        <h1>Get started with Bootstrap and CuteFront</h1>
+        <p class="g-5 col-md-8">
+        CuteFront creates a Qt-style widget, signal, slot system for frontend
+        html and javascript.  Styling is done using bootstrap.
+        </p>
+        <p class="g-5 col-md-8">
+        Widgets in this demo are ListWidget, CardWidget, (popup) FormWidget, CrudButtonsWidget and
+        a Datasource that are connected with signals and slots.
+        </p>
+        <p class="g-5 col-md-8">
+        Choose entries form the list by clicking it.  Try crud operations.
+        </p>
+
+        <a href="http://google.com" class="btn btn-outline-primary">CuteFront docs</a>
+        <a href="https://doc.qt.io/qt-6/qlistwidget.html" class="btn btn-outline-primary">Qt docs</a>
+        <a href="https://getbootstrap.com/docs/5.0/examples/cheatsheet/" class="btn btn-outline-primary">Bootstrap cheatsheet</a>        
+
+        <hr class="col-3 col-md-2 mb-5">
+    
+        <div class="row g-5">
+        <div class="col-md-6">
+            <h2>List of Registered People</h2>
+            <p>[ListWidget]</p>
+            <table id="person-list" class="table table-striped"></table>
+            <p>[CrudButtonsWidget]</p>
+            <div id="crud-buttons"></div>
+        </div>
+    
+        <div class="col-md-6">
+            <h2>Details</h2>
+            <p>[CardWidget]</p>
+            <div id="person-card", class="card-body"></div>
+        </div>
+        </div>
+    </main>
+    <footer class="pt-5 my-5 text-muted border-top">
+        Template by the Bootstrap team &middot; &copy; 2021
+    </footer>
+    </div>
+
+    <div id="popup-form"></div>
+    
+</body>
+
+<script src="./bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
+
+<script type="module">
+
+import { getPageParameters } from './lib/base/widget.js';
+import { CardWidget } from './lib/base/cardwidget.js';
+import { CrudButtonsWidget } from './lib/base/crudbuttonswidget.js';
+import { FormWidget } from './lib/base/formwidget.js';
+
+import { PersonMockDataSourceWidget, PersonHTTPDataSourceWidget } from './app/persondatasources.js';
+import { PersonListWidget } from './app/personlistwidget.js';
+
+let pars=getPageParameters()
+console.log("page url-encoded parameters:", pars)
+if (pars.source==undefined) {
+    pars.source="mock"
+    alert("using mock data source")
+}
+else if (pars.source=="") {
+    alert("will use reverse proxy")
+}
+else {
+    alert("will use backend at " + pars.source)
+}
+
+if (pars.source == "mock") {
+    var data_source = new PersonMockDataSourceWidget() // for developing with mock data
+}
+else {
+    var data_source = new PersonHTTPDataSourceWidget({
+        // base_address: "http://0.0.0.0:8080", // for local dev session without a reverse proxy and with no cors limitations
+        // base_address: "", // when using reverse proxy (nginx etc)
+        // if this page gets as a parameter "?source=" then base_address will be ="", otherwise it is the current host
+        base_address: pars.source,
+        api_slug: "api_v1",
+        object_name: "person"
+        });
+}
+
+var card = new CardWidget("person-card")
+var crud_buttons = new CrudButtonsWidget("crud-buttons")
+var form = new FormWidget("popup-form", "[FormWidget]")
+var person_list = new PersonListWidget("person-list")
+
+// let loglevel=-1
+let loglevel=0
+
+card.setLogLevel(loglevel)
+crud_buttons.setLogLevel(loglevel)
+form.setLogLevel(loglevel)
+person_list.setLogLevel(loglevel)
+
+// signals from DataSource PersonHTTPDataSourceWidget
+data_source.signals.datamodel_read.connect( // datamodel to CardWidget
+    card.datamodel_slot.bind(card)
+)
+data_source.signals.datamodel_read.connect( // datamodel to FormWidget
+    form.datamodel_slot.bind(form)
+    // here we assume that read & update datamodels are same
+    // if they're different, we could create two different
+    // FormWidgets
+)
+data_source.signals.data.connect( // data to PersonListWidget
+    person_list.datums_slot.bind(person_list)
+)
+data_source.signals.error.connect( // http. etc. errors to alerts
+    (message) => alert(message)
+)
+
+
+// signals from PersonListWidget
+person_list.signals.current_datum.connect( // current datum to CardWidget
+    card.current_datum_slot.bind(card)
+)
+person_list.signals.current_datum.connect( // current datum to FormWidget
+    form.current_datum_slot.bind(form)
+)
+person_list.signals.current_datum.connect( // current datum to CrudButtonsWidget
+    crud_buttons.current_datum_slot.bind(crud_buttons)
+    // carries current datum or null: null deactivates update & delete buttons
+)
+
+// signals from FormWidget
+form.signals.create.connect( // create new datum to DataSource
+    data_source.create_slot.bind(data_source)
+)
+form.signals.update.connect( // updated datum to DataSource
+    data_source.update_slot.bind(data_source)
+)
+
+// signals from CrudButtonsWidget
+crud_buttons.signals.create.connect( // tell FormWidget to request new datum
+    form.create_slot.bind(form)
+)
+crud_buttons.signals.update.connect( // tell FormWidget to update current datum
+    form.update_slot.bind(form)
+)
+crud_buttons.signals.delete.connect( // tell DataSource to delete current datum 
+    data_source.delete_slot.bind(data_source)
+    // carries uuid of the datum
+)
+
+// start by propagating data models from DataSource
+data_source.model_slot()
+// read data for the first time
+data_source.read_slot()
+
+</script>

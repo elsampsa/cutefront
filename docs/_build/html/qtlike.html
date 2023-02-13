@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Qt-like Widgets and Signals &mdash; CuteFront  documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installing" href="install.html" />
+    <link rel="prev" title="Intro" href="intro.html" />
+    <!-- as per https://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs -->
+    <link href="_static/rtd_override.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+  <a href="index.html" class="icon icon-home"> CuteFront<img src="_static/logo.png" class="logo" alt="Logo"/>
+</a>
+    <div class="version">
+      0.0.1
+    </div>
+
+
+<!-- font awesome comes with the rtd package.. use like this:-->
+<a href="https://github.com/elsampsa/skeleton" class="icon icon-github"> CuteFront @ github</a>
+<a href="https://github.com/elsampsa/skeleton/issues" class="fa fa-bug"> Issue Tracker @ github</a>
+
+<!-- don't even think about subclassing searchbox.html .. will never work!-->
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Intro</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Qt-like Widgets and Signals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#let-s-play-ball">Let’s play ball</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#anatomy-of-a-widget">Anatomy of a Widget</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library.html">Widget Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="codeorg.html">Code Organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devenvs.html">Development Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creating.html">Creating and Using Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fullstack.html">A Fullstack Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cheatsheet.html">Python vs JS Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="links.html">Links</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CuteFront</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Qt-like Widgets and Signals</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/qtlike.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="qt-like-widgets-and-signals">
+<h1>Qt-like Widgets and Signals<a class="headerlink" href="#qt-like-widgets-and-signals" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="let-s-play-ball">
+<h2>Let’s play ball<a class="headerlink" href="#let-s-play-ball" title="Permalink to this headline">¶</a></h2>
+<p>In CuteFront, there is only plain html and javascript.
+Javascript and html are in the same <code class="docutils literal notranslate"><span class="pre">.html</span></code> file, while each widget class is
+in a separate <code class="docutils literal notranslate"><span class="pre">.js</span></code> file.</p>
+<p>A code example tells more than thousand explanatory words, so let’s get straight to it
+with some javascript:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="p">{</span> <span class="nx">BallPlayer</span><span class="p">,</span> <span class="nx">BillBoard</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./ballplayer.js&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">alex</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BallPlayer</span><span class="p">(</span><span class="s2">&quot;alex&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">bob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BallPlayer</span><span class="p">(</span><span class="s2">&quot;bob&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">billboard</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BillBoard</span><span class="p">(</span><span class="s2">&quot;billboard&quot;</span><span class="p">)</span>
+
+<span class="c1">// ball from alex to bob</span>
+<span class="nx">alex</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
+    <span class="nx">bob</span><span class="p">.</span><span class="nx">catch_ball_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">bob</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1">// ball from bob to alex</span>
+<span class="nx">bob</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
+    <span class="nx">alex</span><span class="p">.</span><span class="nx">catch_ball_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">alex</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1">// inform billboard about the game</span>
+<span class="c1">// alex throws</span>
+<span class="nx">alex</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
+    <span class="nx">billboard</span><span class="p">.</span><span class="nx">ball_throw_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">billboard</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1">// bob throws</span>
+<span class="nx">bob</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
+    <span class="nx">billboard</span><span class="p">.</span><span class="nx">ball_throw_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">billboard</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">// give ball initially to alex</span>
+<span class="nx">alex</span><span class="p">.</span><span class="nx">catch_ball_slot</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Here we have instantiated two widgets, namely, <code class="docutils literal notranslate"><span class="pre">Bob</span></code>
+and <code class="docutils literal notranslate"><span class="pre">Alex</span></code>, from the same widget class <code class="docutils literal notranslate"><span class="pre">BallPlayer</span></code>.  There’s yet another widget
+instantiated, <code class="docutils literal notranslate"><span class="pre">billboard</span></code> from the class <code class="docutils literal notranslate"><span class="pre">Billboard</span></code> that reports the ballgame
+between alex and bob.</p>
+<p>Widget classes are read from separate  <code class="docutils literal notranslate"><span class="pre">.js</span></code> files from a widget library.</p>
+<p>Signals from Bob and Alex are connected to the slot of the other player and also
+to the billboard so that it gets updated: the callback chains become obvious and easy
+to read, thanks to the signal/slot syntax.</p>
+<p>The html part (in the same file), looks like this:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;alex&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;bob&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;billboard&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Quite simple, right?  No templating languages or obscure <code class="docutils literal notranslate"><span class="pre">onclick</span></code> callbacks to- and fro
+between html and javascript.</p>
+<p>Only the basic layout is described by html, while all other complex / interactive stuff
+is implemented by the widget code.  Note how we “hooked” into the <code class="docutils literal notranslate"><span class="pre">&lt;div&gt;</span></code> elements
+in the JS part by using their unique <code class="docutils literal notranslate"><span class="pre">id</span></code>.</p>
+<p>Here is an image of the working web-page:</p>
+<img alt="_images/ballgame.png" src="_images/ballgame.png" />
+</div>
+<div class="section" id="anatomy-of-a-widget">
+<h2>Anatomy of a Widget<a class="headerlink" href="#anatomy-of-a-widget" title="Permalink to this headline">¶</a></h2>
+<p>Let’s take a look at the <code class="docutils literal notranslate"><span class="pre">BallPlayer</span></code> widget class:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nx">BallPlayer</span> <span class="k">extends</span> <span class="nx">Widget</span> <span class="p">{</span>
+    <span class="c1">// A widget you can throw ball with</span>
+    <span class="c1">// to another widget</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="nx">id</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">createElement</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">createState</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="c1">// UP: signals</span>
+    <span class="nx">createSignals</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Signal</span><span class="p">();</span> <span class="c1">// sends the ball to another widget</span>
+    <span class="p">}</span>
+    <span class="c1">// IN: slots</span>
+    <span class="nx">catch_ball_slot</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// receive a ball</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">,</span> <span class="s2">&quot;catch_ball_slot&quot;</span><span class="p">)</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span> <span class="o">=</span> <span class="kc">true</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">setBall</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="nx">createState</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">element</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">err</span><span class="p">(</span><span class="s2">&quot;no html element&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="p">}</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span> <span class="o">=</span> <span class="kc">false</span> <span class="c1">// the only state variable</span>
+        <span class="c1">// initialize to not having a ball</span>
+    <span class="p">}</span>
+    <span class="nx">createElement</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">element</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">element</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">err</span><span class="p">(</span><span class="s2">&quot;could not find element with id&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="p">}</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="sb">`</span>
+<span class="sb">        &lt;button class=&quot;btn btn-outline-primary&quot;&gt;Throw&lt;/button&gt;</span>
+<span class="sb">        `</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">button</span><span class="o">=</span><span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">&quot;button&quot;</span><span class="p">).</span><span class="nx">item</span><span class="p">(</span><span class="mf">0</span><span class="p">)</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">button</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">throwBall</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nx">throwBall</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// we don&#39;t have the ball..</span>
+            <span class="k">return</span>
+        <span class="p">}</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span> <span class="o">=</span> <span class="kc">false</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">setBall</span><span class="p">()</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">emit</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="nx">setBall</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// changes html element appearance according this.has_ball</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">button</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="sb">`Throw me (I have the ball!)`</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">button</span><span class="p">.</span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;btn btn-outline-primary&quot;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">button</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="sb">`Throw`</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">button</span><span class="p">.</span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;btn btn-outline-primary&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// BallPlayer</span>
+</pre></div>
+</div>
+<p>All widgets define <code class="docutils literal notranslate"><span class="pre">createSignals</span></code>, <code class="docutils literal notranslate"><span class="pre">createState</span></code> and <code class="docutils literal notranslate"><span class="pre">createElement</span></code> methods.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">createSignals</span></code> defines the signals this widget emits.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">createState</span></code> describes the internal state variables of the widget.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">createElement</span></code> hooks into the html code and gets an element handle to the widget’s html element.  It is also responsible in producing any additional html elements.</p></li>
+<li><p>Slots methods have names ending in <code class="docutils literal notranslate"><span class="pre">_slot</span></code>.  This is where the signals from other widgets are connected to.</p></li>
+</ul>
+<p>To put it simply, slot methods change the internal state of the widget
+(created initially in <code class="docutils literal notranslate"><span class="pre">createState</span></code>), and emit signals to other widgets.</p>
+<p>Taking a look into <code class="docutils literal notranslate"><span class="pre">createSignals</span></code> and the <code class="docutils literal notranslate"><span class="pre">_slot</span></code> methods, <strong>we can see at a single glance the API of the widget.</strong></p>
+<p>Before going full throttle into creating your own interative pages and widgets,
+please look at the <a class="reference internal" href="creating.html#creating"><span class="std std-ref">Creating Widgets</span></a> section for common techniques
+and pitfalls (in javascript, there are quite some).</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="intro.html" class="btn btn-neutral float-left" title="Intro" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="install.html" class="btn btn-neutral float-right" title="Installing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023 Sampsa Riikonen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
