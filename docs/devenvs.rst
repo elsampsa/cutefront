@@ -70,6 +70,8 @@ At this stage of the development (developing individual widgets and putting init
 together your fullstack app), you would typically use a mock datasouce
 (for more details, see datasources in :ref:`here <fullstack>`)
 
+.. _native:
+
 2. Native
 ---------
 
