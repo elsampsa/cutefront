@@ -25,7 +25,7 @@ A code example:
     <!doctype html>
     <head>
     <meta charset="utf-8">
-    <link href="../../bootstrap-5.2.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bootstrap-5.2.3-dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
 
@@ -33,7 +33,7 @@ A code example:
     <div id="bob"></div>
 
     </body>
-    <script src="../../bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
 
     <script type="module">
 

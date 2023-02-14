@@ -41,11 +41,12 @@ The widget library is available at `<https://github.com/elsampsa/cutefront-lib>`
 By default, the widget library is installed as a separate `git submodule <https://gist.github.com/gitaarik/8735255>`_.  This 
 makes it possible to use different versions and branches of the widget library in your project (see more in :ref:`here <codeorg>`)
 
-The only thing you need to do is this:
+The only thing you need to do is this (in the main repo's directory):
 
 .. code:: bash
 
     git submodule init
+    git submodule update
 
 And congrats, you now have the widget library in ``frontend/lib/``.
 

@@ -119,13 +119,14 @@ git clone git@github.com:elsampsa/cutefront.git
 <p id="get-library">The widget library is available at <a class="reference external" href="https://github.com/elsampsa/cutefront-lib">https://github.com/elsampsa/cutefront-lib</a>.</p>
 <p>By default, the widget library is installed as a separate <a class="reference external" href="https://gist.github.com/gitaarik/8735255">git submodule</a>.  This
 makes it possible to use different versions and branches of the widget library in your project (see more in <a class="reference internal" href="codeorg.html#codeorg"><span class="std std-ref">here</span></a>)</p>
-<p>The only thing you need to do is this:</p>
+<p>The only thing you need to do is this (in the main repo’s directory):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git submodule init
+git submodule update
 </pre></div>
 </div>
-<p>And congrats, now you have the widget library in <code class="docutils literal notranslate"><span class="pre">frontend/lib</span></code>.</p>
+<p>And congrats, you now have the widget library in <code class="docutils literal notranslate"><span class="pre">frontend/lib/</span></code>.</p>
 <p>However, depending on your particular case, you might or might not want to use the widget library as git submodule, but just download a zipfile from github and extract it
-into <code class="docutils literal notranslate"><span class="pre">lib/</span></code></p>
+into <code class="docutils literal notranslate"><span class="pre">frontend/lib/</span></code></p>
 </div>
 <div class="section" id="nginx-sqlite-etc">
 <h2>Nginx, sqlite, etc.<a class="headerlink" href="#nginx-sqlite-etc" title="Permalink to this headline">¶</a></h2>
