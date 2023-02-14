@@ -4,6 +4,10 @@
 Widget Library
 ==============
 
+By now, you have checked out or downloaded the widget library
+as was instructed in :ref:`here <get_library>` from 
+`github <https://github.com/elsampsa/cutefront-lib>`_.
+
 Basic Widgets
 -------------
 

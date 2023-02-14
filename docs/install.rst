@@ -24,19 +24,33 @@ You'll get this directory structure:
     ├── docker-compose-dev.yml  # Fullstack example docker-compose file
     ├── docs/                   # This documentation
     ├── frontend/               # CuteFront frontend
+    |      |
+    |      └── lib/             # The widget library from https://github.com/elsampsa/cutefront-lib
+    |                           # (see below)
     └── secrets/                # .ini files for the fullstack example
 
 
-Install Bootstrap 5
--------------------
+Checkout The Widget Library
+---------------------------
 
-You need to download bootstrap 5 into directory ``frontend``:
+.. _get_library:
+
+The widget library is available at `<https://github.com/elsampsa/cutefront-lib>`_.
+
+.. git submodule add git@github.com:elsampsa/cutefront-lib lib
+By default, the widget library is installed as a separate `git submodule <https://gist.github.com/gitaarik/8735255>`_.  This 
+makes it possible to use different versions and branches of the widget library in your project (see more in :ref:`here <codeorg>`)
+
+The only thing you need to do is this:
 
 .. code:: bash
 
-    cd frontend
-    ./get_bootstrap.bash
-    cd ..
+    git submodule init
+
+And congrats, you now have the widget library in ``frontend/lib/``.
+
+However, depending on your particular case, you might or might not want to use the widget library as git submodule, but just download a zipfile from github and extract it
+into ``frontend/lib/``
 
 
 Nginx, sqlite, etc.

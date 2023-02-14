@@ -86,28 +86,28 @@
            <div itemprop="articleBody">
              
   <div class="section" id="code-organization">
-<h1>Code Organization<a class="headerlink" href="#code-organization" title="Permalink to this headline">¶</a></h1>
+<span id="codeorg"></span><h1>Code Organization<a class="headerlink" href="#code-organization" title="Permalink to this headline">¶</a></h1>
 <p><em>Where to put your stuff?</em></p>
-<p>Whether it is for development or deployment, use this:</p>
+<p>Whether it is for development or deployment, use this very same schema you got after
+<a class="reference internal" href="install.html#install"><span class="std std-ref">installing</span></a> the example code:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.
 ├── app                    # your app&#39;s .js and .html files
 ├── app.html / index.html  # your frontend entry-point
 ├── assets                 # images, etc.
-├── bootstrap-5.2.3-dist   # downloaded bootstrap js and css
-│  ├── css
-│  └── js
 ├── css                    # your app&#39;s css
 ├── docker                 # special stuff installed in docker image
 │  └── dev
 │      └── nginx.conf
 ├── Dockerfile.dev         # docker image file
-├── lib                    # *** The CuteFront Widget Bibrary ***
-│  └── base
+├── lib                    # *** The CuteFront Widget Library ***
+│    ├── base              # ***    AS A GIT SUBMODULE        ***
+│    └── bootstrap-5.2.3-dist
+│       ├── css
+│       └── js
 └── test.html              # some basic test entry-point
 </pre></div>
 </div>
-<p>You can find this scheme in the <code class="docutils literal notranslate"><span class="pre">frontend</span></code> directory of the <a class="reference internal" href="install.html#install"><span class="std std-ref">repo</span></a>.  It’s also
-used by the <a class="reference internal" href="fullstack.html#fullstack"><span class="std std-ref">fullstack example</span></a>.</p>
+<p>This schema is also used by the <a class="reference internal" href="fullstack.html#fullstack"><span class="std std-ref">fullstack example</span></a>.</p>
 </div>
 
 

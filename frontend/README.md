@@ -4,12 +4,14 @@ Nothing much in this file - please refer to the full documentation in [here](htt
 
 Frontend app files:
 ```
-lib/                    the widget library, organized into subdirectories
+lib/                    *** A git submodule ***
+                        the widget library, organized into subdirectories
+    base/               widgets
+    bootstrap-5.2.3-dist/ 
+                        bootstrap styling & javascript
 app/                    YOUR application-specific .js and .html 
 static/                 YOUR images etc.
 css/                    YOUR css
-bootstrap-5.2.3-dist/   bootstrap styling & javascripts.  Please use 
-                        script "get_bootstrap.bash" to create this directory
 app.html                main entry point of YOUR app
 test.html               backend intercom quicktest of YOUR app
 ```
@@ -26,5 +28,4 @@ Dockerfile.dev          dev mode docker image recipe
 Scripts
 ```
 nginx.py                run nginx locally
-get_bootstrap.bash      downoads bootstrap 5 for you
 ```

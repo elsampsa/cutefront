@@ -53,7 +53,7 @@
 <li class="toctree-l1"><a class="reference internal" href="qtlike.html">Qt-like Widgets and Signals</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installing</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#download-the-repo">Download the Repo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#install-bootstrap-5">Install Bootstrap 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#checkout-the-widget-library">Checkout The Widget Library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#nginx-sqlite-etc">Nginx, sqlite, etc.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#firefox">Firefox</a></li>
 </ul>
@@ -107,18 +107,25 @@ git clone git@github.com:elsampsa/cutefront.git
 ├── docker-compose-dev.yml  # Fullstack example docker-compose file
 ├── docs/                   # This documentation
 ├── frontend/               # CuteFront frontend
+|      |
+|      └── lib/             # The widget library from https://github.com/elsampsa/cutefront-lib
+|                           # (see below)
 └── secrets/                # .ini files for the fullstack example
 </pre></div>
 </div>
 </div>
-<div class="section" id="install-bootstrap-5">
-<h2>Install Bootstrap 5<a class="headerlink" href="#install-bootstrap-5" title="Permalink to this headline">¶</a></h2>
-<p>You need to download bootstrap 5 into directory <code class="docutils literal notranslate"><span class="pre">frontend</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> frontend
-./get_bootstrap.bash
-<span class="nb">cd</span> ..
+<div class="section" id="checkout-the-widget-library">
+<h2>Checkout The Widget Library<a class="headerlink" href="#checkout-the-widget-library" title="Permalink to this headline">¶</a></h2>
+<p id="get-library">The widget library is available at <a class="reference external" href="https://github.com/elsampsa/cutefront-lib">https://github.com/elsampsa/cutefront-lib</a>.</p>
+<p>By default, the widget library is installed as a separate <a class="reference external" href="https://gist.github.com/gitaarik/8735255">git submodule</a>.  This
+makes it possible to use different versions and branches of the widget library in your project (see more in <a class="reference internal" href="codeorg.html#codeorg"><span class="std std-ref">here</span></a>)</p>
+<p>The only thing you need to do is this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git submodule init
 </pre></div>
 </div>
+<p>And congrats, now you have the widget library in <code class="docutils literal notranslate"><span class="pre">frontend/lib</span></code>.</p>
+<p>However, depending on your particular case, you might or might not want to use the widget library as git submodule, but just download a zipfile from github and extract it
+into <code class="docutils literal notranslate"><span class="pre">lib/</span></code></p>
 </div>
 <div class="section" id="nginx-sqlite-etc">
 <h2>Nginx, sqlite, etc.<a class="headerlink" href="#nginx-sqlite-etc" title="Permalink to this headline">¶</a></h2>
