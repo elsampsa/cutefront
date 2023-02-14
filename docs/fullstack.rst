@@ -8,7 +8,7 @@ A Fullstack Example
 
 .. image:: images/fullstack.png
 
-An on-line demo is available `here <https://elsampsa.github.io/cutefront/app.html>`_
+An on-line demo is available `here <https://elsampsa.github.io/cutefront/app.html>`_.  It uses a mock data source (see below) instead of an actual backend.
 
 Datasources
 -----------
