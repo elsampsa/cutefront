@@ -37,7 +37,7 @@ Checkout The Widget Library
 
 The widget library is available at `<https://github.com/elsampsa/cutefront-lib>`_.
 
-.. git submodule add git@github.com:elsampsa/cutefront-lib lib
+.. git submodule add git@github.com:elsampsa/cutefront-lib.git lib
 By default, the widget library is installed as a separate `git submodule <https://gist.github.com/gitaarik/8735255>`_.  This 
 makes it possible to use different versions and branches of the widget library in your project (see more in :ref:`here <codeorg>`)
 

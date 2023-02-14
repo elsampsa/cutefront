@@ -1,0 +1,3 @@
+[submodule "frontend/lib"]
+	path = frontend/lib
+	url = git@github.com:elsampsa/cutefront-lib.git
