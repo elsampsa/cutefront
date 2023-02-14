@@ -71,7 +71,7 @@ Here is an image of the working web-page:
 
 .. image:: images/ballgame.png
 
-You can also try it also on-line in `here <https://elsampsa.github.io/cutefront/lib/base/ballplayer.html>`_
+You can also try it on-line in `here <https://elsampsa.github.io/cutefront/lib/base/ballplayer.html>`_
 
 Anatomy of a Widget
 -------------------
