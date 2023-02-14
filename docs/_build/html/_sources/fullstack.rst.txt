@@ -8,6 +8,8 @@ A Fullstack Example
 
 .. image:: images/fullstack.png
 
+An on-line demo is available `here <https://elsampsa.github.io/cutefront/app.html>`_
+
 Datasources
 -----------
 
