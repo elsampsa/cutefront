@@ -140,6 +140,11 @@ class ListWidget extends Widget {
             this.err("could not find element with id", this.id)
             return
         }
+        if (this.element.tagName != "TABLE") {
+            this.err("html element tagname must be table, not", this.element.tagName)
+            this.element = null
+            return
+        }
         this.element.innerHTML=`
         <thead>
         </thead>

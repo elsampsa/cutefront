@@ -1,6 +1,5 @@
 import { Widget, Signal } from './widget.js';
 
-// TODO: substitute `MyWidget`
 class MyWidget extends Widget {
     
     constructor(id) {

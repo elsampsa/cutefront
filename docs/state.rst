@@ -21,7 +21,8 @@ As you might have noticed, the state of a webapp is *encoded* in the URL address
 
 You can also copy-paste such URL addresses and send them to someone else, so then that person can go to the page and reach the desired state directly.
 
-CuteFront offers a consistent way of saving the state and handling the state history.  Please check out a working demo in here (TODO) 
+CuteFront offers a consistent way of saving the state and handling the state history.  Please check out a working demo in
+`here <https://elsampsa.github.io/cutefront/lib/base/ballplayer2.html>`_
 (and remember to try browser's forward/backward buttons after throwing the ball a few times).
 
 State de/serialization

@@ -211,7 +211,7 @@ class HTTPDataSourceWidget extends DataSourceWidget {
         } catch (error) {
             console.error(error)
             this.signals.error.emit(
-                `Error ${error} in operation create`
+                `Error ${error} in operation read`
             )
             return false
         }
