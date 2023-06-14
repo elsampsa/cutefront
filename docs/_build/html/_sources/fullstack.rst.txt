@@ -147,7 +147,10 @@ Internals
 ---------
 
 Here's a nice HIMO diagram for understanding the fullstack example: it shows the signal-slot connections between
-the different widgets in the code:
+the different widgets in the code.
+
+Please also note how the global state is partitioned and cached into the widgets
+themselves (this was discussed also :ref:`here <state>`):
 
 .. code-block:: text
 

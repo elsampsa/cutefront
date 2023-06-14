@@ -74,6 +74,7 @@ class BallPlayer extends Widget {
             return
         }
         this.has_ball = false // the only state variable
+        this.setBall()
         // initialize to not having a ball
     }
     createElement() {

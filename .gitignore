@@ -8,3 +8,4 @@ Untitled*.ipynb
 .vscode/
 scrap/
 backend/my_backend/api_v1/alembic/versions/*.py
+TODO.md

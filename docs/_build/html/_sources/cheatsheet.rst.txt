@@ -24,6 +24,26 @@ else if
     else {
     }
 
+Type testing
+------------
+
+.. code-block:: text
+
+    if isinstance(test, bool) // python
+    if (typeof test === 'boolean') // javascript
+
+Type conversions
+----------------
+
+*some of them*
+
+.. code-block:: text
+
+    st = str(i) // python
+    let st = i.toString() // javascript
+
+    i = int(st) // python
+    let i = parseInt(st) // javascript
 
 Strings
 -------
@@ -34,7 +54,6 @@ Strings
 
     st = st + 'more' # python
     st = st.concat('more') // javascript
-
 
 *length*
 
@@ -51,6 +70,18 @@ Strings
     f'kikkelis-kokkelis-{parameter} # python
     `kikkelis-kokkelis-${parameter}" // javascript
 
+*splitting*
+
+.. code-block:: text
+
+    str.split(",") // python AND javascript
+
+*substring check*
+
+.. code-block:: text
+
+    substring in string # python
+    string.includes(substring) // javascript
 
 Lists, Arrays
 -------------
@@ -90,6 +121,14 @@ Lists, Arrays
     lis.pop(index) # python
     lis.splice(index, 1) // javascript
 
+*find index*
+
+.. code-block:: text
+
+    lis.index(element) # python
+    lis.indexOf(element) // javascript
+
+
 Sets
 ----
 
@@ -114,6 +153,13 @@ args
 
 Dictionaries, Objects
 ---------------------
+
+*creating*
+
+.. code-block:: text
+    
+    dic = {} # python
+    dic = Objects() // javascript
 
 *access per key*
 
@@ -199,11 +245,27 @@ Subclassing
 .. code-block:: text
 
     class ChildClass(ParentClass): # python
-        def __init__(self): # python
-            super() # python
+        def __init__(self):
+            super()
 
     class ChildClass extends ParentClass { // javascript
         constructor() { super() } // javascript
+
+*call superclass method*
+
+.. code-block:: text
+
+    class SubClass(BaseClass): # python
+        ...
+        def someMethod():
+            super().someMethod()
+
+    class SubClass extends BaseClass { // javascript
+        ...
+        someMethod() {
+            super.someMethod(); // NOTE: no `()` in super
+        }
+    }
 
 
 Object Instance Members

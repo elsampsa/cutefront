@@ -4,6 +4,14 @@
 {% endblock %}
 
 {% block extrahead %}
+
+    <script src='https://cdn.jsdelivr.net/npm/@widgetbot/crate@3' async defer>
+    new Crate({
+        server: '1116100310574837812', // ElSampsa's kindergarden
+        channel: '1116101050190012426' // #cutefront
+    })
+    </script>
+
     <!-- as per https://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs -->
     <link href="{{ pathto("_static/rtd_override.css", True) }}" rel="stylesheet" type="text/css">
 {% endblock %}

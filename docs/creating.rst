@@ -23,7 +23,7 @@ Creating a new widget is always done in the same way:
 Constructor
 -----------
 
-Constructor typically takes in an ``id`` that identifies the html element
+Constructor always takes in an ``id`` string.  Typically it is the id of the html element
 the widget attaches to
 
 .. code:: javascript
@@ -174,7 +174,6 @@ Or access them on a per-class basis:
 
     this.some_element = this.element.getElementsByClassName("some-class")[0]
 
-
 Or access them consecutively:
 
 .. code:: javascript
@@ -188,6 +187,14 @@ Alternatively, you can create them in js, and then attach as children to
 
     this.thead = document.createElement("thread")
     this.element.appendChild(this.thread)
+
+Setting the css classes:
+
+.. code:: javascript
+
+    this.some_element.className="bg-black whatever"
+    this.some_element.classList.add("anotherclass");
+    this.some_element.classList.remove("anotherclass");
 
 Assuming you have created a button element ``this.alert_button`` in ``createElement`` 
 method, and want to call a method named ``internalMethod`` in your widget when a button is
@@ -260,7 +267,20 @@ Let's recap that:
         TO.slot_name.bind(TO));
 
 What is that ``bind`` and why ``TO`` is repeated?  This has to do with
-the curiosities of ``this`` in javascript, please see below.
+the curiosities of ``this`` in javascript (see below).
+
+You might also want to pass the signal through a lambda function, in order
+to do something more than just to connect it directly to a slot:
+
+.. code::
+
+    from_widget.signals.signal_name.connect(
+        (par) => {
+            // do more stuff
+            console.log("signal sending par", par);
+            to_widget.slot_name.bind(to_widget)(par)
+        }
+    )
 
 .. _this_problem:
 

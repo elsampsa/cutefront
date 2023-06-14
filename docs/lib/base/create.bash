@@ -11,3 +11,4 @@ cp example.html $target_html
 sed -i -r "s/MyWidget/"$1"/g" $target_js
 sed -i -r "s/MyWidget/"$1"/g" $target_html
 sed -i -r "s/mywidget.js/"$target_js"/g" $target_html
+sed -i -r "s/Widget Example/"$1" Example/g" $target_html

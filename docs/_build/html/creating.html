@@ -17,6 +17,14 @@
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="A Fullstack Example" href="fullstack.html" />
     <link rel="prev" title="Development Environments" href="devenvs.html" />
+
+    <script src='https://cdn.jsdelivr.net/npm/@widgetbot/crate@3' async defer>
+    new Crate({
+        server: '1116100310574837812', // ElSampsa's kindergarden
+        channel: '1116101050190012426' // #cutefront
+    })
+    </script>
+
     <!-- as per https://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs -->
     <link href="_static/rtd_override.css" rel="stylesheet" type="text/css">
 
@@ -54,6 +62,7 @@
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library.html">Widget Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="codeorg.html">Code Organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State History</a></li>
 <li class="toctree-l1"><a class="reference internal" href="devenvs.html">Development Environments</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Creating and Using Widgets</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#subclassing-a-widget">Subclassing a Widget</a></li>
@@ -72,6 +81,7 @@
 <li class="toctree-l1"><a class="reference internal" href="fullstack.html">A Fullstack Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cheatsheet.html">Python vs JS Cheatsheet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="links.html">Links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webdev.html">Appendum: A Short History of Web Development</a></li>
 </ul>
 
         </div>
@@ -114,7 +124,7 @@ the <a class="reference internal" href="library.html#library"><span class="std s
 </div>
 <div class="section" id="constructor">
 <h2>Constructor<a class="headerlink" href="#constructor" title="Permalink to this headline">¶</a></h2>
-<p>Constructor typically takes in an <code class="docutils literal notranslate"><span class="pre">id</span></code> that identifies the html element
+<p>Constructor always takes in an <code class="docutils literal notranslate"><span class="pre">id</span></code> string.  Typically it is the id of the html element
 the widget attaches to</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">constructor</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">super</span><span class="p">();</span>
@@ -242,6 +252,12 @@ model (DOM).</p>
 <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">thread</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Setting the css classes:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">some_element</span><span class="p">.</span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;bg-black whatever&quot;</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">some_element</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;anotherclass&quot;</span><span class="p">);</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">some_element</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s2">&quot;anotherclass&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
 <p>Assuming you have created a button element <code class="docutils literal notranslate"><span class="pre">this.alert_button</span></code> in <code class="docutils literal notranslate"><span class="pre">createElement</span></code>
 method, and want to call a method named <code class="docutils literal notranslate"><span class="pre">internalMethod</span></code> in your widget when a button is
 clicked, you would do this in <code class="docutils literal notranslate"><span class="pre">createElement</span></code>:</p>
@@ -294,7 +310,18 @@ a signal from the former to a slot of the latter, is done like this:</p>
 </pre></div>
 </div>
 <p>What is that <code class="docutils literal notranslate"><span class="pre">bind</span></code> and why <code class="docutils literal notranslate"><span class="pre">TO</span></code> is repeated?  This has to do with
-the curiosities of <code class="docutils literal notranslate"><span class="pre">this</span></code> in javascript, please see below.</p>
+the curiosities of <code class="docutils literal notranslate"><span class="pre">this</span></code> in javascript (see below).</p>
+<p>You might also want to pass the signal through a lambda function, in order
+to do something more than just to connect it directly to a slot:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">from_widget</span><span class="o">.</span><span class="n">signals</span><span class="o">.</span><span class="n">signal_name</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">par</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="o">//</span> <span class="n">do</span> <span class="n">more</span> <span class="n">stuff</span>
+        <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;signal sending par&quot;</span><span class="p">,</span> <span class="n">par</span><span class="p">);</span>
+        <span class="n">to_widget</span><span class="o">.</span><span class="n">slot_name</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">to_widget</span><span class="p">)(</span><span class="n">par</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="the-trouble-with-this">
 <span id="this-problem"></span><h2>The Trouble with “this”<a class="headerlink" href="#the-trouble-with-this" title="Permalink to this headline">¶</a></h2>

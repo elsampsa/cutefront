@@ -17,6 +17,14 @@
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Installing" href="install.html" />
     <link rel="prev" title="Intro" href="intro.html" />
+
+    <script src='https://cdn.jsdelivr.net/npm/@widgetbot/crate@3' async defer>
+    new Crate({
+        server: '1116100310574837812', // ElSampsa's kindergarden
+        channel: '1116101050190012426' // #cutefront
+    })
+    </script>
+
     <!-- as per https://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs -->
     <link href="_static/rtd_override.css" rel="stylesheet" type="text/css">
 
@@ -52,17 +60,20 @@
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Intro</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Qt-like Widgets and Signals</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#let-s-play-ball">Let’s play ball</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#about-the-state">About the State</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#anatomy-of-a-widget">Anatomy of a Widget</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library.html">Widget Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="codeorg.html">Code Organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State History</a></li>
 <li class="toctree-l1"><a class="reference internal" href="devenvs.html">Development Environments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating.html">Creating and Using Widgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fullstack.html">A Fullstack Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cheatsheet.html">Python vs JS Cheatsheet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="links.html">Links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webdev.html">Appendum: A Short History of Web Development</a></li>
 </ul>
 
         </div>
@@ -92,7 +103,7 @@
   <div class="section" id="qt-like-widgets-and-signals">
 <h1>Qt-like Widgets and Signals<a class="headerlink" href="#qt-like-widgets-and-signals" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="let-s-play-ball">
-<h2>Let’s play ball<a class="headerlink" href="#let-s-play-ball" title="Permalink to this headline">¶</a></h2>
+<span id="ballgame"></span><h2>Let’s play ball<a class="headerlink" href="#let-s-play-ball" title="Permalink to this headline">¶</a></h2>
 <p>In CuteFront, there is only plain html and javascript.
 Javascript and html are in the same <code class="docutils literal notranslate"><span class="pre">.html</span></code> file, while each widget class is
 in a separate <code class="docutils literal notranslate"><span class="pre">.js</span></code> file.</p>
@@ -148,8 +159,35 @@ in the JS part by using their unique <code class="docutils literal notranslate">
 <img alt="_images/ballgame.png" src="_images/ballgame.png" />
 <p>You can also try it on-line in <a class="reference external" href="https://elsampsa.github.io/cutefront/lib/base/ballplayer.html">here</a></p>
 </div>
+<div class="section" id="about-the-state">
+<span id="state"></span><h2>About the State<a class="headerlink" href="#about-the-state" title="Permalink to this headline">¶</a></h2>
+<p>Before continuying, let’s still comment about the “state” (the set of all variables) of the page:</p>
+<ul class="simple">
+<li><p>Each widget from the <code class="docutils literal notranslate"><span class="pre">BallPlayer</span></code> class knows it’s own state (has the ball or not).</p></li>
+<li><p>The widget from the <code class="docutils literal notranslate"><span class="pre">Billboard</span></code> class, similarly, knows only the relevant part of the state: how many times the ball has been thrown around.</p></li>
+</ul>
+<p>In other words, the global state has been “partitioned” and cached into the widgets.  You can contrast this to, for example to Vue’s “vuex”
+and similar architectures, where the state variables become, in practice, global variables (like in 80’s style programming).  Again, in Vue,
+it becomes even more nastier when those global variables are “reactive” and change sneakily other variables in the global state (and the page’s behaviour).</p>
+<p><em>Let’s emphasize the philosophy of handling the state in CuteFront:</em></p>
+<p><strong>Each widget caches it’s own part of the global state</strong></p>
+<p>Furthermore, signal/slot paradigm can naturally be represented as a graph, so let’s do some ascii art:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>BallPlayer
+    sig: throw_ball  &gt;------+-----+
+    slot: catch_ball &lt;--+   |     |
+                        |   |     +---&gt; Billboard
+BallPlayer              |   |     |
+    sig: throw_ball  &gt;--+---|-----+
+    slot: catch_ball &lt;------+
+</pre></div>
+</div>
+<p>This feature is used in Qt’s “Qt Studio”, where you can create interactions by graphically drawing lines between widgets.
+We have the same potential with CuteFront.</p>
+<p>A more complicated topic on the state is the “state history”, i.e. moving forward and backward in history, using browser forward and backward
+buttons.  You can read more about that in <a class="reference internal" href="state.html#state-history"><span class="std std-ref">State History</span></a>.</p>
+</div>
 <div class="section" id="anatomy-of-a-widget">
-<h2>Anatomy of a Widget<a class="headerlink" href="#anatomy-of-a-widget" title="Permalink to this headline">¶</a></h2>
+<span id="ballgame-code"></span><h2>Anatomy of a Widget<a class="headerlink" href="#anatomy-of-a-widget" title="Permalink to this headline">¶</a></h2>
 <p>Let’s take a look at the <code class="docutils literal notranslate"><span class="pre">BallPlayer</span></code> widget class:</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nx">BallPlayer</span> <span class="k">extends</span> <span class="nx">Widget</span> <span class="p">{</span>
     <span class="c1">// A widget you can throw ball with</span>
@@ -219,7 +257,8 @@ in the JS part by using their unique <code class="docutils literal notranslate">
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">createSignals</span></code> defines the signals this widget emits.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">createState</span></code> describes the internal state variables of the widget.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">createElement</span></code> hooks into the html code and gets an element handle to the widget’s html element.  It is also responsible in producing any additional html elements.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">createElement</span></code> hooks into the html code and gets an element handle to the widget’s html element.
+It is also responsible for producing the html code required by the widget.</p></li>
 <li><p>Slots methods have names ending in <code class="docutils literal notranslate"><span class="pre">_slot</span></code>.  This is where the signals from other widgets are connected to.</p></li>
 </ul>
 <p>To put it simply, slot methods change the internal state of the widget
