@@ -17,6 +17,14 @@
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Links" href="links.html" />
     <link rel="prev" title="A Fullstack Example" href="fullstack.html" />
+
+    <script src='https://cdn.jsdelivr.net/npm/@widgetbot/crate@3' async defer>
+    new Crate({
+        server: '1116100310574837812', // ElSampsa's kindergarden
+        channel: '1116101050190012426' // #cutefront
+    })
+    </script>
+
     <!-- as per https://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs -->
     <link href="_static/rtd_override.css" rel="stylesheet" type="text/css">
 
@@ -54,11 +62,14 @@
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library.html">Widget Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="codeorg.html">Code Organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State History</a></li>
 <li class="toctree-l1"><a class="reference internal" href="devenvs.html">Development Environments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating.html">Creating and Using Widgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fullstack.html">A Fullstack Example</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Python vs JS Cheatsheet</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#else-if">else if</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#type-testing">Type testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#type-conversions">Type conversions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#strings">Strings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#lists-arrays">Lists, Arrays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sets">Sets</a></li>
@@ -73,6 +84,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="links.html">Links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webdev.html">Appendum: A Short History of Web Development</a></li>
 </ul>
 
         </div>
@@ -121,6 +133,24 @@ else {
 </pre></div>
 </div>
 </div>
+<div class="section" id="type-testing">
+<h2>Type testing<a class="headerlink" href="#type-testing" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>if isinstance(test, bool) // python
+if (typeof test === &#39;boolean&#39;) // javascript
+</pre></div>
+</div>
+</div>
+<div class="section" id="type-conversions">
+<h2>Type conversions<a class="headerlink" href="#type-conversions" title="Permalink to this headline">¶</a></h2>
+<p><em>some of them</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>st = str(i) // python
+let st = i.toString() // javascript
+
+i = int(st) // python
+let i = parseInt(st) // javascript
+</pre></div>
+</div>
+</div>
 <div class="section" id="strings">
 <h2>Strings<a class="headerlink" href="#strings" title="Permalink to this headline">¶</a></h2>
 <p><em>append</em></p>
@@ -137,6 +167,15 @@ st.length // javascript
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&#39;kikkelis-kokkelis-{parameter}&#39;.format(parameter=1) # python
 f&#39;kikkelis-kokkelis-{parameter} # python
 `kikkelis-kokkelis-${parameter}&quot; // javascript
+</pre></div>
+</div>
+<p><em>splitting</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>str.split(&quot;,&quot;) // python AND javascript
+</pre></div>
+</div>
+<p><em>substring check</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>substring in string # python
+string.includes(substring) // javascript
 </pre></div>
 </div>
 </div>
@@ -171,6 +210,11 @@ lis.push(item)
 lis.splice(index, 1) // javascript
 </pre></div>
 </div>
+<p><em>find index</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>lis.index(element) # python
+lis.indexOf(element) // javascript
+</pre></div>
+</div>
 </div>
 <div class="section" id="sets">
 <h2>Sets<a class="headerlink" href="#sets" title="Permalink to this headline">¶</a></h2>
@@ -192,6 +236,11 @@ function func(...args) { // javascript
 </div>
 <div class="section" id="dictionaries-objects">
 <h2>Dictionaries, Objects<a class="headerlink" href="#dictionaries-objects" title="Permalink to this headline">¶</a></h2>
+<p><em>creating</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>dic = {} # python
+dic = Objects() // javascript
+</pre></div>
+</div>
 <p><em>access per key</em></p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>dic[key] # python
 dic[key] // javascript
@@ -255,11 +304,25 @@ console.trace() // javascript
 <h2>Subclassing<a class="headerlink" href="#subclassing" title="Permalink to this headline">¶</a></h2>
 <p><em>call superclass ctor</em></p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>class ChildClass(ParentClass): # python
-    def __init__(self): # python
-        super() # python
+    def __init__(self):
+        super()
 
 class ChildClass extends ParentClass { // javascript
     constructor() { super() } // javascript
+</pre></div>
+</div>
+<p><em>call superclass method</em></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>class SubClass(BaseClass): # python
+    ...
+    def someMethod():
+        super().someMethod()
+
+class SubClass extends BaseClass { // javascript
+    ...
+    someMethod() {
+        super.someMethod(); // NOTE: no `()` in super
+    }
+}
 </pre></div>
 </div>
 </div>

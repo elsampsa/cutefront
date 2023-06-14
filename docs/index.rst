@@ -20,11 +20,13 @@ CuteFront
    install
    library
    codeorg
+   state
    devenvs
    creating
    fullstack
    cheatsheet
    links
+   webdev
 
 Indices and tables
 ==================

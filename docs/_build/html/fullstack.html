@@ -17,6 +17,14 @@
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Python vs JS Cheatsheet" href="cheatsheet.html" />
     <link rel="prev" title="Creating and Using Widgets" href="creating.html" />
+
+    <script src='https://cdn.jsdelivr.net/npm/@widgetbot/crate@3' async defer>
+    new Crate({
+        server: '1116100310574837812', // ElSampsa's kindergarden
+        channel: '1116101050190012426' // #cutefront
+    })
+    </script>
+
     <!-- as per https://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs -->
     <link href="_static/rtd_override.css" rel="stylesheet" type="text/css">
 
@@ -54,6 +62,7 @@
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library.html">Widget Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="codeorg.html">Code Organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State History</a></li>
 <li class="toctree-l1"><a class="reference internal" href="devenvs.html">Development Environments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating.html">Creating and Using Widgets</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">A Fullstack Example</a><ul>
@@ -67,6 +76,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cheatsheet.html">Python vs JS Cheatsheet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="links.html">Links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webdev.html">Appendum: A Short History of Web Development</a></li>
 </ul>
 
         </div>
@@ -199,7 +209,9 @@ bash/dev.bash up
 <div class="section" id="internals">
 <h2>Internals<a class="headerlink" href="#internals" title="Permalink to this headline">¶</a></h2>
 <p>Here’s a nice HIMO diagram for understanding the fullstack example: it shows the signal-slot connections between
-the different widgets in the code:</p>
+the different widgets in the code.</p>
+<p>Please also note how the global state is partitioned and cached into the widgets
+themselves (this was discussed also <a class="reference internal" href="qtlike.html#state"><span class="std std-ref">here</span></a>):</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Main html
 
     - Creates object instances

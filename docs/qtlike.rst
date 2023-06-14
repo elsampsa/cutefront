@@ -2,6 +2,8 @@
 Qt-like Widgets and Signals
 ===========================
 
+.. _ballgame:
+
 Let's play ball
 ---------------
 
@@ -72,6 +74,45 @@ Here is an image of the working web-page:
 .. image:: images/ballgame.png
 
 You can also try it on-line in `here <https://elsampsa.github.io/cutefront/lib/base/ballplayer.html>`_
+
+.. _state:
+
+About the State
+---------------
+
+Before continuying, let's still comment about the "state" (the set of all variables) of the page: 
+
+- Each widget from the ``BallPlayer`` class knows it's own state (has the ball or not).
+
+- The widget from the ``Billboard`` class, similarly, knows only the relevant part of the state: how many times the ball has been thrown around.
+
+In other words, the global state has been "partitioned" and cached into the widgets.  You can contrast this to, for example to Vue's "vuex"
+and similar architectures, where the state variables become, in practice, global variables (like in 80's style programming).  Again, in Vue, 
+it becomes even more nastier when those global variables are "reactive" and change sneakily other variables in the global state (and the page's behaviour).
+
+*Let's emphasize the philosophy of handling the state in CuteFront:*
+
+**Each widget caches it's own part of the global state**
+
+Furthermore, signal/slot paradigm can naturally be represented as a graph, so let's do some ascii art:
+
+.. code:: text
+
+    BallPlayer
+        sig: throw_ball  >------+-----+
+        slot: catch_ball <--+   |     |
+                            |   |     +---> Billboard
+    BallPlayer              |   |     |
+        sig: throw_ball  >--+---|-----+
+        slot: catch_ball <------+
+
+This feature is used in Qt's "Qt Studio", where you can create interactions by graphically drawing lines between widgets.  
+We have the same potential with CuteFront.
+
+A more complicated topic on the state is the "state history", i.e. moving forward and backward in history, using browser forward and backward
+buttons.  You can read more about that in :ref:`State History <state_history>`.
+
+.. _ballgame_code:
 
 Anatomy of a Widget
 -------------------
@@ -148,7 +189,8 @@ All widgets define ``createSignals``, ``createState`` and ``createElement`` meth
 
 - ``createSignals`` defines the signals this widget emits.
 - ``createState`` describes the internal state variables of the widget.
-- ``createElement`` hooks into the html code and gets an element handle to the widget's html element.  It is also responsible in producing any additional html elements.
+- ``createElement`` hooks into the html code and gets an element handle to the widget's html element.  
+  It is also responsible for producing the html code required by the widget.
 - Slots methods have names ending in ``_slot``.  This is where the signals from other widgets are connected to.
 
 To put it simply, slot methods change the internal state of the widget 

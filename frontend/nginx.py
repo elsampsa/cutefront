@@ -115,9 +115,6 @@ class CLI:
         self.parser.add_argument("--ini", action="store", type=str, required=False,
             default = default_ini, help=".ini configuration file")
 
-
-
-
     def add_argument(self, *args, **kwargs):
         self.parser.add_argument(*args, **kwargs)
 
@@ -213,7 +210,8 @@ def main():
     os.system("killall -9 nginx") # just in case this script was previously closed "dirty"
     w=NGWrapper(tmpdir=tmpdir, config_file=config_file)
     w.start()
-    print()
+    print("\n FRONTEND SERVING AT PORT", p.port,"\n")
+    print(f"\nhttp://localhost:{p.port}\n")
     while True:
         try:
             time.sleep(1)
