@@ -19,6 +19,13 @@ Creating a new widget is always done in the same way:
         // widget definition here
     }
 
+If you're creating an app-specific widget into the ``app`` directory,
+as described in :ref:`code organization <codeorg>`, remember to
+use the correct relative path, i.e.:
+
+.. code:: javascript
+
+    import { Widget, Signal } from '../lib/base/widget.js';
 
 Constructor
 -----------
@@ -46,7 +53,8 @@ Logging from within the widget code is done like this:
 .. code:: javascript
 
     this.err("report an error")
-    this.log(-1, "some logging")
+    this.log(0, "some normal-level logging")
+    this.log(-1, "some debug-level logging")
 
 These work like ``console.log``, i.e. feel free to add all optional arguments you want.
 
@@ -57,6 +65,8 @@ When using the widget, you can set the loglevel like this:
     var widget = YouWidget("some-id")
     widget.setLogLevel(-1); // debugging
 
+When setting loglevel ``-1``, all calls to ``this.log(N, ..)``  with ``N>=-1`` are printed to the console, i.e.
+going "down" with negative numbers mean less significant messages.
 
 Defining Signals
 ----------------
@@ -272,7 +282,7 @@ the curiosities of ``this`` in javascript (see below).
 You might also want to pass the signal through a lambda function, in order
 to do something more than just to connect it directly to a slot:
 
-.. code::
+.. code:: javascript
 
     from_widget.signals.signal_name.connect(
         (par) => {
@@ -281,6 +291,67 @@ to do something more than just to connect it directly to a slot:
             to_widget.slot_name.bind(to_widget)(par)
         }
     )
+
+
+Create test HTML
+----------------
+
+Each widget should always be accompanied with corresponding, minimal test html file.  This html file
+can then be opened in the :ref:`plainfile development environment <plainfile>`.
+
+It can also be used for automatic testing, with selenium and the like.
+
+Let's suppose you have:
+
+- Defined ``MyWidget`` in file ``mywidget.js`` in the :ref:`app directory <codeorg>`
+- ``MyWidget`` has only one signal named ``ping``
+
+Then the corresponding ``mywidget.html`` (which you would place into the ``app`` folder) would look like this:
+
+.. code:: html
+
+    <!doctype html>
+    <html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <title>Widget Test</title>
+    <link href="../bootstrap-5.2.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+
+    <div id="test-element" class=""></div>
+    <button id="test-button">test something</button>
+
+    </body>
+    <script src="../bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module">
+    /* // define mock data if you need that
+    var data = [
+    ];
+    */
+    import { DummyWidget } from '../lib/base/widget.js';
+    import { MyWidget } from './mywidget.js';
+    var dummy_widget = new DummyWidget();
+    var widget = new MyWidget("test-element");
+    widget.setLogLevel(-1); // debugging
+
+    // connect your widget's signals to the DummyWidget
+    widget.signals.ping.connect(
+        dummy_widget.slot.bind(dummy_widget) // simply dumps the signal data to the console
+    );
+
+    // test your slots by calling directly
+    // widget.some_slot();
+
+    let button = document.getElementById("test-button");
+
+    // or test your slot interactively
+    button.onclick = () => {
+        widget.some_slot();
+    };
+
+    </script>
+
 
 .. _this_problem:
 
@@ -304,13 +375,5 @@ This is used when connecting signals to slots as discussed above.
 As a rule of thumb, always when passing an object member function as a parameter,
 always use ``bind``.  When creating callbacks in object methods, 
 always define a local lambda function.
-
-
-
-
-
-
-
-
 
 

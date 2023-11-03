@@ -173,14 +173,17 @@ So when clicking a button, something is executed in the js part.
 Then that part changes a variable.  Then that variable is substituted
 to ``flag``.  I mean, come on.
 
-So it is basically things going to-and-fro between
+So it is things going to-and-fro between
 an annoying templating/transpilable language and javascript.  Talk about
-possibilities for some major clusterfs and state confusion here.
+possibilities for major confusions here.
+
+When did such crazy stuff start to feel normal and natural?
 
 And there are so many examples I could give here about these nutty, fragile and unnatural frontend frameworks, but I will stop here as I don't want
 to waste my time with them even the slightest.
 
-When did such crazy stuff start to feel normal and natural?
+And lucky you, having found CuteFront, the minimalistic pure-javascript framework!
 
-*Felt offended by my trashing of the modern js frameworks?  Want to add something or educate me?  Please do so
-in discord (that small symbol on the right-down corner)*
+
+
+

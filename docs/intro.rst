@@ -17,7 +17,7 @@ CuteFront is a frontend framework, featuring:
 - No templating languages, just pure js and html
 - Qt's touch'n'feel with widgets, signals and slots
 - Simple development environment with plain js and html files
-- Global state partitioned and cached into widgets
+- Global state partitioned and cached into widgets - avoid global state mess
 - The signal/slot paradigm creates possibilities for graphical representation of page interactions (like in qt studio).
 
 A code example:
@@ -68,8 +68,7 @@ For What?
 
 - To get an interactive web-page quickly up and running
 - Especially for smaller projects requiring complex reactive frontend code, SPA (single-page applications) and the like
-- Not guaranteed or tested for huge projects, although the system is component-based and *requires no transpiling* 
-(eliminating a problem for big projects)
+- Not guaranteed or tested for huge projects, although the system is component-based and *requires no transpiling* (eliminating a problem for big projects)
 - CuteFront is in poc (proof-of-concept) stage, and expanding the widget library requires *your* help
 
 Cute-What?

@@ -75,6 +75,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#using-the-dom">Using the DOM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#emitting-signals">Emitting Signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#connecting-signals">Connecting Signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-test-html">Create test HTML</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#the-trouble-with-this">The Trouble with “this”</a></li>
 </ul>
 </li>
@@ -121,6 +122,12 @@ the <a class="reference internal" href="library.html#library"><span class="std s
 <span class="p">}</span>
 </pre></div>
 </div>
+<p>If you’re creating an app-specific widget into the <code class="docutils literal notranslate"><span class="pre">app</span></code> directory,
+as described in <a class="reference internal" href="codeorg.html#codeorg"><span class="std std-ref">code organization</span></a>, remember to
+use the correct relative path, i.e.:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="p">{</span> <span class="nx">Widget</span><span class="p">,</span> <span class="nx">Signal</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;../lib/base/widget.js&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="constructor">
 <h2>Constructor<a class="headerlink" href="#constructor" title="Permalink to this headline">¶</a></h2>
@@ -140,7 +147,8 @@ the widget attaches to</p>
 <h2>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h2>
 <p>Logging from within the widget code is done like this:</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">err</span><span class="p">(</span><span class="s2">&quot;report an error&quot;</span><span class="p">)</span>
-<span class="k">this</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">,</span> <span class="s2">&quot;some logging&quot;</span><span class="p">)</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span> <span class="s2">&quot;some normal-level logging&quot;</span><span class="p">)</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">,</span> <span class="s2">&quot;some debug-level logging&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>These work like <code class="docutils literal notranslate"><span class="pre">console.log</span></code>, i.e. feel free to add all optional arguments you want.</p>
@@ -149,6 +157,8 @@ the widget attaches to</p>
 <span class="nx">widget</span><span class="p">.</span><span class="nx">setLogLevel</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">);</span> <span class="c1">// debugging</span>
 </pre></div>
 </div>
+<p>When setting loglevel <code class="docutils literal notranslate"><span class="pre">-1</span></code>, all calls to <code class="docutils literal notranslate"><span class="pre">this.log(N,</span> <span class="pre">..)</span></code>  with <code class="docutils literal notranslate"><span class="pre">N&gt;=-1</span></code> are printed to the console, i.e.
+going “down” with negative numbers mean less significant messages.</p>
 </div>
 <div class="section" id="defining-signals">
 <h2>Defining Signals<a class="headerlink" href="#defining-signals" title="Permalink to this headline">¶</a></h2>
@@ -313,13 +323,68 @@ a signal from the former to a slot of the latter, is done like this:</p>
 the curiosities of <code class="docutils literal notranslate"><span class="pre">this</span></code> in javascript (see below).</p>
 <p>You might also want to pass the signal through a lambda function, in order
 to do something more than just to connect it directly to a slot:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">from_widget</span><span class="o">.</span><span class="n">signals</span><span class="o">.</span><span class="n">signal_name</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
-    <span class="p">(</span><span class="n">par</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="o">//</span> <span class="n">do</span> <span class="n">more</span> <span class="n">stuff</span>
-        <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;signal sending par&quot;</span><span class="p">,</span> <span class="n">par</span><span class="p">);</span>
-        <span class="n">to_widget</span><span class="o">.</span><span class="n">slot_name</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">to_widget</span><span class="p">)(</span><span class="n">par</span><span class="p">)</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">from_widget</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">signal_name</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
+    <span class="p">(</span><span class="nx">par</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// do more stuff</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;signal sending par&quot;</span><span class="p">,</span> <span class="nx">par</span><span class="p">);</span>
+        <span class="nx">to_widget</span><span class="p">.</span><span class="nx">slot_name</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">to_widget</span><span class="p">)(</span><span class="nx">par</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-test-html">
+<h2>Create test HTML<a class="headerlink" href="#create-test-html" title="Permalink to this headline">¶</a></h2>
+<p>Each widget should always be accompanied with corresponding, minimal test html file.  This html file
+can then be opened in the <a class="reference internal" href="devenvs.html#plainfile"><span class="std std-ref">plainfile development environment</span></a>.</p>
+<p>It can also be used for automatic testing, with selenium and the like.</p>
+<p>Let’s suppose you have:</p>
+<ul class="simple">
+<li><p>Defined <code class="docutils literal notranslate"><span class="pre">MyWidget</span></code> in file <code class="docutils literal notranslate"><span class="pre">mywidget.js</span></code> in the <a class="reference internal" href="codeorg.html#codeorg"><span class="std std-ref">app directory</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MyWidget</span></code> has only one signal named <code class="docutils literal notranslate"><span class="pre">ping</span></code></p></li>
+</ul>
+<p>Then the corresponding <code class="docutils literal notranslate"><span class="pre">mywidget.html</span></code> (which you would place into the <code class="docutils literal notranslate"><span class="pre">app</span></code> folder) would look like this:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!doctype html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Widget Test<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;../bootstrap-5.2.3-dist/css/bootstrap.min.css&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;test-element&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;test-button&quot;</span><span class="p">&gt;</span>test something<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;../bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;module&quot;</span><span class="p">&gt;</span>
+<span class="cm">/* // define mock data if you need that</span>
+<span class="cm">var data = [</span>
+<span class="cm">];</span>
+<span class="cm">*/</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">DummyWidget</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;../lib/base/widget.js&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MyWidget</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./mywidget.js&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">dummy_widget</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DummyWidget</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">widget</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyWidget</span><span class="p">(</span><span class="s2">&quot;test-element&quot;</span><span class="p">);</span>
+<span class="nx">widget</span><span class="p">.</span><span class="nx">setLogLevel</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">);</span> <span class="c1">// debugging</span>
+
+<span class="c1">// connect your widget&#39;s signals to the DummyWidget</span>
+<span class="nx">widget</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">ping</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
+    <span class="nx">dummy_widget</span><span class="p">.</span><span class="nx">slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">dummy_widget</span><span class="p">)</span> <span class="c1">// simply dumps the signal data to the console</span>
+<span class="p">);</span>
+
+<span class="c1">// test your slots by calling directly</span>
+<span class="c1">// widget.some_slot();</span>
+
+<span class="kd">let</span> <span class="nx">button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;test-button&quot;</span><span class="p">);</span>
+
+<span class="c1">// or test your slot interactively</span>
+<span class="nx">button</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">widget</span><span class="p">.</span><span class="nx">some_slot</span><span class="p">();</span>
+<span class="p">};</span>
+
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </pre></div>
 </div>
 </div>
