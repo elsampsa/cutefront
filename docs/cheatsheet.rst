@@ -217,6 +217,14 @@ Dictionaries, Objects
     let value = dict[key] // javascript
     if (value == undefined) { <code> }
 
+*from string*
+
+.. code-block:: text
+
+    dic = json.loads(st) # python
+    let dic = JSON.parse(st) // javascript
+
+
 Deepcopy
 --------
 

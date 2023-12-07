@@ -1,32 +1,29 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Widget Library &mdash; CuteFront  documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <title>Widget Library &mdash; CuteFront  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Code Organization" href="codeorg.html" />
     <link rel="prev" title="Installing" href="install.html" />
-
-    <script src='https://cdn.jsdelivr.net/npm/@widgetbot/crate@3' async defer>
-    new Crate({
-        server: '1116100310574837812', // ElSampsa's kindergarden
-        channel: '1116101050190012426' // #cutefront
-    })
-    </script>
-
-    <!-- as per https://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs -->
-    <link href="_static/rtd_override.css" rel="stylesheet" type="text/css">
+<!-- as per https://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs -->
+<link href="_static/rtd_override.css" rel="stylesheet" type="text/css">
+<script src="https://kit.fontawesome.com/1f90d3565b.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -36,7 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-  <a href="index.html" class="icon icon-home"> CuteFront<img src="_static/logo.png" class="logo" alt="Logo"/>
+
+<!--
+  <a href="index.html" class="icon icon-home"> CuteFront
+</a>
+-->
+
+<!--
+NOTE: we are starting to have "version creep" here..  at the moment, with Sphinx==7.2.6 and sphinx-rtd-theme==1.3.0 the only thing that
+works is this:
+-->
+<a href="index.html">
+<img src="_static/logo.png" class="logo" style="width: 200px; height: auto; border-radius: 0px 6px 6px 0px;" alt="Logo"/>
 </a>
     <div class="version">
       0.0.1
@@ -44,13 +52,14 @@
 
 
 <!-- font awesome comes with the rtd package.. use like this:-->
-<a href="https://github.com/elsampsa/cutefront" class="icon icon-github"> CuteFront @ github</a>
-<a href="https://github.com/elsampsa/cutefront/issues" class="fa fa-bug"> Issue Tracker @ github</a>
+<a href="https://github.com/elsampsa/cutefront" target="_blank" rel="noopener noreferrer"> <i class="fa-brands fa-github"></i> CuteFront @ github</a>
+<a href="https://github.com/elsampsa/cutefront/issues" target="_blank" rel="noopener noreferrer"> <i class="fas fa-bug"></i> Issue Tracker @ github</a>
+<a href="https://discord.com/channels/1116100310574837812/1116101050190012426" target="_blank" rel="noopener noreferrer"> <i class="fa-brands fa-discord"></i> Discord </a>
 
 <!-- don't even think about subclassing searchbox.html .. will never work!-->
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -88,7 +97,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Widget Library</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/library.rst.txt" rel="nofollow"> View page source</a>
@@ -99,13 +108,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="widget-library">
-<span id="library"></span><h1>Widget Library<a class="headerlink" href="#widget-library" title="Permalink to this headline">¶</a></h1>
+  <section id="widget-library">
+<span id="library"></span><h1>Widget Library<a class="headerlink" href="#widget-library" title="Link to this heading"></a></h1>
 <p>By now, you have checked out or downloaded the widget library
 as was instructed in <a class="reference internal" href="install.html#get-library"><span class="std std-ref">here</span></a> from
 <a class="reference external" href="https://github.com/elsampsa/cutefront-lib">github</a>.</p>
-<div class="section" id="basic-widgets">
-<h2>Basic Widgets<a class="headerlink" href="#basic-widgets" title="Permalink to this headline">¶</a></h2>
+<section id="basic-widgets">
+<h2>Basic Widgets<a class="headerlink" href="#basic-widgets" title="Link to this heading"></a></h2>
 <p>Please take a look into <code class="docutils literal notranslate"><span class="pre">frontend/lib/base</span></code>.  Some important files therein:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">widget.js</span></code> : the motherclass of all widgets</p></li>
@@ -122,16 +131,16 @@ for CRUD operations.</p>
 </ul>
 <p>You can test each of the widgets by simply accessing their test/demo html files.  However, before that, you need to set up at least the
 <em>Plainfile</em> development environment.  See <a class="reference internal" href="devenvs.html#plainfile"><span class="std std-ref">here</span></a> for more details.</p>
-</div>
-<div class="section" id="contribute">
-<h2>Contribute<a class="headerlink" href="#contribute" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="contribute">
+<h2>Contribute<a class="headerlink" href="#contribute" title="Link to this heading"></a></h2>
 <p>When you get into <a class="reference internal" href="creating.html#creating"><span class="std std-ref">developing widgets</span></a>, please share them!  This project
 needs your contribution.</p>
 <p>The widget library organization is still an open question.  However, they should
 be vaguely organized in subdirectories according to common categories / authors.</p>
 <p>An accompanying html file (see above) is required for all contributed widgets.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

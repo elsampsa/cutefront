@@ -1,32 +1,29 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>State History &mdash; CuteFront  documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <title>State History &mdash; CuteFront  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Development Environments" href="devenvs.html" />
     <link rel="prev" title="Code Organization" href="codeorg.html" />
-
-    <script src='https://cdn.jsdelivr.net/npm/@widgetbot/crate@3' async defer>
-    new Crate({
-        server: '1116100310574837812', // ElSampsa's kindergarden
-        channel: '1116101050190012426' // #cutefront
-    })
-    </script>
-
-    <!-- as per https://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs -->
-    <link href="_static/rtd_override.css" rel="stylesheet" type="text/css">
+<!-- as per https://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs -->
+<link href="_static/rtd_override.css" rel="stylesheet" type="text/css">
+<script src="https://kit.fontawesome.com/1f90d3565b.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -36,7 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-  <a href="index.html" class="icon icon-home"> CuteFront<img src="_static/logo.png" class="logo" alt="Logo"/>
+
+<!--
+  <a href="index.html" class="icon icon-home"> CuteFront
+</a>
+-->
+
+<!--
+NOTE: we are starting to have "version creep" here..  at the moment, with Sphinx==7.2.6 and sphinx-rtd-theme==1.3.0 the only thing that
+works is this:
+-->
+<a href="index.html">
+<img src="_static/logo.png" class="logo" style="width: 200px; height: auto; border-radius: 0px 6px 6px 0px;" alt="Logo"/>
 </a>
     <div class="version">
       0.0.1
@@ -44,13 +52,14 @@
 
 
 <!-- font awesome comes with the rtd package.. use like this:-->
-<a href="https://github.com/elsampsa/cutefront" class="icon icon-github"> CuteFront @ github</a>
-<a href="https://github.com/elsampsa/cutefront/issues" class="fa fa-bug"> Issue Tracker @ github</a>
+<a href="https://github.com/elsampsa/cutefront" target="_blank" rel="noopener noreferrer"> <i class="fa-brands fa-github"></i> CuteFront @ github</a>
+<a href="https://github.com/elsampsa/cutefront/issues" target="_blank" rel="noopener noreferrer"> <i class="fas fa-bug"></i> Issue Tracker @ github</a>
+<a href="https://discord.com/channels/1116100310574837812/1116101050190012426" target="_blank" rel="noopener noreferrer"> <i class="fa-brands fa-discord"></i> Discord </a>
 
 <!-- don't even think about subclassing searchbox.html .. will never work!-->
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -92,7 +101,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">State History</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/state.rst.txt" rel="nofollow"> View page source</a>
@@ -103,8 +112,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="state-history">
-<span id="id1"></span><h1>State History<a class="headerlink" href="#state-history" title="Permalink to this headline">¶</a></h1>
+  <section id="state-history">
+<span id="id1"></span><h1>State History<a class="headerlink" href="#state-history" title="Link to this heading"></a></h1>
 <p>We have been contrasting the HTML + javascript based vs. Qt based GUI development frameworks.</p>
 <p>As discussed in <a class="reference internal" href="webdev.html#appendum"><span class="std std-ref">the appendum</span></a>, the web browser has - because of it’s original purpose of being just a “file browser” -
 the extremely nice feature of being able to move forward and backward in the browsing history.</p>
@@ -119,39 +128,39 @@ that actually <em>do</em> jump from one html file to another, offer this possibi
 <p>CuteFront offers a consistent way of saving the state and handling the state history.  Please check out a working demo in
 <a class="reference external" href="https://elsampsa.github.io/cutefront/lib/base/ballplayer2.html">here</a>
 (and remember to try browser’s forward/backward buttons after throwing the ball a few times).</p>
-<div class="section" id="state-de-serialization">
-<h2>State de/serialization<a class="headerlink" href="#state-de-serialization" title="Permalink to this headline">¶</a></h2>
+<section id="state-de-serialization">
+<h2>State de/serialization<a class="headerlink" href="#state-de-serialization" title="Link to this heading"></a></h2>
 <p>First of all, a widget that wants to use the state history feature, needs to implement the serialization
 and deserialization of it’s internal state.  Let’s extend the widget <code class="docutils literal notranslate"><span class="pre">BallPlayer</span></code> from the <a class="reference internal" href="qtlike.html#ballgame-code"><span class="std std-ref">original example</span></a>.</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nx">BallPlayer2</span> <span class="k">extends</span> <span class="nx">BallPlayer</span> <span class="p">{</span>
-    <span class="p">...</span>
-    <span class="c1">// define state serialization</span>
-    <span class="nx">stateToPar</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kd">let</span> <span class="nx">par</span> <span class="o">=</span> <span class="o">+</span><span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span> <span class="c1">// boolean to int</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">,</span> <span class="s2">&quot;stateToPar&quot;</span><span class="p">,</span> <span class="nx">par</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nx">par</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
-    <span class="p">}</span>
-    <span class="c1">// validate a serialized state</span>
-    <span class="nx">validatePar</span><span class="p">(</span><span class="nx">par</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// return false if par can&#39;t parsed as an integer value</span>
-        <span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">par</span><span class="p">)</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">i</span><span class="p">))</span> <span class="p">{</span> <span class="c1">// not an integer</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">err</span><span class="p">(</span><span class="s2">&quot;validatePar failed with par&quot;</span><span class="p">,</span><span class="nx">par</span><span class="p">,</span><span class="s2">&quot;:&quot;</span><span class="p">,</span><span class="nx">i</span><span class="p">,</span><span class="s2">&quot;not a number&quot;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="kc">false</span>
-        <span class="p">}</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">i</span><span class="o">!=</span><span class="mf">0</span> <span class="o">&amp;&amp;</span> <span class="nx">i</span><span class="o">!=</span><span class="mf">1</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">err</span><span class="p">(</span><span class="s2">&quot;validatePar failed with :&quot;</span><span class="p">,</span><span class="nx">i</span><span class="p">,</span><span class="s2">&quot;not 0 or 1&quot;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="kc">false</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="c1">// define state deserialization</span>
-    <span class="nx">parToState</span><span class="p">(</span><span class="nx">par</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span> <span class="o">=</span> <span class="p">(</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">par</span><span class="p">)</span> <span class="o">==</span> <span class="mf">1</span><span class="p">)</span> <span class="c1">// int to bool</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">,</span> <span class="s2">&quot;parToState&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span><span class="p">)</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">setBall</span><span class="p">()</span>
-    <span class="p">}</span>
-    <span class="p">...</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span><span class="w"> </span><span class="nx">BallPlayer2</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">BallPlayer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="c1">// define state serialization</span>
+<span class="w">    </span><span class="nx">stateToPar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">par</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">+</span><span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span><span class="w"> </span><span class="c1">// boolean to int</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;stateToPar&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">par</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">par</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// validate a serialized state</span>
+<span class="w">    </span><span class="nx">validatePar</span><span class="p">(</span><span class="nx">par</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// return false if par can&#39;t parsed as an integer value</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">par</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">i</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// not an integer</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">err</span><span class="p">(</span><span class="s2">&quot;validatePar failed with par&quot;</span><span class="p">,</span><span class="nx">par</span><span class="p">,</span><span class="s2">&quot;:&quot;</span><span class="p">,</span><span class="nx">i</span><span class="p">,</span><span class="s2">&quot;not a number&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="o">!=</span><span class="mf">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">i</span><span class="o">!=</span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">err</span><span class="p">(</span><span class="s2">&quot;validatePar failed with :&quot;</span><span class="p">,</span><span class="nx">i</span><span class="p">,</span><span class="s2">&quot;not 0 or 1&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// define state deserialization</span>
+<span class="w">    </span><span class="nx">parToState</span><span class="p">(</span><span class="nx">par</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nb">parseInt</span><span class="p">(</span><span class="nx">par</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="c1">// int to bool</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;parToState&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span><span class="p">)</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">setBall</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="p">...</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -163,58 +172,58 @@ state of the widget using the text <code class="docutils literal notranslate"><s
 can be deserialized into a state or not.</p>
 <p>All widgets that want the state management feature, must also define
 a signal named <code class="docutils literal notranslate"><span class="pre">state_change</span></code>:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">createSignals</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">super</span><span class="p">.</span><span class="nx">createSignals</span><span class="p">()</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">state_change</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Signal</span><span class="p">()</span> <span class="c1">// required for state management</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">createSignals</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">super</span><span class="p">.</span><span class="nx">createSignals</span><span class="p">()</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">state_change</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Signal</span><span class="p">()</span><span class="w"> </span><span class="c1">// required for state management</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>They must also define meticulously <em>when</em> the state should be serialized and saved,
 by calling <code class="docutils literal notranslate"><span class="pre">stateSave</span></code>:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">catch_ball_slot</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// receive a ball</span>
-    <span class="k">super</span><span class="p">.</span><span class="nx">catch_ball_slot</span><span class="p">()</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">stateSave</span><span class="p">()</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">catch_ball_slot</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// receive a ball</span>
+<span class="w">    </span><span class="k">super</span><span class="p">.</span><span class="nx">catch_ball_slot</span><span class="p">()</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">stateSave</span><span class="p">()</span>
 <span class="p">}</span>
-<span class="nx">createState</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">super</span><span class="p">.</span><span class="nx">createState</span><span class="p">()</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">stateSave</span><span class="p">()</span>
-    <span class="c1">// initialize to not having a ball</span>
+<span class="nx">createState</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">super</span><span class="p">.</span><span class="nx">createState</span><span class="p">()</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">stateSave</span><span class="p">()</span>
+<span class="w">    </span><span class="c1">// initialize to not having a ball</span>
 <span class="p">}</span>
-<span class="nx">throwBall</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// we don&#39;t have the ball..</span>
-        <span class="k">return</span>
-    <span class="p">}</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span> <span class="o">=</span> <span class="kc">false</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">setBall</span><span class="p">()</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">stateSave</span><span class="p">()</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">emit</span><span class="p">()</span>
+<span class="nx">throwBall</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// we don&#39;t have the ball..</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">setBall</span><span class="p">()</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">stateSave</span><span class="p">()</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">emit</span><span class="p">()</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="using-state-de-serialization">
-<h2>Using state de/serialization<a class="headerlink" href="#using-state-de-serialization" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="using-state-de-serialization">
+<h2>Using state de/serialization<a class="headerlink" href="#using-state-de-serialization" title="Link to this heading"></a></h2>
 <p>Let’s modify the original <a class="reference internal" href="qtlike.html#ballgame"><span class="std std-ref">ballgame example</span></a> to include state history handling:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="p">{</span> <span class="nx">BallPlayer2</span><span class="p">,</span> <span class="nx">BillBoard2</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./ballplayer2.js&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">StateManager</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./statemanager.js&#39;</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">BallPlayer2</span><span class="p">,</span><span class="w"> </span><span class="nx">BillBoard2</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./ballplayer2.js&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">StateManager</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./statemanager.js&#39;</span>
 
-<span class="kd">class</span> <span class="nx">MyStateManager</span> <span class="k">extends</span> <span class="nx">StateManager</span> <span class="p">{</span>
-    <span class="nx">validateInitialState</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// how to form the initial state</span>
-        <span class="k">if</span> <span class="p">((</span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">alex</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="o">||</span>
-            <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">bob</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="o">||</span>
-            <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">billboard</span> <span class="o">==</span> <span class="kc">null</span><span class="p">))</span> <span class="p">{</span>
-                <span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">alex</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
-                <span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">bob</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
-                <span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">billboard</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
-            <span class="p">}</span>
-    <span class="p">}</span>
+<span class="kd">class</span><span class="w"> </span><span class="nx">MyStateManager</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">StateManager</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">validateInitialState</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// how to form the initial state</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">alex</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="o">||</span>
+<span class="w">            </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">bob</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="o">||</span>
+<span class="w">            </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">billboard</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">alex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;0&#39;</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">bob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;1&#39;</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">billboard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;0&#39;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">var</span> <span class="nx">alex</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BallPlayer2</span><span class="p">(</span><span class="s2">&quot;alex&quot;</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">bob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BallPlayer2</span><span class="p">(</span><span class="s2">&quot;bob&quot;</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">billboard</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BillBoard2</span><span class="p">(</span><span class="s2">&quot;billboard&quot;</span><span class="p">)</span>
-<span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyStateManager</span><span class="p">(</span><span class="s2">&quot;state&quot;</span><span class="p">)</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">alex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">BallPlayer2</span><span class="p">(</span><span class="s2">&quot;alex&quot;</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">bob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">BallPlayer2</span><span class="p">(</span><span class="s2">&quot;bob&quot;</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">billboard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">BillBoard2</span><span class="p">(</span><span class="s2">&quot;billboard&quot;</span><span class="p">)</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">MyStateManager</span><span class="p">(</span><span class="s2">&quot;state&quot;</span><span class="p">)</span>
 
 <span class="nx">alex</span><span class="p">.</span><span class="nx">setLogLevel</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">)</span>
 <span class="nx">bob</span><span class="p">.</span><span class="nx">setLogLevel</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">)</span>
@@ -223,46 +232,46 @@ by calling <code class="docutils literal notranslate"><span class="pre">stateSav
 
 <span class="c1">// connect alex, bob and billboard&#39;s state_change signal</span>
 <span class="c1">// to state&#39;s state_change_slot</span>
-<span class="nx">state</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="nx">alex</span><span class="p">,</span> <span class="nx">bob</span><span class="p">,</span> <span class="nx">billboard</span><span class="p">);</span>
+<span class="nx">state</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="nx">alex</span><span class="p">,</span><span class="w"> </span><span class="nx">bob</span><span class="p">,</span><span class="w"> </span><span class="nx">billboard</span><span class="p">);</span>
 
 <span class="c1">// ball from alex to bob</span>
 <span class="nx">alex</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
-    <span class="nx">bob</span><span class="p">.</span><span class="nx">catch_ball_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">bob</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">bob</span><span class="p">.</span><span class="nx">catch_ball_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">bob</span><span class="p">)</span>
 <span class="p">)</span>
 <span class="c1">// ball from bob to alex</span>
 <span class="nx">bob</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
-    <span class="nx">alex</span><span class="p">.</span><span class="nx">catch_ball_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">alex</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">alex</span><span class="p">.</span><span class="nx">catch_ball_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">alex</span><span class="p">)</span>
 <span class="p">)</span>
 <span class="c1">// inform billboard about the game</span>
 <span class="c1">// alex throws</span>
 <span class="nx">alex</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
-    <span class="nx">billboard</span><span class="p">.</span><span class="nx">ball_throw_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">billboard</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">billboard</span><span class="p">.</span><span class="nx">ball_throw_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">billboard</span><span class="p">)</span>
 <span class="p">)</span>
 <span class="c1">// bob throws</span>
 <span class="nx">bob</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
-    <span class="nx">billboard</span><span class="p">.</span><span class="nx">ball_throw_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">billboard</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">billboard</span><span class="p">.</span><span class="nx">ball_throw_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">billboard</span><span class="p">)</span>
 <span class="p">)</span>
 
 <span class="c1">// NOTE: order of the following calls (1, 2) is important</span>
 <span class="c1">// as you want to update the state information _before_ it is saved</span>
 <span class="c1">// into the url address bar</span>
-<span class="nx">state</span><span class="p">.</span><span class="nx">connectStateChanges</span><span class="p">()</span> <span class="c1">// (1)</span>
+<span class="nx">state</span><span class="p">.</span><span class="nx">connectStateChanges</span><span class="p">()</span><span class="w"> </span><span class="c1">// (1)</span>
 
 <span class="c1">// when the URL address serialize state is updated:</span>
-<span class="nx">billboard</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">state_change</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span> <span class="c1">// (2)</span>
-    <span class="nx">state</span><span class="p">.</span><span class="nx">state_save_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span>
+<span class="nx">billboard</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">state_change</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="w"> </span><span class="c1">// (2)</span>
+<span class="w">    </span><span class="nx">state</span><span class="p">.</span><span class="nx">state_save_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p>Let’s dissect what is exactly happening here.</p>
-</div>
-<div class="section" id="serialize">
-<h2>Serialize<a class="headerlink" href="#serialize" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="serialize">
+<h2>Serialize<a class="headerlink" href="#serialize" title="Link to this heading"></a></h2>
 <p><em>(a) Caching the state</em></p>
 <p>Each time a ballplayer changes it’s state (throws or catches a ball), it sends the signal <code class="docutils literal notranslate"><span class="pre">state_change</span></code>, carrying a key-value pair
 to the <code class="docutils literal notranslate"><span class="pre">MyStateManager</span></code> widget .  <code class="docutils literal notranslate"><span class="pre">MyStateManager</span></code> then caches these key value pairs.</p>
 <p>A default behaviour is that always when a widget changes it’s state, the information is sent to <code class="docutils literal notranslate"><span class="pre">MyStateManager</span></code>.  This is enabled by:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="nx">connectStateChanges</span><span class="p">()</span> <span class="c1">// (1)</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="nx">connectStateChanges</span><span class="p">()</span><span class="w"> </span><span class="c1">// (1)</span>
 </pre></div>
 </div>
 <p>That line of code connects all widgets’ <code class="docutils literal notranslate"><span class="pre">state_change</span></code> signals to <code class="docutils literal notranslate"><span class="pre">MyStateManager</span></code> ‘s <code class="docutils literal notranslate"><span class="pre">state_change_slot</span></code> (you could connect them separately by yourself as well).</p>
@@ -282,8 +291,8 @@ browser’s history, with this trailing address:</p>
 the latter happens is defined by connecting signals to <code class="docutils literal notranslate"><span class="pre">MyStateManager</span></code>’s  <code class="docutils literal notranslate"><span class="pre">save_state_slot</span></code>.</p>
 <p>When the new deserialized state appears in the browser’s URL address and history, is another matter completely and is defined by these lines (2):</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// when the URL address serialize state is updated:</span>
-<span class="nx">billboard</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">state_change</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span> <span class="c1">// (2)</span>
-    <span class="nx">state</span><span class="p">.</span><span class="nx">state_save_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span>
+<span class="nx">billboard</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">state_change</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="w"> </span><span class="c1">// (2)</span>
+<span class="w">    </span><span class="nx">state</span><span class="p">.</span><span class="nx">state_save_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -291,51 +300,51 @@ the latter happens is defined by connecting signals to <code class="docutils lit
 we obviously do not want.</p>
 <p>One final note: the order of calling (1) and (2) is important: we want the slots to be called in such an order that the states are cached first and
 only after the caching is complete, the state is updated into the browser URL address bar and history.</p>
-</div>
-<div class="section" id="deserialize">
-<h2>Deserialize<a class="headerlink" href="#deserialize" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="deserialize">
+<h2>Deserialize<a class="headerlink" href="#deserialize" title="Link to this heading"></a></h2>
 <p>Deserialization, i.e. the widgets setting their state, based on what appers in the URL address field <code class="docutils literal notranslate"><span class="pre">?alex=1&amp;bob=0&amp;billboard=5</span></code>
 ending of the URL, is triggered always when you press the forward/backward buttons of the browser.</p>
 <p><code class="docutils literal notranslate"><span class="pre">MyStateManager</span></code> will pick up the parameters from the URL address field and calls each widget’s <code class="docutils literal notranslate"><span class="pre">parToState</span></code> method.</p>
-</div>
-<div class="section" id="initialization">
-<h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="initialization">
+<h2>Initialization<a class="headerlink" href="#initialization" title="Link to this heading"></a></h2>
 <p>We also have to define what happens at the initial page load.  In the current case, if a single state parameter is missing, we will just reset all of them:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nx">MyStateManager</span> <span class="k">extends</span> <span class="nx">StateManager</span> <span class="p">{</span>
-        <span class="nx">validateInitialState</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// how to form the initial state</span>
-            <span class="k">if</span> <span class="p">((</span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">alex</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="o">||</span>
-                <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">bob</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="o">||</span>
-                <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">billboard</span> <span class="o">==</span> <span class="kc">null</span><span class="p">))</span> <span class="p">{</span>
-                    <span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">alex</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
-                    <span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">bob</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
-                    <span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">billboard</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
-                <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span><span class="w"> </span><span class="nx">MyStateManager</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">StateManager</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">validateInitialState</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// how to form the initial state</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">alex</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="o">||</span>
+<span class="w">                </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">bob</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="o">||</span>
+<span class="w">                </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">billboard</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">alex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;0&#39;</span>
+<span class="w">                    </span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">bob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;1&#39;</span>
+<span class="w">                    </span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">billboard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;0&#39;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 </pre></div>
 </div>
 <p>A more default behaviour would be:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nx">MyStateManager</span> <span class="k">extends</span> <span class="nx">StateManager</span> <span class="p">{</span>
-        <span class="nx">validateInitialState</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// how to form the initial state</span>
-            <span class="k">if</span> <span class="p">((</span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">alex</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="o">||</span>
-                <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">bob</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="o">||</span>
-                <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">billboard</span> <span class="o">==</span> <span class="kc">null</span><span class="p">))</span> <span class="p">{</span>
-                    <span class="k">this</span><span class="p">.</span><span class="nx">setDefaultValues</span><span class="p">()</span>
-                <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span><span class="w"> </span><span class="nx">MyStateManager</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">StateManager</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">validateInitialState</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// how to form the initial state</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">alex</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="o">||</span>
+<span class="w">                </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">bob</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="o">||</span>
+<span class="w">                </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">billboard</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">this</span><span class="p">.</span><span class="nx">setDefaultValues</span><span class="p">()</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 </pre></div>
 </div>
 <p>Where <code class="docutils literal notranslate"><span class="pre">MyStateManager</span></code> simply asks from each widget for a suitable initial parameter by calling <code class="docutils literal notranslate"><span class="pre">setDefaultValues()</span></code>.</p>
-</div>
-<div class="section" id="pitfalls">
-<h2>Pitfalls<a class="headerlink" href="#pitfalls" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="pitfalls">
+<h2>Pitfalls<a class="headerlink" href="#pitfalls" title="Link to this heading"></a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">parToState</span></code> is fired always when a serialized state is pulled from the browser history, so you probably <strong>don’t want
 signals and widget interactions fired when</strong> <code class="docutils literal notranslate"><span class="pre">parToState</span></code> <strong>is called:</strong> this would make one widget to alter the state of another
 widget (via the signal-slot connections), while we actually want them just to create a state from the deserialized data.</p>
 <p>So be carefull not to fire any signals originating in/directly from <code class="docutils literal notranslate"><span class="pre">parToState</span></code>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

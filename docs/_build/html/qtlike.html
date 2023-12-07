@@ -1,32 +1,29 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Qt-like Widgets and Signals &mdash; CuteFront  documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <title>Qt-like Widgets and Signals &mdash; CuteFront  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Installing" href="install.html" />
     <link rel="prev" title="Intro" href="intro.html" />
-
-    <script src='https://cdn.jsdelivr.net/npm/@widgetbot/crate@3' async defer>
-    new Crate({
-        server: '1116100310574837812', // ElSampsa's kindergarden
-        channel: '1116101050190012426' // #cutefront
-    })
-    </script>
-
-    <!-- as per https://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs -->
-    <link href="_static/rtd_override.css" rel="stylesheet" type="text/css">
+<!-- as per https://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs -->
+<link href="_static/rtd_override.css" rel="stylesheet" type="text/css">
+<script src="https://kit.fontawesome.com/1f90d3565b.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -36,7 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-  <a href="index.html" class="icon icon-home"> CuteFront<img src="_static/logo.png" class="logo" alt="Logo"/>
+
+<!--
+  <a href="index.html" class="icon icon-home"> CuteFront
+</a>
+-->
+
+<!--
+NOTE: we are starting to have "version creep" here..  at the moment, with Sphinx==7.2.6 and sphinx-rtd-theme==1.3.0 the only thing that
+works is this:
+-->
+<a href="index.html">
+<img src="_static/logo.png" class="logo" style="width: 200px; height: auto; border-radius: 0px 6px 6px 0px;" alt="Logo"/>
 </a>
     <div class="version">
       0.0.1
@@ -44,13 +52,14 @@
 
 
 <!-- font awesome comes with the rtd package.. use like this:-->
-<a href="https://github.com/elsampsa/cutefront" class="icon icon-github"> CuteFront @ github</a>
-<a href="https://github.com/elsampsa/cutefront/issues" class="fa fa-bug"> Issue Tracker @ github</a>
+<a href="https://github.com/elsampsa/cutefront" target="_blank" rel="noopener noreferrer"> <i class="fa-brands fa-github"></i> CuteFront @ github</a>
+<a href="https://github.com/elsampsa/cutefront/issues" target="_blank" rel="noopener noreferrer"> <i class="fas fa-bug"></i> Issue Tracker @ github</a>
+<a href="https://discord.com/channels/1116100310574837812/1116101050190012426" target="_blank" rel="noopener noreferrer"> <i class="fa-brands fa-discord"></i> Discord </a>
 
 <!-- don't even think about subclassing searchbox.html .. will never work!-->
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -89,7 +98,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Qt-like Widgets and Signals</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/qtlike.rst.txt" rel="nofollow"> View page source</a>
@@ -100,36 +109,36 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="qt-like-widgets-and-signals">
-<h1>Qt-like Widgets and Signals<a class="headerlink" href="#qt-like-widgets-and-signals" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="let-s-play-ball">
-<span id="ballgame"></span><h2>Let’s play ball<a class="headerlink" href="#let-s-play-ball" title="Permalink to this headline">¶</a></h2>
+  <section id="qt-like-widgets-and-signals">
+<h1>Qt-like Widgets and Signals<a class="headerlink" href="#qt-like-widgets-and-signals" title="Link to this heading"></a></h1>
+<section id="let-s-play-ball">
+<span id="ballgame"></span><h2>Let’s play ball<a class="headerlink" href="#let-s-play-ball" title="Link to this heading"></a></h2>
 <p>In CuteFront, there is only plain html and javascript.
 Javascript and html are in the same <code class="docutils literal notranslate"><span class="pre">.html</span></code> file, while each widget class is
 in a separate <code class="docutils literal notranslate"><span class="pre">.js</span></code> file.</p>
 <p>A code example tells more than thousand explanatory words, so let’s get straight to it
 with some javascript:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="p">{</span> <span class="nx">BallPlayer</span><span class="p">,</span> <span class="nx">BillBoard</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./ballplayer.js&#39;</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">alex</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BallPlayer</span><span class="p">(</span><span class="s2">&quot;alex&quot;</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">bob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BallPlayer</span><span class="p">(</span><span class="s2">&quot;bob&quot;</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">billboard</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BillBoard</span><span class="p">(</span><span class="s2">&quot;billboard&quot;</span><span class="p">)</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">BallPlayer</span><span class="p">,</span><span class="w"> </span><span class="nx">BillBoard</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./ballplayer.js&#39;</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">alex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">BallPlayer</span><span class="p">(</span><span class="s2">&quot;alex&quot;</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">bob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">BallPlayer</span><span class="p">(</span><span class="s2">&quot;bob&quot;</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">billboard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">BillBoard</span><span class="p">(</span><span class="s2">&quot;billboard&quot;</span><span class="p">)</span>
 
 <span class="c1">// ball from alex to bob</span>
 <span class="nx">alex</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
-    <span class="nx">bob</span><span class="p">.</span><span class="nx">catch_ball_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">bob</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">bob</span><span class="p">.</span><span class="nx">catch_ball_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">bob</span><span class="p">)</span>
 <span class="p">)</span>
 <span class="c1">// ball from bob to alex</span>
 <span class="nx">bob</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
-    <span class="nx">alex</span><span class="p">.</span><span class="nx">catch_ball_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">alex</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">alex</span><span class="p">.</span><span class="nx">catch_ball_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">alex</span><span class="p">)</span>
 <span class="p">)</span>
 <span class="c1">// inform billboard about the game</span>
 <span class="c1">// alex throws</span>
 <span class="nx">alex</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
-    <span class="nx">billboard</span><span class="p">.</span><span class="nx">ball_throw_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">billboard</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">billboard</span><span class="p">.</span><span class="nx">ball_throw_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">billboard</span><span class="p">)</span>
 <span class="p">)</span>
 <span class="c1">// bob throws</span>
 <span class="nx">bob</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
-    <span class="nx">billboard</span><span class="p">.</span><span class="nx">ball_throw_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">billboard</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">billboard</span><span class="p">.</span><span class="nx">ball_throw_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">billboard</span><span class="p">)</span>
 <span class="p">)</span>
 
 <span class="c1">// give ball initially to alex</span>
@@ -158,9 +167,9 @@ in the JS part by using their unique <code class="docutils literal notranslate">
 <p>Here is an image of the working web-page:</p>
 <img alt="_images/ballgame.png" src="_images/ballgame.png" />
 <p>You can also try it on-line in <a class="reference external" href="https://elsampsa.github.io/cutefront/lib/base/ballplayer.html">here</a></p>
-</div>
-<div class="section" id="about-the-state">
-<span id="state"></span><h2>About the State<a class="headerlink" href="#about-the-state" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="about-the-state">
+<span id="state"></span><h2>About the State<a class="headerlink" href="#about-the-state" title="Link to this heading"></a></h2>
 <p>Before continuying, let’s still comment about the “state” (the set of all variables) of the page:</p>
 <ul class="simple">
 <li><p>Each widget from the <code class="docutils literal notranslate"><span class="pre">BallPlayer</span></code> class knows it’s own state (has the ball or not).</p></li>
@@ -185,72 +194,72 @@ BallPlayer              |   |     |
 We have the same potential with CuteFront.</p>
 <p>A more complicated topic on the state is the “state history”, i.e. moving forward and backward in history, using browser forward and backward
 buttons.  You can read more about that in <a class="reference internal" href="state.html#state-history"><span class="std std-ref">State History</span></a>.</p>
-</div>
-<div class="section" id="anatomy-of-a-widget">
-<span id="ballgame-code"></span><h2>Anatomy of a Widget<a class="headerlink" href="#anatomy-of-a-widget" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="anatomy-of-a-widget">
+<span id="ballgame-code"></span><h2>Anatomy of a Widget<a class="headerlink" href="#anatomy-of-a-widget" title="Link to this heading"></a></h2>
 <p>Let’s take a look at the <code class="docutils literal notranslate"><span class="pre">BallPlayer</span></code> widget class:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nx">BallPlayer</span> <span class="k">extends</span> <span class="nx">Widget</span> <span class="p">{</span>
-    <span class="c1">// A widget you can throw ball with</span>
-    <span class="c1">// to another widget</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">();</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="nx">id</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">createElement</span><span class="p">();</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">createState</span><span class="p">();</span>
-    <span class="p">}</span>
-    <span class="c1">// UP: signals</span>
-    <span class="nx">createSignals</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Signal</span><span class="p">();</span> <span class="c1">// sends the ball to another widget</span>
-    <span class="p">}</span>
-    <span class="c1">// IN: slots</span>
-    <span class="nx">catch_ball_slot</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// receive a ball</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">,</span> <span class="s2">&quot;catch_ball_slot&quot;</span><span class="p">)</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span> <span class="o">=</span> <span class="kc">true</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">setBall</span><span class="p">()</span>
-    <span class="p">}</span>
-    <span class="nx">createState</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">element</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">err</span><span class="p">(</span><span class="s2">&quot;no html element&quot;</span><span class="p">)</span>
-            <span class="k">return</span>
-        <span class="p">}</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span> <span class="o">=</span> <span class="kc">false</span> <span class="c1">// the only state variable</span>
-        <span class="c1">// initialize to not having a ball</span>
-    <span class="p">}</span>
-    <span class="nx">createElement</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">element</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
-        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">element</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">err</span><span class="p">(</span><span class="s2">&quot;could not find element with id&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
-            <span class="k">return</span>
-        <span class="p">}</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="sb">`</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span><span class="w"> </span><span class="nx">BallPlayer</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Widget</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// A widget you can throw ball with</span>
+<span class="w">    </span><span class="c1">// to another widget</span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">super</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">id</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">createElement</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">createState</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// UP: signals</span>
+<span class="w">    </span><span class="nx">createSignals</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Signal</span><span class="p">();</span><span class="w"> </span><span class="c1">// sends the ball to another widget</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// IN: slots</span>
+<span class="w">    </span><span class="nx">catch_ball_slot</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// receive a ball</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;catch_ball_slot&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">setBall</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">createState</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">err</span><span class="p">(</span><span class="s2">&quot;no html element&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="c1">// the only state variable</span>
+<span class="w">        </span><span class="c1">// initialize to not having a ball</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">createElement</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">err</span><span class="p">(</span><span class="s2">&quot;could not find element with id&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="sb">`</span>
 <span class="sb">        &lt;button class=&quot;btn btn-outline-primary&quot;&gt;Throw&lt;/button&gt;</span>
 <span class="sb">        `</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">button</span><span class="o">=</span><span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">&quot;button&quot;</span><span class="p">).</span><span class="nx">item</span><span class="p">(</span><span class="mf">0</span><span class="p">)</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">button</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">throwBall</span><span class="p">()</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="nx">throwBall</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// we don&#39;t have the ball..</span>
-            <span class="k">return</span>
-        <span class="p">}</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span> <span class="o">=</span> <span class="kc">false</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">setBall</span><span class="p">()</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">emit</span><span class="p">()</span>
-    <span class="p">}</span>
-    <span class="nx">setBall</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// changes html element appearance according this.has_ball</span>
-        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">button</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="sb">`Throw me (I have the ball!)`</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">button</span><span class="p">.</span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;btn btn-outline-primary&quot;</span>
-        <span class="p">}</span>
-        <span class="k">else</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">button</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="sb">`Throw`</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">button</span><span class="p">.</span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;btn btn-outline-primary&quot;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">button</span><span class="o">=</span><span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">&quot;button&quot;</span><span class="p">).</span><span class="nx">item</span><span class="p">(</span><span class="mf">0</span><span class="p">)</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">button</span><span class="p">.</span><span class="nx">onclick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">throwBall</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">throwBall</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// we don&#39;t have the ball..</span>
+<span class="w">            </span><span class="k">return</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">setBall</span><span class="p">()</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">emit</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">setBall</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// changes html element appearance according this.has_ball</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">has_ball</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">button</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="sb">`Throw me (I have the ball!)`</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">button</span><span class="p">.</span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;btn btn-outline-primary&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">button</span><span class="p">.</span><span class="nx">innerHTML</span><span class="o">=</span><span class="sb">`Throw`</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">button</span><span class="p">.</span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;btn btn-outline-primary&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-<span class="p">}</span> <span class="c1">// BallPlayer</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// BallPlayer</span>
 </pre></div>
 </div>
 <p>All widgets define <code class="docutils literal notranslate"><span class="pre">createSignals</span></code>, <code class="docutils literal notranslate"><span class="pre">createState</span></code> and <code class="docutils literal notranslate"><span class="pre">createElement</span></code> methods.</p>
@@ -267,8 +276,8 @@ It is also responsible for producing the html code required by the widget.</p></
 <p>Before going full throttle into creating your own interative pages and widgets,
 please look at the <a class="reference internal" href="creating.html#creating"><span class="std std-ref">Creating Widgets</span></a> section for common techniques
 and pitfalls (in javascript, there are quite some).</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

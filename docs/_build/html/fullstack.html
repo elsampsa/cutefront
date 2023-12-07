@@ -1,32 +1,29 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A Fullstack Example &mdash; CuteFront  documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <title>A Fullstack Example &mdash; CuteFront  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Python vs JS Cheatsheet" href="cheatsheet.html" />
     <link rel="prev" title="Creating and Using Widgets" href="creating.html" />
-
-    <script src='https://cdn.jsdelivr.net/npm/@widgetbot/crate@3' async defer>
-    new Crate({
-        server: '1116100310574837812', // ElSampsa's kindergarden
-        channel: '1116101050190012426' // #cutefront
-    })
-    </script>
-
-    <!-- as per https://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs -->
-    <link href="_static/rtd_override.css" rel="stylesheet" type="text/css">
+<!-- as per https://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs -->
+<link href="_static/rtd_override.css" rel="stylesheet" type="text/css">
+<script src="https://kit.fontawesome.com/1f90d3565b.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -36,7 +33,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-  <a href="index.html" class="icon icon-home"> CuteFront<img src="_static/logo.png" class="logo" alt="Logo"/>
+
+<!--
+  <a href="index.html" class="icon icon-home"> CuteFront
+</a>
+-->
+
+<!--
+NOTE: we are starting to have "version creep" here..  at the moment, with Sphinx==7.2.6 and sphinx-rtd-theme==1.3.0 the only thing that
+works is this:
+-->
+<a href="index.html">
+<img src="_static/logo.png" class="logo" style="width: 200px; height: auto; border-radius: 0px 6px 6px 0px;" alt="Logo"/>
 </a>
     <div class="version">
       0.0.1
@@ -44,13 +52,14 @@
 
 
 <!-- font awesome comes with the rtd package.. use like this:-->
-<a href="https://github.com/elsampsa/cutefront" class="icon icon-github"> CuteFront @ github</a>
-<a href="https://github.com/elsampsa/cutefront/issues" class="fa fa-bug"> Issue Tracker @ github</a>
+<a href="https://github.com/elsampsa/cutefront" target="_blank" rel="noopener noreferrer"> <i class="fa-brands fa-github"></i> CuteFront @ github</a>
+<a href="https://github.com/elsampsa/cutefront/issues" target="_blank" rel="noopener noreferrer"> <i class="fas fa-bug"></i> Issue Tracker @ github</a>
+<a href="https://discord.com/channels/1116100310574837812/1116101050190012426" target="_blank" rel="noopener noreferrer"> <i class="fa-brands fa-discord"></i> Discord </a>
 
 <!-- don't even think about subclassing searchbox.html .. will never work!-->
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -92,7 +101,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">A Fullstack Example</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/fullstack.rst.txt" rel="nofollow"> View page source</a>
@@ -103,13 +112,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="a-fullstack-example">
-<span id="fullstack"></span><h1>A Fullstack Example<a class="headerlink" href="#a-fullstack-example" title="Permalink to this headline">¶</a></h1>
+  <section id="a-fullstack-example">
+<span id="fullstack"></span><h1>A Fullstack Example<a class="headerlink" href="#a-fullstack-example" title="Link to this heading"></a></h1>
 <p><em>a CRUD fullstack demo</em></p>
 <img alt="_images/fullstack.png" src="_images/fullstack.png" />
 <p>An on-line demo is available <a class="reference external" href="https://elsampsa.github.io/cutefront/app.html">here</a>.  It uses a mock data source (see below) instead of an actual backend.</p>
-<div class="section" id="datasources">
-<h2>Datasources<a class="headerlink" href="#datasources" title="Permalink to this headline">¶</a></h2>
+<section id="datasources">
+<h2>Datasources<a class="headerlink" href="#datasources" title="Link to this heading"></a></h2>
 <p>So, by now we have talked about Qt-style widgets that have signals and slots.</p>
 <p>Datasources are things that handle the interface between the backend and the frontend
 and we can use the same signal/slot paradigm in their case.  Consider the following:</p>
@@ -134,31 +143,31 @@ and we can use the same signal/slot paradigm in their case.  Consider the follow
 </ul>
 <p>Backend has a script that uses the backend’s pydantic data schemas to produce automagically CuteFront datasources which you can integrate directly into the frontend code</p>
 <p>Said that, documenting these features in detail is out of the scope of this (frontend) library, so you’ll need to study the code instead.</p>
-</div>
-<div class="section" id="installing-the-backend">
-<h2>Installing the Backend<a class="headerlink" href="#installing-the-backend" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="installing-the-backend">
+<h2>Installing the Backend<a class="headerlink" href="#installing-the-backend" title="Link to this heading"></a></h2>
 <p>For Plainfile (1) and Native (2) development modes (see below),
 you need first to install the backend into to your system:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install sqlite3 nginx
-virtualenv -p python3 venv
-<span class="nb">source</span> venv/bin/activate
-<span class="nb">cd</span> backend
-pip3 install --user -e .
-<span class="nb">cd</span> ..
-my-backend db --drop --init --revision --upgrade
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>sqlite3<span class="w"> </span>nginx
+virtualenv<span class="w"> </span>-p<span class="w"> </span>python3<span class="w"> </span>venv
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate
+<span class="nb">cd</span><span class="w"> </span>backend
+pip3<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>-e<span class="w"> </span>.
+<span class="nb">cd</span><span class="w"> </span>..
+my-backend<span class="w"> </span>db<span class="w"> </span>--drop<span class="w"> </span>--init<span class="w"> </span>--revision<span class="w"> </span>--upgrade
 </pre></div>
 </div>
 <p>i.e., installing sqlite3 and nginx, creating a python virtualenv (skip if you feel so),
 installing the backend package and finally, initializing the database</p>
-</div>
-<div class="section" id="plainfile-run">
-<h2>1. Plainfile Run<a class="headerlink" href="#plainfile-run" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="plainfile-run">
+<h2>1. Plainfile Run<a class="headerlink" href="#plainfile-run" title="Link to this heading"></a></h2>
 <p>Please read first about the “Plainfile” development environment in
 <a class="reference internal" href="devenvs.html#plainfile"><span class="std std-ref">here</span></a> and create a dedicated development profile.</p>
 <p>Here we will just access bare .html and .js files.  Typically you wouldn’t start a backend
 either, but work with mock data (in early development phases).</p>
 <p>Run the backend with (emphasis on <code class="docutils literal notranslate"><span class="pre">--cors</span></code>):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>my-backend run --cors
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>my-backend<span class="w"> </span>run<span class="w"> </span>--cors
 </pre></div>
 </div>
 <p>Backend API endpoints are now available in <a class="reference external" href="http://0.0.0.0:8080/docs">http://0.0.0.0:8080/docs</a></p>
@@ -172,42 +181,42 @@ either, but work with mock data (in early development phases).</p>
 </div>
 <p>(i.e. dropping that <code class="docutils literal notranslate"><span class="pre">?source=http://0.0.0.0:8080</span></code> in the end)</p>
 <p>Using mock data is a good option in the first stages of development</p>
-</div>
-<div class="section" id="native-run">
-<h2>2. Native Run<a class="headerlink" href="#native-run" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="native-run">
+<h2>2. Native Run<a class="headerlink" href="#native-run" title="Link to this heading"></a></h2>
 <p>Start backend with:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>my-backend run
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>my-backend<span class="w"> </span>run
 </pre></div>
 </div>
 <p>And in another terminal frontend with:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> frontend
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>frontend
 ./nginx.py
 </pre></div>
 </div>
 <p>Go with browser to <a class="reference external" href="http://0.0.0.0:8086/?source=">http://0.0.0.0:8086/?source=</a></p>
 <p>Backend API endpoints are avail in <a class="reference external" href="http://0.0.0.0:8086/docs">http://0.0.0.0:8086/docs</a></p>
-</div>
-<div class="section" id="docker-run">
-<h2>3. Docker Run<a class="headerlink" href="#docker-run" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="docker-run">
+<h2>3. Docker Run<a class="headerlink" href="#docker-run" title="Link to this heading"></a></h2>
 <p>No extra installations (except for having docker-compose installed into your system)
 is required.</p>
 <p>Please use the no-brainer bash scripts provided in directory <code class="docutils literal notranslate"><span class="pre">bash</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash/dev.bash build
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash/dev.bash<span class="w"> </span>build
 bash/devreset.bash
-bash/dev.bash up
+bash/dev.bash<span class="w"> </span>up
 </pre></div>
 </div>
 <p>That builds the images, inits the database and starts the containers</p>
 <p>Go with your browser to <a class="reference external" href="http://localhost:8086/?source=">http://localhost:8086/?source=</a></p>
 <p>Backend API endpoints are available in <a class="reference external" href="http://0.0.0.0:8086/docs">http://0.0.0.0:8086/docs</a></p>
 <p>Since we’re using very generic container names (“frontend” &amp; “backend”), you might need to do this:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker container prune
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>container<span class="w"> </span>prune
 </pre></div>
 </div>
 <p>in order to get rid of earlier containers with identical names.</p>
-</div>
-<div class="section" id="internals">
-<h2>Internals<a class="headerlink" href="#internals" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="internals">
+<h2>Internals<a class="headerlink" href="#internals" title="Link to this heading"></a></h2>
 <p>Here’s a nice HIMO diagram for understanding the fullstack example: it shows the signal-slot connections between
 the different widgets in the code.</p>
 <p>Please also note how the global state is partitioned and cached into the widgets
@@ -311,8 +320,8 @@ themselves (this was discussed also <a class="reference internal" href="qtlike.h
         IN: current_datum_slot // input: currently chosen datum (or null)
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
