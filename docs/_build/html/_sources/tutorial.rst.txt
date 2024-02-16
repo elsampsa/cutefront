@@ -77,7 +77,7 @@ Execute `project init script <https://github.com/elsampsa/cutefront/blob/main/sc
 
 .. code-block:: bash
 
-    curl -sSL https://raw.githubusercontent.com/elsampsa/cutefront/main/script/project_init.bash | bash
+    bash <(curl -sSL https://raw.githubusercontent.com/elsampsa/cutefront/main/script/project_init.bash)
 
 Let's use ``app3`` as the app subdirectory name.
 

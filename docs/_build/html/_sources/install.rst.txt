@@ -9,7 +9,7 @@ that includes the complete :ref:`Fullstack Example <fullstack>`, with python bac
 
 The idea is, that you can then remove the parts you don't need.
 
-Alternatively, you may want to use `project init script  <https://github.com/elsampsa/cutefront/blob/main/bash/TODO>`_
+Alternatively, you may want to use `project init script  <https://github.com/elsampsa/cutefront/blob/main/script/project_init.bash>`_
 to start CuteFront project from a clean slate, as was done in the :ref:`Tutorial <tutorial>`.
 
 Download Fullstack Example
