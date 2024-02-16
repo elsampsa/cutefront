@@ -23,6 +23,9 @@ This repo can also be used as a *fullstack scaffold* for your projects.  It feat
 - Development mode using pure .js and .html only
 - Development mode using mock data without a backend
 
+CuteFront widgets can be **AI generated** using Large Language Models (LLMs), please take a look
+at the provided preconditioning prompt in [here](prompt.md).
+
 ## Author(s)
 
 Sampsa Riikonen

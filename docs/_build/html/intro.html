@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Intro &mdash; CuteFront  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -16,6 +19,8 @@
         <script src="_static/documentation_options.js?v=5929fcd5"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -74,12 +79,14 @@ works is this:
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="qtlike.html">Qt-like Widgets and Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library.html">Widget Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="codeorg.html">Code Organization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">State History</a></li>
 <li class="toctree-l1"><a class="reference internal" href="devenvs.html">Development Environments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating.html">Creating and Using Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chatgpt.html">AI Generated Widgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fullstack.html">A Fullstack Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cheatsheet.html">Python vs JS Cheatsheet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="links.html">Links</a></li>
@@ -112,20 +119,22 @@ works is this:
              
   <section id="intro">
 <span id="id1"></span><h1>Intro<a class="headerlink" href="#intro" title="Link to this heading"></a></h1>
-<p><em>Program in frontend Javascript like you were doing PyQt</em></p>
+<p><em>CuteFront is the lightweight, quick and modular javascript frontend framework</em></p>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
-<p>CuteFront is a frontend framework, featuring:</p>
+<p>CuteFront is a declarative javascript frontend framework, featuring:</p>
 <ul class="simple">
-<li><p>Code structured into clearly separated components / widgets that intercom through signals and slots</p></li>
+<li><p>Code structured into clearly separated components (widgets) that communicate through signals and slots</p></li>
 <li><p>No npm package mess or transpiling</p></li>
-<li><p>No templating languages, just pure js and html</p></li>
+<li><p>No annoying templating languages, just pure javascript and html</p></li>
 <li><p>Qt’s touch’n’feel with widgets, signals and slots</p></li>
-<li><p>Simple development environment with plain js and html files</p></li>
+<li><p>Simple development environment with plain .js and .html files</p></li>
 <li><p>Global state partitioned and cached into widgets - avoid global state mess</p></li>
-<li><p>The signal/slot paradigm creates possibilities for graphical representation of page interactions (like in qt studio).</p></li>
+<li><p>AI Widget generation using Large Language Models (LLMs) <a class="reference internal" href="chatgpt.html#chatgpt"><span class="std std-ref">works like a dream</span></a></p></li>
 </ul>
-<p>A code example:</p>
+<p>If you are a “learning-by-doing” person, want to skip the chit-chat and take a quick look what CuteFront is about,
+I recommend that you take the ~ 30 minutes <a class="reference internal" href="tutorial.html#id1"><span class="std std-ref">tutorial</span></a>.</p>
+<p>Here is a a quick look at a typical CuteFront main html file using widgets:</p>
 <div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!doctype html&gt;</span>
 <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
@@ -162,9 +171,10 @@ works is this:
 <section id="for-whom">
 <h2>For Whom?<a class="headerlink" href="#for-whom" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Ideal for people who have <a class="reference external" href="https://doc.qt.io/qt-6/qtwidgets-index.html">Qt</a> or <a class="reference external" href="https://www.gtk.org/">GTK</a>, i.e. widget based GUI development background</p></li>
-<li><p>Even more so for people with <a class="reference external" href="https://riverbankcomputing.com/software/pyqt">PyQt</a> / <a class="reference external" href="https://wiki.qt.io/Qt_for_Python">PySide2</a> background</p></li>
 <li><p>For people who are, like me, deeply frustrated with the bloated modern-day javascript frameworks</p></li>
+<li><p>Sure, there is Flutter and Dart that are also programmatic and widget-based approaches, but here we use only browser-native javascript!</p></li>
+<li><p>Very ideal for people who have <a class="reference external" href="https://doc.qt.io/qt-6/qtwidgets-index.html">Qt</a> or <a class="reference external" href="https://www.gtk.org/">GTK</a>, i.e. widget based GUI development background</p></li>
+<li><p>Even more so for people with <a class="reference external" href="https://riverbankcomputing.com/software/pyqt">PyQt</a> / <a class="reference external" href="https://wiki.qt.io/Qt_for_Python">PySide2</a> background</p></li>
 </ul>
 </section>
 <section id="for-what">
@@ -172,8 +182,7 @@ works is this:
 <ul class="simple">
 <li><p>To get an interactive web-page quickly up and running</p></li>
 <li><p>Especially for smaller projects requiring complex reactive frontend code, SPA (single-page applications) and the like</p></li>
-<li><p>Not guaranteed or tested for huge projects, although the system is component-based and <em>requires no transpiling</em> (eliminating a problem for big projects)</p></li>
-<li><p>CuteFront is in poc (proof-of-concept) stage, and expanding the widget library requires <em>your</em> help</p></li>
+<li><p>Not guaranteed or tested for huge projects, although the system is component-based and <em>requires no transpiling</em> (eliminating one big problem for large projects)</p></li>
 </ul>
 </section>
 <section id="cute-what">

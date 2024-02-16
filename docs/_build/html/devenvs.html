@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Development Environments &mdash; CuteFront  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -16,6 +19,8 @@
         <script src="_static/documentation_options.js?v=5929fcd5"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -68,6 +73,7 @@ works is this:
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="qtlike.html">Qt-like Widgets and Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library.html">Widget Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="codeorg.html">Code Organization</a></li>
@@ -79,6 +85,7 @@ works is this:
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="creating.html">Creating and Using Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chatgpt.html">AI Generated Widgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fullstack.html">A Fullstack Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cheatsheet.html">Python vs JS Cheatsheet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="links.html">Links</a></li>
@@ -113,10 +120,10 @@ works is this:
 <h1>Development Environments<a class="headerlink" href="#development-environments" title="Link to this heading"></a></h1>
 <section id="plainfile">
 <span id="id1"></span><h2>1. Plainfile<a class="headerlink" href="#plainfile" title="Link to this heading"></a></h2>
-<p>In this development you open your app’s entry point
+<p><em>Firefox</em></p>
+<p>In this development you can open your app’s entry point
 (<code class="docutils literal notranslate"><span class="pre">app.html</span></code> or <code class="docutils literal notranslate"><span class="pre">index.html</span></code>) directly with your browser from the disk.</p>
-<p>You would do the same for the html files in the <code class="docutils literal notranslate"><span class="pre">frontend/lib/base</span></code> directory, when
-developing and debugging a new widget.</p>
+<p>You would do the same for the widget’s test html files when developing and debugging a new widget.</p>
 <p>In firefox, type this into your browser’s address bar:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>file://abs/path/to/file.html
 </pre></div>
@@ -145,7 +152,7 @@ profile for that.  Start firefox with:</p>
 </div>
 <p>to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
 <p>You can start firefox in that profile with</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>firefox -P development
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>firefox<span class="w"> </span>-P<span class="w"> </span>development
 </pre></div>
 </div>
 <p><strong>WARNING</strong> : the <code class="docutils literal notranslate"><span class="pre">security.fileuri.strict_origin_policy</span></code> allows firefox to
@@ -155,13 +162,18 @@ web using the “development” profile!</p>
 <p>At this stage of the development (developing individual widgets and putting initially
 together your fullstack app), you would typically use a mock datasouce
 (for more details, see datasources in <a class="reference internal" href="fullstack.html#fullstack"><span class="std std-ref">here</span></a>)</p>
+<p><em>Google Chrome</em></p>
+<p>You can achieve same unlimited file access with Google Chrome by launching it with a command-line argument:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>google-chrome<span class="w"> </span>--allow-file-access-from-files<span class="w"> </span>.
+</pre></div>
+</div>
+<p>The same words of warning as for the Firefox case (see above) apply when running Google Chrome in the special unrestricted mode.</p>
 </section>
 <section id="native">
 <span id="id2"></span><h2>2. Native<a class="headerlink" href="#native" title="Link to this heading"></a></h2>
 <p>In this mode, a reverse-proxy server (nginx) is serving you the html and js files.</p>
 <p>When using this development mode, you’d already have a backend you want to play with.</p>
-<p>A single-shot python wrapper for nginx is provided in directory <code class="docutils literal notranslate"><span class="pre">frontend/</span></code>, please
-start it with</p>
+<p>A <a class="reference external" href="https://github.com/elsampsa/cutefront/blob/main/frontend/nginx.py">simple python wrapper for nginx</a> is provided, start it with</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./nginx.py<span class="w"> </span>--help
 </pre></div>
 </div>
@@ -170,6 +182,7 @@ start it with</p>
 </section>
 <section id="docker">
 <h2>3. Docker<a class="headerlink" href="#docker" title="Link to this heading"></a></h2>
+<p>Here we assume that you have initiated your project with the <a class="reference internal" href="install.html#install-fullstack"><span class="std std-ref">Fullstack Example Repo</span></a>.</p>
 <p>A docker image file <code class="docutils literal notranslate"><span class="pre">frontend/Dockerfile.dev</span></code> is provided.  It simply runs nginx with
 the provided <code class="docutils literal notranslate"><span class="pre">nginx.conf</span></code> from <code class="docutils literal notranslate"><span class="pre">frontend/docker/dev/</span></code> directory.</p>
 <p>All code in <code class="docutils literal notranslate"><span class="pre">frontend/</span></code> is mounted into a docker volume, allowing you to edit and

@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Python vs JS Cheatsheet &mdash; CuteFront  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -16,6 +19,8 @@
         <script src="_static/documentation_options.js?v=5929fcd5"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -68,14 +73,17 @@ works is this:
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="qtlike.html">Qt-like Widgets and Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library.html">Widget Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="codeorg.html">Code Organization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">State History</a></li>
 <li class="toctree-l1"><a class="reference internal" href="devenvs.html">Development Environments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating.html">Creating and Using Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chatgpt.html">AI Generated Widgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fullstack.html">A Fullstack Example</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Python vs JS Cheatsheet</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#none">None</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#else-if">else if</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#type-testing">Type testing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#type-conversions">Type conversions</a></li>
@@ -122,8 +130,14 @@ works is this:
              
   <section id="python-vs-js-cheatsheet">
 <h1>Python vs JS Cheatsheet<a class="headerlink" href="#python-vs-js-cheatsheet" title="Link to this heading"></a></h1>
-<p>Since the intended audience is for coders that have background in PyQt, this
-python-compared-to-javascript cheatsheet might come handy.</p>
+<p><em>This cheat-sheet is handy for all of you who throttle between python and javascript</em></p>
+<section id="none">
+<h2>None<a class="headerlink" href="#none" title="Link to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>None # python
+null // javascript
+</pre></div>
+</div>
+</section>
 <section id="else-if">
 <h2>else if<a class="headerlink" href="#else-if" title="Link to this heading"></a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>if val == 0: # python

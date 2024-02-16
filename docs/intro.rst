@@ -5,22 +5,25 @@
 Intro
 =====
 
-*Program in frontend Javascript like you were doing PyQt*
+*CuteFront is the lightweight, quick and modular javascript frontend framework*
 
 Features
 --------
 
-CuteFront is a frontend framework, featuring:
+CuteFront is a declarative javascript frontend framework, featuring:
 
-- Code structured into clearly separated components / widgets that intercom through signals and slots
+- Code structured into clearly separated components (widgets) that communicate through signals and slots
 - No npm package mess or transpiling
-- No templating languages, just pure js and html
+- No annoying templating languages, just pure javascript and html
 - Qt's touch'n'feel with widgets, signals and slots
-- Simple development environment with plain js and html files
+- Simple development environment with plain .js and .html files
 - Global state partitioned and cached into widgets - avoid global state mess
-- The signal/slot paradigm creates possibilities for graphical representation of page interactions (like in qt studio).
+- AI Widget generation using Large Language Models (LLMs) :ref:`works like a dream <chatgpt>`
 
-A code example:
+If you are a "learning-by-doing" person, want to skip the chit-chat and take a quick look what CuteFront is about,
+I recommend that you take the ~ 30 minutes :ref:`tutorial <tutorial>`.
+
+Here is a a quick look at a typical CuteFront main html file using widgets:
 
 .. code:: html
 
@@ -59,17 +62,17 @@ A code example:
 For Whom?
 ---------
 
-- Ideal for people who have `Qt <https://doc.qt.io/qt-6/qtwidgets-index.html>`_ or `GTK <https://www.gtk.org/>`_, i.e. widget based GUI development background
-- Even more so for people with `PyQt <https://riverbankcomputing.com/software/pyqt>`_ / `PySide2 <https://wiki.qt.io/Qt_for_Python>`_ background
 - For people who are, like me, deeply frustrated with the bloated modern-day javascript frameworks
+- Sure, there is Flutter and Dart that are also programmatic and widget-based approaches, but here we use only browser-native javascript!
+- Very ideal for people who have `Qt <https://doc.qt.io/qt-6/qtwidgets-index.html>`_ or `GTK <https://www.gtk.org/>`_, i.e. widget based GUI development background
+- Even more so for people with `PyQt <https://riverbankcomputing.com/software/pyqt>`_ / `PySide2 <https://wiki.qt.io/Qt_for_Python>`_ background
 
 For What?
 ---------
 
 - To get an interactive web-page quickly up and running
 - Especially for smaller projects requiring complex reactive frontend code, SPA (single-page applications) and the like
-- Not guaranteed or tested for huge projects, although the system is component-based and *requires no transpiling* (eliminating a problem for big projects)
-- CuteFront is in poc (proof-of-concept) stage, and expanding the widget library requires *your* help
+- Not guaranteed or tested for huge projects, although the system is component-based and *requires no transpiling* (eliminating one big problem for large projects)
 
 Cute-What?
 ----------

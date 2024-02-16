@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Installing &mdash; CuteFront  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -16,11 +19,13 @@
         <script src="_static/documentation_options.js?v=5929fcd5"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Widget Library" href="library.html" />
-    <link rel="prev" title="Qt-like Widgets and Signals" href="qtlike.html" />
+    <link rel="prev" title="Tutorial" href="tutorial.html" />
 <!-- as per https://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs -->
 <link href="_static/rtd_override.css" rel="stylesheet" type="text/css">
 <script src="https://kit.fontawesome.com/1f90d3565b.js" crossorigin="anonymous"></script>
@@ -68,8 +73,9 @@ works is this:
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="qtlike.html">Qt-like Widgets and Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#download-the-repo">Download the Repo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#download-fullstack-example">Download Fullstack Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#checkout-the-widget-library">Checkout The Widget Library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#nginx-sqlite-etc">Nginx, sqlite, etc.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#firefox">Firefox</a></li>
@@ -80,6 +86,7 @@ works is this:
 <li class="toctree-l1"><a class="reference internal" href="state.html">State History</a></li>
 <li class="toctree-l1"><a class="reference internal" href="devenvs.html">Development Environments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating.html">Creating and Using Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chatgpt.html">AI Generated Widgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fullstack.html">A Fullstack Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cheatsheet.html">Python vs JS Cheatsheet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="links.html">Links</a></li>
@@ -112,9 +119,14 @@ works is this:
              
   <section id="installing">
 <span id="install"></span><h1>Installing<a class="headerlink" href="#installing" title="Link to this heading"></a></h1>
-<section id="download-the-repo">
-<h2>Download the Repo<a class="headerlink" href="#download-the-repo" title="Link to this heading"></a></h2>
-<p>Get the code (for example) with either of these:</p>
+<p>In this section, we will checkout the whole <a class="reference external" href="https://github.com/elsampsa/cutefront">CuteFront main repo</a>,
+that includes the complete <a class="reference internal" href="fullstack.html#fullstack"><span class="std std-ref">Fullstack Example</span></a>, with python backend, dockerization, etc.</p>
+<p>The idea is, that you can then remove the parts you don’t need.</p>
+<p>Alternatively, you may want to use <a class="reference external" href="https://github.com/elsampsa/cutefront/blob/main/bash/TODO">project init script</a>
+to start CuteFront project from a clean slate, as was done in the <a class="reference internal" href="tutorial.html#id1"><span class="std std-ref">Tutorial</span></a>.</p>
+<section id="download-fullstack-example">
+<h2>Download Fullstack Example<a class="headerlink" href="#download-fullstack-example" title="Link to this heading"></a></h2>
+<p id="install-fullstack">Get the code (for example) with either of these:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/elsampsa/cutefront.git
 git<span class="w"> </span>clone<span class="w"> </span>git@github.com:elsampsa/cutefront.git
 </pre></div>
@@ -144,8 +156,13 @@ git<span class="w"> </span>submodule<span class="w"> </span>update
 </pre></div>
 </div>
 <p>And congrats, you now have the widget library in <code class="docutils literal notranslate"><span class="pre">frontend/lib/</span></code>.</p>
-<p>However, depending on your particular case, you might or might not want to use the widget library as git submodule, but just download a zipfile from github and extract it
-into <code class="docutils literal notranslate"><span class="pre">frontend/lib/</span></code></p>
+<p>You can see the commit and branch of your current library with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>submodule<span class="w"> </span>status
+</pre></div>
+</div>
+<p>When in directory <code class="docutils literal notranslate"><span class="pre">frontend/lib</span></code>, all git commands work on the library (sub)repository instead, i.e. please try therein <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--get</span> <span class="pre">remote.origin.url</span></code>.</p>
+<p>Finally, depending on your particular case, you might or might not want to use the widget library as git submodule,
+but just download a zipfile from github and extract it into <code class="docutils literal notranslate"><span class="pre">frontend/lib/</span></code></p>
 </section>
 <section id="nginx-sqlite-etc">
 <h2>Nginx, sqlite, etc.<a class="headerlink" href="#nginx-sqlite-etc" title="Link to this heading"></a></h2>
@@ -165,7 +182,7 @@ sqlite3 and nginx:</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="qtlike.html" class="btn btn-neutral float-left" title="Qt-like Widgets and Signals" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorial.html" class="btn btn-neutral float-left" title="Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="library.html" class="btn btn-neutral float-right" title="Widget Library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

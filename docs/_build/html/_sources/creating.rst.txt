@@ -15,6 +15,7 @@ Creating a new widget is always done in the same way:
 .. code:: javascript
 
     import { Widget, Signal } from './widget.js';
+    // import { Widget, Signal } from '../lib/base/widget.js'; // app-specific widget
     class CrudButtonsWidget extends Widget {
         // widget definition here
     }
@@ -36,14 +37,17 @@ the widget attaches to
 .. code:: javascript
 
     constructor(id) {
-        super();
-        this.id=id;
+        super(id);
         this.createElement();
         this.createState();
     }
 
-Note that ``super()`` calls ``createSignals`` (see below) automatically.
+Note that ``super()`` sets ``this.id`` and 
+calls ``createSignals`` (see below) automatically.
 
+If you use class inheritance, call ``createElement()`` and
+``createState()`` only in the base class, not in the inherited classes
+(i.e., no need to call them multiple times).
 
 Logging
 -------
@@ -75,15 +79,15 @@ Define signals like this, into the ``this.signals`` "namespace":
 
 .. code:: javascript
 
-    // UP: signals
-    createSignals() {
-        this.signals.create = new Signal(); // C // carries nothing
-        this.signals.update = new Signal(); // U // carries nothing
-        this.signals.delete = new Signal(); // D // carries uuid of the datum
+    createSignals() { /*
+        After each line, declare what datatype the signal carries and when it is emitted.
+        */
+        this.signals.create = new Signal(); // Carries nothing.  Emitted on new record creating.
+        this.signals.update = new Signal(); // Carries nothing.  Emitted on record update.
+        this.signals.delete = new Signal(); // Carries uuid string of the datum.  Emitted when a record is deleted
     }
 
-In the comments, you should always write what kind of variable / data
-structure the signal is carrying
+In the comments, you should always write what kind of variable / data structure the signal is carrying
 
 Initialize State
 ----------------
@@ -106,7 +110,11 @@ Let's consider a slot that receives a signal carrying a json object "datum"
 
 .. code:: javascript
 
-    current_datum_slot(datum) {
+    current_datum_slot(datum) { /*
+        Comment here what kind of data the slot expects:
+        datatype and/or a nested json object scheme.
+        You can also implement a datatype check.
+        */
         if (datum == null) {
             // change state, say hide buttons
             this.current_datum = null
@@ -124,26 +132,112 @@ to do this.  Consider situation where you send an object to a slot and then it i
 elsewhere in the code: in such situation your slot function needs to create its own copy 
 of the object in order to keep it's state under control.
 
-Code as Documentation
----------------------
+.. _docstrings:
 
-Structuring the code in the CuteFront way, "autodocuments" the code to some extent.
+Creating Autodocumentation
+--------------------------
+
+Structuring the code in the CuteFront way, makes reading it easy:
 
 Taking a quick look into the the subclassed ``createSignals`` and
-various (well commented) ``slot`` functions immediately give you a clear
+various (well commented) ``slot`` functions immediately gives you a clear
 idea of the widget's API, while looking at ``createState`` shows you all the 
 internal state variables of the widget.
 
 The associated, minimal testing ``html`` file demonstrates actual use with
 dummy data.
 
+To facilitate autodocumentation even further, `a python script <https://github.com/elsampsa/cutefront/blob/main/script/docextract.py>` 
+is provided that documents your widget's API, when you write comments enclosed in ``/*//DOC`` and ``*/``.  Like this:
+
+.. code:: javascript
+
+    class SampleListWidget extends Widget { /*//DOC
+        A list of samples with their datetime strings and statuses 
+        (polished or not).
+        */
+
+    ...
+    ...
+
+    createSignals() {
+            this.signals.new_sample = new Signal(); /*//DOC 
+            Carries a sample object {uuid:string, datetime:string, data:2D profile}.  
+            Emitted when a new sample is added to this list (i.e. a "relay" signal).
+            */
+            this.signals.chosen_sample = new Signal(); /*//DOC 
+            Carries a sample object {uuid:string, datetime:string, data:2D profile}.
+            Emitted when a sample is clicked highlighted in the list
+            */
+        }
+
+        new_sample_slot(sample) { /*//DOC
+            input is an object with
+            uuid: uuid string
+            datetime: datetime string
+            data: a 2D profile
+            */
+            this.signals.new_sample.emit(sample);
+            this.createSampleItem(sample);
+        }
+
+    ...
+    ...
+
+When requesting markdown format, the script gives this output:
+
+.. code:: text
+
+    ### SampleListWidget
+    - file: `samplelist.js`
+    - inherits: `Widget`
+    - A list of samples with their datetime strings and statuses
+        <br> (polished or not).
+    - SIGNAL: new_sample
+        <br> Carries a sample object {uuid:string, datetime:string, data:2D profile}.
+        <br> Emitted when a new sample is added to this list (i.e. a "relay" signal).
+    - SIGNAL: chosen_sample
+        <br> Carries a sample object {uuid:string, datetime:string, data:2D profile}.
+        <br> Emitted when a sample is clicked highlighted in the list
+    - SLOT: new_sample_slot(sample)
+        <br> input is an object with
+        <br> uuid: uuid string
+        <br> datetime: datetime string
+        <br> data: a 2D profile
+    ...
+    ...
+
 Using the DOM
 -------------
 
-The ``createElement`` method is used to hook into and manipulate the document object
-model (DOM).
+.. _createelement:
 
-It should always start the same way:
+The ``createElement`` method is used to insert the HTML code of the widget into the 
+document object model (DOM).  
+
+In this method, you will also hook into the various DOM elements (fields, buttons, etc.)
+and use them as member variables.  These member variables constitute the *state* of the widget
+and their contents (and the state) is then modified in other methods of your widget class
+(for example, in ``createState``).
+
+You should always try to use the DOM elements themselves as state variables, instead of creating
+extra member state variables, i.e.:
+
+.. code:: javascript
+
+    this.element.innerHTML = `
+        ...
+        <input type="text" id="name">
+        ...`
+    ...
+    this.name_field = this.element.querySelector("#name");
+    this.name_field.value // use this as your member state variable
+    // don't create an extra this.name string variable that you need to synchronize with this.name_field.value
+
+``createElement`` is the most "nasty" part of your widget you need to write (who wants to write HTML and
+manipulate it programmatically), but fortunately, it can be done to great extent using :ref:`AI assistants <chatgpt>`.
+
+``createElement`` should always start the same way:
 
 .. code:: javascript
 
@@ -306,7 +400,10 @@ Let's suppose you have:
 - Defined ``MyWidget`` in file ``mywidget.js`` in the :ref:`app directory <codeorg>`
 - ``MyWidget`` has only one signal named ``ping``
 
-Then the corresponding ``mywidget.html`` (which you would place into the ``app`` folder) would look like this:
+An example corresponding ``mywidget.html`` test html is below.  For app-specific widgets, you would
+place it in the ``app`` folder.  Again, be carefull with the ``<link href=..>`` to set the correct path for
+css inclusion and with ``<script src=..>`` for javascript inclusion, depending on your 
+:ref:`code organization scheme <codeorg>`.
 
 .. code:: html
 
@@ -315,7 +412,8 @@ Then the corresponding ``mywidget.html`` (which you would place into the ``app``
     <head>
     <meta charset="utf-8">
     <title>Widget Test</title>
-    <link href="../bootstrap-5.2.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- for app-specific widgets: -->
+    <link href="../lib/bootstrap-5.2.3-dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
 
@@ -323,13 +421,14 @@ Then the corresponding ``mywidget.html`` (which you would place into the ``app``
     <button id="test-button">test something</button>
 
     </body>
-    <script src="../bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
+    <!-- for app-specific widgets: -->
+    <script src="../lib/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
     <script type="module">
     /* // define mock data if you need that
     var data = [
     ];
     */
-    import { DummyWidget } from '../lib/base/widget.js';
+    import { DummyWidget } from '../lib/base/widget.js'; // for app-specific widgets
     import { MyWidget } from './mywidget.js';
     var dummy_widget = new DummyWidget();
     var widget = new MyWidget("test-element");
@@ -375,5 +474,40 @@ This is used when connecting signals to slots as discussed above.
 As a rule of thumb, always when passing an object member function as a parameter,
 always use ``bind``.  When creating callbacks in object methods, 
 always define a local lambda function.
+
+
+Parent / Child Widget Structures
+--------------------------------
+
+In some cases, widgets should instantiate other widgets (child widgets).
+
+A typical case is a widget that implements a list of items (say, a list of cards, each card having several fields corresponding to some data).
+
+Say, you would have ``YourListWidget`` (parent) that instantiates and caches several ``YourListItemWidget`` (child) instances.
+
+Then ``YourListItemWidget`` would look something like this:
+
+.. code:: javascript
+
+    constructor() { // we don't need the id as the html element is created by the widget itself
+        super(null); 
+        this.createElement();
+        this.createState();
+        }
+
+    createElement() {
+        // does not use this.id to hook up to an existing html element in the html code
+        // but creates a new element from scratch instead
+        this.element = document.createElement("tr"); // i.e. instead of document.getElementById(this.id)
+        // etc. etc.
+    }
+
+    getElement() { // maybe called by the parent widget
+        return this.element
+    }
+
+There are quite many ways to manage the intercommunication between the parent and its child widgets and the details are up to you.
+
+
 
 

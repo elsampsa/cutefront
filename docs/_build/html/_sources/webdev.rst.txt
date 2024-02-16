@@ -4,9 +4,7 @@
 Appendum: A Short History of Web Development
 ============================================
 
-*Let's talk about fullstack web development!*
-
-(and why in 2023 it (still) sucks)
+*Let's talk about the history of frontend web development (and it's current state)*
 
 Prehistory
 ----------
@@ -104,7 +102,7 @@ You can expand your tree structures, click'n'hide data elements, jump in the men
 no resending the view from the server (B).
 
 When data is requested, *just the data* flows from (B) to (A) (typically as a json), finally
-populating the graphical elements (text etc. fields) in the view (C).  Yeah - this is the way you would
+populating the graphical elements (text etc. fields) in the view (C).  This is the way you would
 do it in Qt as well.
 
 Finally we have a clean separation of the view (C) and the data (D)!
@@ -112,8 +110,8 @@ Finally we have a clean separation of the view (C) and the data (D)!
 But the good news end here.  
 
 Modern javascript frameworks use several layers of templating which have to be "transpiled" into actual
-html and javascript, so you end up writing some weirdo templating language instead of html or javascript 
-(how many god'd*** languages we need to master!?).
+html and javascript, so you end up writing some weirdo templating language instead of pure html or javascript 
+(how many domain-specific languages we need to master?).
 
 Here is an example of the popular Vue.js framework:
 
@@ -144,7 +142,7 @@ Here is an example of the popular Vue.js framework:
 
         <v-spacer />
 
-I mean, what does that even mean!?  A programming language should be obvious to interprete.  And we are trying to do programming here, right?
+I mean, what does that even mean?  A programming language should be obvious to interprete.
 
 It's basically a combination of a html-like (templating) language (vuetify in this case)
 that describes a graphical view but with conditional programming clauses mixed within the
@@ -171,19 +169,31 @@ Here is some more:
 
 So when clicking a button, something is executed in the js part.
 Then that part changes a variable.  Then that variable is substituted
-to ``flag``.  I mean, come on.
+to ``flag``.
 
 So it is things going to-and-fro between
 an annoying templating/transpilable language and javascript.  Talk about
 possibilities for major confusions here.
 
-When did such crazy stuff start to feel normal and natural?
+When did such madness start to feel normal and natural?
 
-And there are so many examples I could give here about these nutty, fragile and unnatural frontend frameworks, but I will stop here as I don't want
-to waste my time with them even the slightest.
+Modern Age
+----------
 
-And lucky you, having found CuteFront, the minimalistic pure-javascript framework!
+With the arrival of Flutter and Dart, we finally have a sort-of Qt-like widget-based UI development environment for the web 
+(although it doesn't utilize the signal/slot paradigm).  There is also "React Native", UIKit, SwiftUI (Apple), Jetpack Compose (Android), etc.
 
+These frameworks are usually classified as "Declarative" (in constrast to "Imperative") because they don't declare separately
+the UI layout with a templating language (like the horrific vuetify example we just discussed), but use a programming language instead 
+to define *everything* (layouts, interactive entities = widgets, intercom between the widgets).
 
+So where does CuteFront stand in all this?
 
+It has the "imperative" part where the program's main layout is still defined in good-ol-plain html: i.e. widget (a)
+is on top of widget (b), which is at the left of .. etc. (for example in Qt you would define even the main-level layout in a declarative way).
 
+CuteFront is "declarative" in defining which widget's are instantiated and how they should intercommunicate with each other
+(signal/slot paradigm).  This has been the very weak point of the "imperative" graphical UI programming (as discussed above).
+
+So CuteFront takes the best of the both worlds.  It is a very good option if you just want to use - the very familiar and widely used -
+html and javascript in the declarative way.

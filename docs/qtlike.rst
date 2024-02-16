@@ -189,8 +189,9 @@ All widgets define ``createSignals``, ``createState`` and ``createElement`` meth
 
 - ``createSignals`` defines the signals this widget emits.
 - ``createState`` describes the internal state variables of the widget.
-- ``createElement`` hooks into the html code and gets an element handle to the widget's html element.  
-  It is also responsible for producing the html code required by the widget.
+- ``createElement`` hooks into the html code and gets an element handle to the widget's html element.
+  It then produces dynamically all the html code required by the widget and hooks into relevant DOM elements
+  that are used by the widget (for more about ``createElement``, see :ref:`here <createelement>`).
 - Slots methods have names ending in ``_slot``.  This is where the signals from other widgets are connected to.
 
 To put it simply, slot methods change the internal state of the widget 

@@ -2,8 +2,15 @@
 Python vs JS Cheatsheet
 =======================
 
-Since the intended audience is for coders that have background in PyQt, this
-python-compared-to-javascript cheatsheet might come handy.
+*This cheat-sheet is handy for all of you who throttle between python and javascript*
+
+None
+----
+
+.. code-block:: text
+
+    None # python
+    null // javascript
 
 else if
 -------

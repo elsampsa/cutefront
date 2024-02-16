@@ -4,8 +4,18 @@
 Installing
 ==========
 
-Download the Repo
------------------
+In this section, we will checkout the whole `CuteFront main repo <https://github.com/elsampsa/cutefront>`_,
+that includes the complete :ref:`Fullstack Example <fullstack>`, with python backend, dockerization, etc.
+
+The idea is, that you can then remove the parts you don't need.
+
+Alternatively, you may want to use `project init script  <https://github.com/elsampsa/cutefront/blob/main/bash/TODO>`_
+to start CuteFront project from a clean slate, as was done in the :ref:`Tutorial <tutorial>`.
+
+Download Fullstack Example
+--------------------------
+
+.. _install-fullstack:
 
 Get the code (for example) with either of these:
 
@@ -50,9 +60,16 @@ The only thing you need to do is this (in the main repo's directory):
 
 And congrats, you now have the widget library in ``frontend/lib/``.
 
-However, depending on your particular case, you might or might not want to use the widget library as git submodule, but just download a zipfile from github and extract it
-into ``frontend/lib/``
+You can see the commit and branch of your current library with:
 
+.. code:: bash
+
+    git submodule status
+
+When in directory ``frontend/lib``, all git commands work on the library (sub)repository instead, i.e. please try therein ``git config --get remote.origin.url``.
+
+Finally, depending on your particular case, you might or might not want to use the widget library as git submodule, 
+but just download a zipfile from github and extract it into ``frontend/lib/``
 
 Nginx, sqlite, etc.
 -------------------
@@ -69,5 +86,4 @@ Firefox
 -------
 
 Firefox and it's web developer tools are highly recommended.  Please see also the :ref:`Plainfile <plainfile>` development environment.
-
 

@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Appendum: A Short History of Web Development &mdash; CuteFront  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -16,6 +19,8 @@
         <script src="_static/documentation_options.js?v=5929fcd5"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -67,12 +72,14 @@ works is this:
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="qtlike.html">Qt-like Widgets and Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library.html">Widget Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="codeorg.html">Code Organization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">State History</a></li>
 <li class="toctree-l1"><a class="reference internal" href="devenvs.html">Development Environments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating.html">Creating and Using Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chatgpt.html">AI Generated Widgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fullstack.html">A Fullstack Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cheatsheet.html">Python vs JS Cheatsheet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="links.html">Links</a></li>
@@ -81,6 +88,7 @@ works is this:
 <li class="toctree-l2"><a class="reference internal" href="#definitions">Definitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#bronze-age">Bronze Age</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#iron-age">Iron Age</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modern-age">Modern Age</a></li>
 </ul>
 </li>
 </ul>
@@ -111,8 +119,7 @@ works is this:
              
   <section id="appendum-a-short-history-of-web-development">
 <span id="appendum"></span><h1>Appendum: A Short History of Web Development<a class="headerlink" href="#appendum-a-short-history-of-web-development" title="Link to this heading"></a></h1>
-<p><em>Let’s talk about fullstack web development!</em></p>
-<p>(and why in 2023 it (still) sucks)</p>
+<p><em>Let’s talk about the history of frontend web development (and it’s current state)</em></p>
 <section id="prehistory">
 <h2>Prehistory<a class="headerlink" href="#prehistory" title="Link to this heading"></a></h2>
 <p>Let’s look back in history.</p>
@@ -189,13 +196,13 @@ inside the browser, so this starts to look like Qt!</p>
 <p>You can expand your tree structures, click’n’hide data elements, jump in the menus and there’s
 no resending the view from the server (B).</p>
 <p>When data is requested, <em>just the data</em> flows from (B) to (A) (typically as a json), finally
-populating the graphical elements (text etc. fields) in the view (C).  Yeah - this is the way you would
+populating the graphical elements (text etc. fields) in the view (C).  This is the way you would
 do it in Qt as well.</p>
 <p>Finally we have a clean separation of the view (C) and the data (D)!</p>
 <p>But the good news end here.</p>
 <p>Modern javascript frameworks use several layers of templating which have to be “transpiled” into actual
-html and javascript, so you end up writing some weirdo templating language instead of html or javascript
-(how many god’d*** languages we need to master!?).</p>
+html and javascript, so you end up writing some weirdo templating language instead of pure html or javascript
+(how many domain-specific languages we need to master?).</p>
 <p>Here is an example of the popular Vue.js framework:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
 <span class="o">&lt;</span><span class="n">v</span><span class="o">-</span><span class="n">app</span><span class="o">&gt;</span>
@@ -223,7 +230,7 @@ html and javascript, so you end up writing some weirdo templating language inste
     <span class="o">&lt;</span><span class="n">v</span><span class="o">-</span><span class="n">spacer</span> <span class="o">/&gt;</span>
 </pre></div>
 </div>
-<p>I mean, what does that even mean!?  A programming language should be obvious to interprete.  And we are trying to do programming here, right?</p>
+<p>I mean, what does that even mean?  A programming language should be obvious to interprete.</p>
 <p>It’s basically a combination of a html-like (templating) language (vuetify in this case)
 that describes a graphical view but with conditional programming clauses mixed within the
 view definition (!)</p>
@@ -243,14 +250,26 @@ It doesn’t even come close to Pascal.  I surely wonder if <em>this</em> thing 
 </div>
 <p>So when clicking a button, something is executed in the js part.
 Then that part changes a variable.  Then that variable is substituted
-to <code class="docutils literal notranslate"><span class="pre">flag</span></code>.  I mean, come on.</p>
+to <code class="docutils literal notranslate"><span class="pre">flag</span></code>.</p>
 <p>So it is things going to-and-fro between
 an annoying templating/transpilable language and javascript.  Talk about
 possibilities for major confusions here.</p>
-<p>When did such crazy stuff start to feel normal and natural?</p>
-<p>And there are so many examples I could give here about these nutty, fragile and unnatural frontend frameworks, but I will stop here as I don’t want
-to waste my time with them even the slightest.</p>
-<p>And lucky you, having found CuteFront, the minimalistic pure-javascript framework!</p>
+<p>When did such madness start to feel normal and natural?</p>
+</section>
+<section id="modern-age">
+<h2>Modern Age<a class="headerlink" href="#modern-age" title="Link to this heading"></a></h2>
+<p>With the arrival of Flutter and Dart, we finally have a sort-of Qt-like widget-based UI development environment for the web
+(although it doesn’t utilize the signal/slot paradigm).  There is also “React Native”, UIKit, SwiftUI (Apple), Jetpack Compose (Android), etc.</p>
+<p>These frameworks are usually classified as “Declarative” (in constrast to “Imperative”) because they don’t declare separately
+the UI layout with a templating language (like the horrific vuetify example we just discussed), but use a programming language instead
+to define <em>everything</em> (layouts, interactive entities = widgets, intercom between the widgets).</p>
+<p>So where does CuteFront stand in all this?</p>
+<p>It has the “imperative” part where the program’s main layout is still defined in good-ol-plain html: i.e. widget (a)
+is on top of widget (b), which is at the left of .. etc. (for example in Qt you would define even the main-level layout in a declarative way).</p>
+<p>CuteFront is “declarative” in defining which widget’s are instantiated and how they should intercommunicate with each other
+(signal/slot paradigm).  This has been the very weak point of the “imperative” graphical UI programming (as discussed above).</p>
+<p>So CuteFront takes the best of the both worlds.  It is a very good option if you just want to use - the very familiar and widely used -
+html and javascript in the declarative way.</p>
 </section>
 </section>
 

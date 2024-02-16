@@ -7,11 +7,12 @@ Development Environments
 1. Plainfile
 ------------
 
-In this development you open your app's entry point 
+*Firefox*
+
+In this development you can open your app's entry point 
 (``app.html`` or ``index.html``) directly with your browser from the disk.
 
-You would do the same for the html files in the ``frontend/lib/base`` directory, when
-developing and debugging a new widget.
+You would do the same for the widget's test html files when developing and debugging a new widget.
 
 In firefox, type this into your browser's address bar:
 
@@ -56,7 +57,7 @@ to ``false``.
 
 You can start firefox in that profile with
 
-.. code-block:: text
+.. code-block:: bash
 
     firefox -P development
 
@@ -70,6 +71,16 @@ At this stage of the development (developing individual widgets and putting init
 together your fullstack app), you would typically use a mock datasouce
 (for more details, see datasources in :ref:`here <fullstack>`)
 
+*Google Chrome*
+
+You can achieve same unlimited file access with Google Chrome by launching it with a command-line argument:
+
+.. code-block:: bash
+
+    google-chrome --allow-file-access-from-files .
+
+The same words of warning as for the Firefox case (see above) apply when running Google Chrome in the special unrestricted mode.
+
 .. _native:
 
 2. Native
@@ -79,8 +90,7 @@ In this mode, a reverse-proxy server (nginx) is serving you the html and js file
 
 When using this development mode, you'd already have a backend you want to play with.
 
-A single-shot python wrapper for nginx is provided in directory ``frontend/``, please
-start it with
+A `simple python wrapper for nginx <https://github.com/elsampsa/cutefront/blob/main/frontend/nginx.py>`_ is provided, start it with
 
 .. code:: bash
 
@@ -92,6 +102,8 @@ Refer to the :ref:`Fullstack Example <fullstack>` to see an actual working examp
 
 3. Docker
 ---------
+
+Here we assume that you have initiated your project with the :ref:`Fullstack Example Repo <install-fullstack>`.
 
 A docker image file ``frontend/Dockerfile.dev`` is provided.  It simply runs nginx with
 the provided ``nginx.conf`` from ``frontend/docker/dev/`` directory.

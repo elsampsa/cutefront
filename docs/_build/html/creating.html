@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Creating and Using Widgets &mdash; CuteFront  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -16,10 +19,12 @@
         <script src="_static/documentation_options.js?v=5929fcd5"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="A Fullstack Example" href="fullstack.html" />
+    <link rel="next" title="AI Generated Widgets" href="chatgpt.html" />
     <link rel="prev" title="Development Environments" href="devenvs.html" />
 <!-- as per https://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs -->
 <link href="_static/rtd_override.css" rel="stylesheet" type="text/css">
@@ -68,6 +73,7 @@ works is this:
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="qtlike.html">Qt-like Widgets and Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library.html">Widget Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="codeorg.html">Code Organization</a></li>
@@ -80,14 +86,16 @@ works is this:
 <li class="toctree-l2"><a class="reference internal" href="#defining-signals">Defining Signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#initialize-state">Initialize State</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#slot-methods">Slot Methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#code-as-documentation">Code as Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-autodocumentation">Creating Autodocumentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#using-the-dom">Using the DOM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#emitting-signals">Emitting Signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#connecting-signals">Connecting Signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#create-test-html">Create test HTML</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#the-trouble-with-this">The Trouble with “this”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#parent-child-widget-structures">Parent / Child Widget Structures</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="chatgpt.html">AI Generated Widgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fullstack.html">A Fullstack Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cheatsheet.html">Python vs JS Cheatsheet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="links.html">Links</a></li>
@@ -126,6 +134,7 @@ the <a class="reference internal" href="library.html#library"><span class="std s
 <h2>Subclassing a Widget<a class="headerlink" href="#subclassing-a-widget" title="Link to this heading"></a></h2>
 <p>Creating a new widget is always done in the same way:</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Widget</span><span class="p">,</span><span class="w"> </span><span class="nx">Signal</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./widget.js&#39;</span><span class="p">;</span>
+<span class="c1">// import { Widget, Signal } from &#39;../lib/base/widget.js&#39;; // app-specific widget</span>
 <span class="kd">class</span><span class="w"> </span><span class="nx">CrudButtonsWidget</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Widget</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// widget definition here</span>
 <span class="p">}</span>
@@ -143,14 +152,17 @@ use the correct relative path, i.e.:</p>
 <p>Constructor always takes in an <code class="docutils literal notranslate"><span class="pre">id</span></code> string.  Typically it is the id of the html element
 the widget attaches to</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kr">constructor</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">super</span><span class="p">();</span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="o">=</span><span class="nx">id</span><span class="p">;</span>
+<span class="w">    </span><span class="k">super</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
 <span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">createElement</span><span class="p">();</span>
 <span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">createState</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Note that <code class="docutils literal notranslate"><span class="pre">super()</span></code> calls <code class="docutils literal notranslate"><span class="pre">createSignals</span></code> (see below) automatically.</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">super()</span></code> sets <code class="docutils literal notranslate"><span class="pre">this.id</span></code> and
+calls <code class="docutils literal notranslate"><span class="pre">createSignals</span></code> (see below) automatically.</p>
+<p>If you use class inheritance, call <code class="docutils literal notranslate"><span class="pre">createElement()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">createState()</span></code> only in the base class, not in the inherited classes
+(i.e., no need to call them multiple times).</p>
 </section>
 <section id="logging">
 <h2>Logging<a class="headerlink" href="#logging" title="Link to this heading"></a></h2>
@@ -172,16 +184,16 @@ going “down” with negative numbers mean less significant messages.</p>
 <section id="defining-signals">
 <h2>Defining Signals<a class="headerlink" href="#defining-signals" title="Link to this heading"></a></h2>
 <p>Define signals like this, into the <code class="docutils literal notranslate"><span class="pre">this.signals</span></code> “namespace”:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// UP: signals</span>
-<span class="nx">createSignals</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">create</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Signal</span><span class="p">();</span><span class="w"> </span><span class="c1">// C // carries nothing</span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">update</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Signal</span><span class="p">();</span><span class="w"> </span><span class="c1">// U // carries nothing</span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="ow">delete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Signal</span><span class="p">();</span><span class="w"> </span><span class="c1">// D // carries uuid of the datum</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">createSignals</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/*</span>
+<span class="cm">    After each line, declare what datatype the signal carries and when it is emitted.</span>
+<span class="cm">    */</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">create</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Signal</span><span class="p">();</span><span class="w"> </span><span class="c1">// Carries nothing.  Emitted on new record creating.</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">update</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Signal</span><span class="p">();</span><span class="w"> </span><span class="c1">// Carries nothing.  Emitted on record update.</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="ow">delete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Signal</span><span class="p">();</span><span class="w"> </span><span class="c1">// Carries uuid string of the datum.  Emitted when a record is deleted</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>In the comments, you should always write what kind of variable / data
-structure the signal is carrying</p>
+<p>In the comments, you should always write what kind of variable / data structure the signal is carrying</p>
 </section>
 <section id="initialize-state">
 <h2>Initialize State<a class="headerlink" href="#initialize-state" title="Link to this heading"></a></h2>
@@ -198,7 +210,11 @@ structure the signal is carrying</p>
 <section id="slot-methods">
 <h2>Slot Methods<a class="headerlink" href="#slot-methods" title="Link to this heading"></a></h2>
 <p>Let’s consider a slot that receives a signal carrying a json object “datum”</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">current_datum_slot</span><span class="p">(</span><span class="nx">datum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">current_datum_slot</span><span class="p">(</span><span class="nx">datum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/*</span>
+<span class="cm">    Comment here what kind of data the slot expects:</span>
+<span class="cm">    datatype and/or a nested json object scheme.</span>
+<span class="cm">    You can also implement a datatype check.</span>
+<span class="cm">    */</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">datum</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="c1">// change state, say hide buttons</span>
 <span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">current_datum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
@@ -216,21 +232,95 @@ to do this.  Consider situation where you send an object to a slot and then it i
 elsewhere in the code: in such situation your slot function needs to create its own copy
 of the object in order to keep it’s state under control.</p>
 </section>
-<section id="code-as-documentation">
-<h2>Code as Documentation<a class="headerlink" href="#code-as-documentation" title="Link to this heading"></a></h2>
-<p>Structuring the code in the CuteFront way, “autodocuments” the code to some extent.</p>
+<section id="creating-autodocumentation">
+<span id="docstrings"></span><h2>Creating Autodocumentation<a class="headerlink" href="#creating-autodocumentation" title="Link to this heading"></a></h2>
+<p>Structuring the code in the CuteFront way, makes reading it easy:</p>
 <p>Taking a quick look into the the subclassed <code class="docutils literal notranslate"><span class="pre">createSignals</span></code> and
-various (well commented) <code class="docutils literal notranslate"><span class="pre">slot</span></code> functions immediately give you a clear
+various (well commented) <code class="docutils literal notranslate"><span class="pre">slot</span></code> functions immediately gives you a clear
 idea of the widget’s API, while looking at <code class="docutils literal notranslate"><span class="pre">createState</span></code> shows you all the
 internal state variables of the widget.</p>
 <p>The associated, minimal testing <code class="docutils literal notranslate"><span class="pre">html</span></code> file demonstrates actual use with
 dummy data.</p>
+<p>To facilitate autodocumentation even further, <cite>a python script &lt;https://github.com/elsampsa/cutefront/blob/main/script/docextract.py&gt;</cite>
+is provided that documents your widget’s API, when you write comments enclosed in <code class="docutils literal notranslate"><span class="pre">/*//DOC</span></code> and <code class="docutils literal notranslate"><span class="pre">*/</span></code>.  Like this:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span><span class="w"> </span><span class="nx">SampleListWidget</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Widget</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/*//DOC</span>
+<span class="cm">    A list of samples with their datetime strings and statuses</span>
+<span class="cm">    (polished or not).</span>
+<span class="cm">    */</span>
+
+<span class="p">...</span>
+<span class="p">...</span>
+
+<span class="nx">createSignals</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">new_sample</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Signal</span><span class="p">();</span><span class="w"> </span><span class="cm">/*//DOC</span>
+<span class="cm">        Carries a sample object {uuid:string, datetime:string, data:2D profile}.</span>
+<span class="cm">        Emitted when a new sample is added to this list (i.e. a &quot;relay&quot; signal).</span>
+<span class="cm">        */</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">chosen_sample</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Signal</span><span class="p">();</span><span class="w"> </span><span class="cm">/*//DOC</span>
+<span class="cm">        Carries a sample object {uuid:string, datetime:string, data:2D profile}.</span>
+<span class="cm">        Emitted when a sample is clicked highlighted in the list</span>
+<span class="cm">        */</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">new_sample_slot</span><span class="p">(</span><span class="nx">sample</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/*//DOC</span>
+<span class="cm">        input is an object with</span>
+<span class="cm">        uuid: uuid string</span>
+<span class="cm">        datetime: datetime string</span>
+<span class="cm">        data: a 2D profile</span>
+<span class="cm">        */</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">new_sample</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="nx">sample</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">createSampleItem</span><span class="p">(</span><span class="nx">sample</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">...</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>When requesting markdown format, the script gives this output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>### SampleListWidget
+- file: `samplelist.js`
+- inherits: `Widget`
+- A list of samples with their datetime strings and statuses
+    &lt;br&gt; (polished or not).
+- SIGNAL: new_sample
+    &lt;br&gt; Carries a sample object {uuid:string, datetime:string, data:2D profile}.
+    &lt;br&gt; Emitted when a new sample is added to this list (i.e. a &quot;relay&quot; signal).
+- SIGNAL: chosen_sample
+    &lt;br&gt; Carries a sample object {uuid:string, datetime:string, data:2D profile}.
+    &lt;br&gt; Emitted when a sample is clicked highlighted in the list
+- SLOT: new_sample_slot(sample)
+    &lt;br&gt; input is an object with
+    &lt;br&gt; uuid: uuid string
+    &lt;br&gt; datetime: datetime string
+    &lt;br&gt; data: a 2D profile
+...
+...
+</pre></div>
+</div>
 </section>
 <section id="using-the-dom">
 <h2>Using the DOM<a class="headerlink" href="#using-the-dom" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">createElement</span></code> method is used to hook into and manipulate the document object
-model (DOM).</p>
-<p>It should always start the same way:</p>
+<p id="createelement">The <code class="docutils literal notranslate"><span class="pre">createElement</span></code> method is used to insert the HTML code of the widget into the
+document object model (DOM).</p>
+<p>In this method, you will also hook into the various DOM elements (fields, buttons, etc.)
+and use them as member variables.  These member variables constitute the <em>state</em> of the widget
+and their contents (and the state) is then modified in other methods of your widget class
+(for example, in <code class="docutils literal notranslate"><span class="pre">createState</span></code>).</p>
+<p>You should always try to use the DOM elements themselves as state variables, instead of creating
+extra member state variables, i.e.:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span>
+<span class="sb">    ...</span>
+<span class="sb">    &lt;input type=&quot;text&quot; id=&quot;name&quot;&gt;</span>
+<span class="sb">    ...`</span>
+<span class="p">...</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">name_field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#name&quot;</span><span class="p">);</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">name_field</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="c1">// use this as your member state variable</span>
+<span class="c1">// don&#39;t create an extra this.name string variable that you need to synchronize with this.name_field.value</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">createElement</span></code> is the most “nasty” part of your widget you need to write (who wants to write HTML and
+manipulate it programmatically), but fortunately, it can be done to great extent using <a class="reference internal" href="chatgpt.html#chatgpt"><span class="std std-ref">AI assistants</span></a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">createElement</span></code> should always start the same way:</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">createElement</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -352,13 +442,17 @@ can then be opened in the <a class="reference internal" href="devenvs.html#plain
 <li><p>Defined <code class="docutils literal notranslate"><span class="pre">MyWidget</span></code> in file <code class="docutils literal notranslate"><span class="pre">mywidget.js</span></code> in the <a class="reference internal" href="codeorg.html#codeorg"><span class="std std-ref">app directory</span></a></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">MyWidget</span></code> has only one signal named <code class="docutils literal notranslate"><span class="pre">ping</span></code></p></li>
 </ul>
-<p>Then the corresponding <code class="docutils literal notranslate"><span class="pre">mywidget.html</span></code> (which you would place into the <code class="docutils literal notranslate"><span class="pre">app</span></code> folder) would look like this:</p>
+<p>An example corresponding <code class="docutils literal notranslate"><span class="pre">mywidget.html</span></code> test html is below.  For app-specific widgets, you would
+place it in the <code class="docutils literal notranslate"><span class="pre">app</span></code> folder.  Again, be carefull with the <code class="docutils literal notranslate"><span class="pre">&lt;link</span> <span class="pre">href=..&gt;</span></code> to set the correct path for
+css inclusion and with <code class="docutils literal notranslate"><span class="pre">&lt;script</span> <span class="pre">src=..&gt;</span></code> for javascript inclusion, depending on your
+<a class="reference internal" href="codeorg.html#codeorg"><span class="std std-ref">code organization scheme</span></a>.</p>
 <div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!doctype html&gt;</span>
 <span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Widget Test<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;../bootstrap-5.2.3-dist/css/bootstrap.min.css&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
+<span class="cm">&lt;!-- for app-specific widgets: --&gt;</span>
+<span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;../lib/bootstrap-5.2.3-dist/css/bootstrap.min.css&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
 
@@ -366,13 +460,14 @@ can then be opened in the <a class="reference internal" href="devenvs.html#plain
 <span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;test-button&quot;</span><span class="p">&gt;</span>test something<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
 
 <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;../bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="cm">&lt;!-- for app-specific widgets: --&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;../lib/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;module&quot;</span><span class="p">&gt;</span>
 <span class="cm">/* // define mock data if you need that</span>
 <span class="cm">var data = [</span>
 <span class="cm">];</span>
 <span class="cm">*/</span>
-<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">DummyWidget</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../lib/base/widget.js&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">DummyWidget</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../lib/base/widget.js&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">// for app-specific widgets</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">MyWidget</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./mywidget.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">dummy_widget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">DummyWidget</span><span class="p">();</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">widget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">MyWidget</span><span class="p">(</span><span class="s2">&quot;test-element&quot;</span><span class="p">);</span>
@@ -414,6 +509,32 @@ This is used when connecting signals to slots as discussed above.</p>
 always use <code class="docutils literal notranslate"><span class="pre">bind</span></code>.  When creating callbacks in object methods,
 always define a local lambda function.</p>
 </section>
+<section id="parent-child-widget-structures">
+<h2>Parent / Child Widget Structures<a class="headerlink" href="#parent-child-widget-structures" title="Link to this heading"></a></h2>
+<p>In some cases, widgets should instantiate other widgets (child widgets).</p>
+<p>A typical case is a widget that implements a list of items (say, a list of cards, each card having several fields corresponding to some data).</p>
+<p>Say, you would have <code class="docutils literal notranslate"><span class="pre">YourListWidget</span></code> (parent) that instantiates and caches several <code class="docutils literal notranslate"><span class="pre">YourListItemWidget</span></code> (child) instances.</p>
+<p>Then <code class="docutils literal notranslate"><span class="pre">YourListItemWidget</span></code> would look something like this:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// we don&#39;t need the id as the html element is created by the widget itself</span>
+<span class="w">    </span><span class="k">super</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">createElement</span><span class="p">();</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">createState</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="nx">createElement</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// does not use this.id to hook up to an existing html element in the html code</span>
+<span class="w">    </span><span class="c1">// but creates a new element from scratch instead</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;tr&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// i.e. instead of document.getElementById(this.id)</span>
+<span class="w">    </span><span class="c1">// etc. etc.</span>
+<span class="p">}</span>
+
+<span class="nx">getElement</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// maybe called by the parent widget</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">element</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>There are quite many ways to manage the intercommunication between the parent and its child widgets and the details are up to you.</p>
+</section>
 </section>
 
 
@@ -421,7 +542,7 @@ always define a local lambda function.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="devenvs.html" class="btn btn-neutral float-left" title="Development Environments" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="fullstack.html" class="btn btn-neutral float-right" title="A Fullstack Example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="chatgpt.html" class="btn btn-neutral float-right" title="AI Generated Widgets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta content="Qt-like frontend framework" name="description" />
@@ -7,8 +7,11 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CuteFront &mdash; CuteFront  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -18,6 +21,8 @@
         <script src="_static/documentation_options.js?v=5929fcd5"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -69,12 +74,14 @@ works is this:
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="qtlike.html">Qt-like Widgets and Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library.html">Widget Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="codeorg.html">Code Organization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">State History</a></li>
 <li class="toctree-l1"><a class="reference internal" href="devenvs.html">Development Environments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating.html">Creating and Using Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chatgpt.html">AI Generated Widgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fullstack.html">A Fullstack Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cheatsheet.html">Python vs JS Cheatsheet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="links.html">Links</a></li>
@@ -107,7 +114,7 @@ works is this:
              
   <section id="cutefront">
 <h1>CuteFront<a class="headerlink" href="#cutefront" title="Link to this heading"></a></h1>
-<p><em>A Qt-like Javascript Frontend Framework</em></p>
+<p><em>A Qt-like, Declarative Javascript Frontend Framework</em></p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Intro</a><ul>
@@ -123,8 +130,15 @@ works is this:
 <li class="toctree-l2"><a class="reference internal" href="qtlike.html#anatomy-of-a-widget">Anatomy of a Widget</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#create-directory-structure">1. Create Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#create-widgets-using-ai">2. Create Widgets using AI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#create-main-spa-html">3. Create Main SPA HTML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#himo-diagram">4. HIMO Diagram</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="install.html#download-the-repo">Download the Repo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#download-fullstack-example">Download Fullstack Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install.html#checkout-the-widget-library">Checkout The Widget Library</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install.html#nginx-sqlite-etc">Nginx, sqlite, etc.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install.html#firefox">Firefox</a></li>
@@ -158,14 +172,16 @@ works is this:
 <li class="toctree-l2"><a class="reference internal" href="creating.html#defining-signals">Defining Signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="creating.html#initialize-state">Initialize State</a></li>
 <li class="toctree-l2"><a class="reference internal" href="creating.html#slot-methods">Slot Methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="creating.html#code-as-documentation">Code as Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating.html#creating-autodocumentation">Creating Autodocumentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="creating.html#using-the-dom">Using the DOM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="creating.html#emitting-signals">Emitting Signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="creating.html#connecting-signals">Connecting Signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="creating.html#create-test-html">Create test HTML</a></li>
 <li class="toctree-l2"><a class="reference internal" href="creating.html#the-trouble-with-this">The Trouble with “this”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating.html#parent-child-widget-structures">Parent / Child Widget Structures</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="chatgpt.html">AI Generated Widgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fullstack.html">A Fullstack Example</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="fullstack.html#datasources">Datasources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fullstack.html#installing-the-backend">Installing the Backend</a></li>
@@ -176,6 +192,7 @@ works is this:
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cheatsheet.html">Python vs JS Cheatsheet</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cheatsheet.html#none">None</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cheatsheet.html#else-if">else if</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cheatsheet.html#type-testing">Type testing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cheatsheet.html#type-conversions">Type conversions</a></li>
@@ -198,6 +215,7 @@ works is this:
 <li class="toctree-l2"><a class="reference internal" href="webdev.html#definitions">Definitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="webdev.html#bronze-age">Bronze Age</a></li>
 <li class="toctree-l2"><a class="reference internal" href="webdev.html#iron-age">Iron Age</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webdev.html#modern-age">Modern Age</a></li>
 </ul>
 </li>
 </ul>

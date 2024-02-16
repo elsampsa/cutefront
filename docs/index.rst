@@ -10,19 +10,21 @@ CuteFront
    :description: Qt-like frontend framework
    :keywords: qt, javascript
 
-*A Qt-like Javascript Frontend Framework*
+*A Qt-like, Declarative Javascript Frontend Framework*
 
 .. toctree::
    :maxdepth: 8
 
    intro
    qtlike
+   tutorial
    install
    library
    codeorg
    state
    devenvs
    creating
+   chatgpt
    fullstack
    cheatsheet
    links
