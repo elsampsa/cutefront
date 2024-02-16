@@ -147,7 +147,7 @@ internal state variables of the widget.
 The associated, minimal testing ``html`` file demonstrates actual use with
 dummy data.
 
-To facilitate autodocumentation even further, `a python script <https://github.com/elsampsa/cutefront/blob/main/script/docextract.py>` 
+To facilitate autodocumentation even further, `a python script <https://github.com/elsampsa/cutefront/blob/main/script/docextract.py>`_ 
 is provided that documents your widget's API, when you write comments enclosed in ``/*//DOC`` and ``*/``.  Like this:
 
 .. code:: javascript

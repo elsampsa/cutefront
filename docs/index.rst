@@ -10,7 +10,7 @@ CuteFront
    :description: Qt-like frontend framework
    :keywords: qt, javascript
 
-*A Qt-like, Declarative Javascript Frontend Framework*
+*A Qt-like, Semi-Declarative Javascript Frontend Framework*
 
 .. toctree::
    :maxdepth: 8

@@ -10,7 +10,7 @@ Intro
 Features
 --------
 
-CuteFront is a declarative javascript frontend framework, featuring:
+CuteFront is a semi-declarative javascript frontend framework, featuring:
 
 - Code structured into clearly separated components (widgets) that communicate through signals and slots
 - No npm package mess or transpiling
