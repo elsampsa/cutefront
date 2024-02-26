@@ -133,7 +133,7 @@ the <a class="reference internal" href="library.html#library"><span class="std s
 <section id="subclassing-a-widget">
 <h2>Subclassing a Widget<a class="headerlink" href="#subclassing-a-widget" title="Link to this heading"></a></h2>
 <p>Creating a new widget is always done in the same way:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Widget</span><span class="p">,</span><span class="w"> </span><span class="nx">Signal</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./widget.js&#39;</span><span class="p">;</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Widget</span><span class="p">,</span><span class="w"> </span><span class="nx">Signal</span><span class="p">,</span><span class="w"> </span><span class="nx">randomID</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./widget.js&#39;</span><span class="p">;</span>
 <span class="c1">// import { Widget, Signal } from &#39;../lib/base/widget.js&#39;; // app-specific widget</span>
 <span class="kd">class</span><span class="w"> </span><span class="nx">CrudButtonsWidget</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Widget</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// widget definition here</span>
@@ -318,6 +318,20 @@ extra member state variables, i.e.:</p>
 <span class="c1">// don&#39;t create an extra this.name string variable that you need to synchronize with this.name_field.value</span>
 </pre></div>
 </div>
+<p>Each time when you instantiate an object from your widget class, new html is created dynamically at that moment by the
+<code class="docutils literal notranslate"><span class="pre">createElement</span></code> method.  Supposing you would create five objects, that would insert five times the html code
+<code class="docutils literal notranslate"><span class="pre">&lt;input</span> <span class="pre">type=&quot;text&quot;</span> <span class="pre">id=&quot;name&quot;&gt;</span></code> into the DOM</p>
+<p>However, <em>id attributes should be unique</em>, so let’s fix that code a bit:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span><span class="w"> </span><span class="nx">uuid1</span><span class="o">=</span><span class="nx">randomID</span><span class="p">();</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span>
+<span class="sb">    ...</span>
+<span class="sb">    &lt;input type=&quot;text&quot; id=&quot;</span><span class="si">${</span><span class="nx">uuid1</span><span class="si">}</span><span class="sb">&quot;&gt;</span>
+<span class="sb">    ...`</span>
+<span class="p">...</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">name_field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="sb">`#</span><span class="si">${</span><span class="nx">uuid1</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Which keeps the <code class="docutils literal notranslate"><span class="pre">id</span></code> argument for each widget instance unique.</p>
 <p><code class="docutils literal notranslate"><span class="pre">createElement</span></code> is the most “nasty” part of your widget you need to write (who wants to write HTML and
 manipulate it programmatically), but fortunately, it can be done to great extent using <a class="reference internal" href="chatgpt.html#chatgpt"><span class="std std-ref">AI assistants</span></a>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">createElement</span></code> should always start the same way:</p>
@@ -453,6 +467,9 @@ css inclusion and with <code class="docutils literal notranslate"><span class="p
 <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Widget Test<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
 <span class="cm">&lt;!-- for app-specific widgets: --&gt;</span>
 <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;../lib/bootstrap-5.2.3-dist/css/bootstrap.min.css&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span>
+<span class="cm">&lt;!-- if you use fontawesome:</span>
+<span class="cm">link href=&quot;./lib/include/fontawesome/css/all.min.css&quot; rel=&quot;stylesheet&quot;</span>
+<span class="cm">--&gt;</span>
 <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
 

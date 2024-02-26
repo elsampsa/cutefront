@@ -14,7 +14,7 @@ Creating a new widget is always done in the same way:
 
 .. code:: javascript
 
-    import { Widget, Signal } from './widget.js';
+    import { Widget, Signal, randomID } from './widget.js';
     // import { Widget, Signal } from '../lib/base/widget.js'; // app-specific widget
     class CrudButtonsWidget extends Widget {
         // widget definition here
@@ -234,6 +234,24 @@ extra member state variables, i.e.:
     this.name_field.value // use this as your member state variable
     // don't create an extra this.name string variable that you need to synchronize with this.name_field.value
 
+Each time when you instantiate an object from your widget class, new html is created dynamically at that moment by the
+``createElement`` method.  Supposing you would create five objects, that would insert five times the html code
+``<input type="text" id="name">`` into the DOM
+
+However, *id attributes should be unique*, so let's fix that code a bit:
+
+.. code:: javascript
+
+    let uuid1=randomID();
+    this.element.innerHTML = `
+        ...
+        <input type="text" id="${uuid1}">
+        ...`
+    ...
+    this.name_field = this.element.querySelector(`#${uuid1}`);
+    
+Which keeps the ``id`` argument for each widget instance unique.
+
 ``createElement`` is the most "nasty" part of your widget you need to write (who wants to write HTML and
 manipulate it programmatically), but fortunately, it can be done to great extent using :ref:`AI assistants <chatgpt>`.
 
@@ -414,6 +432,9 @@ css inclusion and with ``<script src=..>`` for javascript inclusion, depending o
     <title>Widget Test</title>
     <!-- for app-specific widgets: -->
     <link href="../lib/bootstrap-5.2.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- if you use fontawesome:
+    link href="./lib/include/fontawesome/css/all.min.css" rel="stylesheet" 
+    -->
     </head>
     <body>
 

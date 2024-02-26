@@ -34,7 +34,7 @@ Each time a user clicks any of the radio buttons, a text message signal is also 
 The widget also has a slot that receives a text message signal from some other widget.  If the incoming signal text includes the word "like" then the
 text field value is incremented by one, if it includes text "hate", then it is decreased by one.
 */
-import { Widget, Signal, uuidv4 } from '../lib/base/widget.js';
+import { Widget, Signal, randomID } from '../lib/base/widget.js';
 
 /* Widget is the base class for all widgets.
 Please, put always the methods described below in the same order:
@@ -102,12 +102,12 @@ class HateLike extends Widget { /*//DOC
         When a new widget is instantiated, each one of them should have their own unique set of html elements identified by a unique "id" attribute.
         Same goes for html # targets.
         */
-        let head=uuidv4();
-        let ctarget=uuidv4();
-        let name=uuidv4();
-        let uuid1=uuidv4();
-        let uuid2=uuidv4();
-        let uuid3=uuidv4();
+        let head=randomID();
+        let ctarget=randomID();
+        let name=randomID();
+        let uuid1=randomID();
+        let uuid2=randomID();
+        let uuid3=randomID();
         // Create the HTML corresponding to this widget
         this.element.innerHTML=`
         <div class="accordion-item">
@@ -194,6 +194,10 @@ This is for class HateLike in file "hatelike.js"
 <meta charset="utf-8">
 <title>HateLike Test</title>
 <link href="../lib/bootstrap-5.2.3-dist/css/bootstrap.min.css" rel="stylesheet">
+<!--
+If we use fontawesome:
+<link href="./lib/include/fontawesome/css/all.min.css" rel="stylesheet">
+-->
 </head>
 <body>
 
