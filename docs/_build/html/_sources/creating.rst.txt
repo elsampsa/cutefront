@@ -15,7 +15,7 @@ Creating a new widget is always done in the same way:
 .. code:: javascript
 
     import { Widget, Signal, randomID } from './widget.js';
-    // import { Widget, Signal } from '../lib/base/widget.js'; // app-specific widget
+    // import { Widget, Signal, randomID } from '../lib/base/widget.js'; // app-specific widget
     class CrudButtonsWidget extends Widget {
         // widget definition here
     }

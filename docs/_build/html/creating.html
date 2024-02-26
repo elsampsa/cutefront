@@ -134,7 +134,7 @@ the <a class="reference internal" href="library.html#library"><span class="std s
 <h2>Subclassing a Widget<a class="headerlink" href="#subclassing-a-widget" title="Link to this heading"></a></h2>
 <p>Creating a new widget is always done in the same way:</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Widget</span><span class="p">,</span><span class="w"> </span><span class="nx">Signal</span><span class="p">,</span><span class="w"> </span><span class="nx">randomID</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./widget.js&#39;</span><span class="p">;</span>
-<span class="c1">// import { Widget, Signal } from &#39;../lib/base/widget.js&#39;; // app-specific widget</span>
+<span class="c1">// import { Widget, Signal, randomID } from &#39;../lib/base/widget.js&#39;; // app-specific widget</span>
 <span class="kd">class</span><span class="w"> </span><span class="nx">CrudButtonsWidget</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">Widget</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// widget definition here</span>
 <span class="p">}</span>
