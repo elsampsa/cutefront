@@ -307,8 +307,8 @@ Alternatively, you can create them in js, and then attach as children to
 
 .. code:: javascript
 
-    this.thead = document.createElement("thread")
-    this.element.appendChild(this.thread)
+    this.thead = document.createElement("thead") // tag names "div", "span", etc.
+    this.element.appendChild(this.thead)
 
 Setting the css classes:
 

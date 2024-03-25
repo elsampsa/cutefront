@@ -13,8 +13,9 @@ Features
 CuteFront is a semi-declarative javascript frontend framework, featuring:
 
 - Code structured into clearly separated components (widgets) that communicate through signals and slots
-- No npm package mess or transpiling
+- No node, npm or transpiling.  Code runs only in the browser.  
 - No annoying templating languages, just pure javascript and html
+- Minimal package mainteinance: CuteFront is just html and javascript running in the browser, so it just "is"
 - Qt's touch'n'feel with widgets, signals and slots
 - Simple development environment with plain .js and .html files
 - Global state partitioned and cached into widgets - avoid global state mess

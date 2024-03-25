@@ -121,13 +121,13 @@ Backend API endpoints are avail in `http://0.0.0.0:8086/docs <http://0.0.0.0:808
 No extra installations (except for having docker-compose installed into your system)
 is required.
 
-Please use the no-brainer bash scripts provided in directory ``bash``:
+Please use the no-brainer bash scripts provided in directory ``script``:
 
 .. code:: bash
 
-    bash/dev.bash build
-    bash/devreset.bash
-    bash/dev.bash up
+    script/dev.bash build
+    script/devreset.bash
+    script/dev.bash up
 
 That builds the images, inits the database and starts the containers
 

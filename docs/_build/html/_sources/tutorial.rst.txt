@@ -100,9 +100,9 @@ Now you have the necessary directory structure and the widget base library (for 
 2. Create Widgets using AI
 --------------------------
 
-Next we will use ChatGPT, to generate the various widgets used in our SPA.
+Next we will use ChatGPT, to generate the various widgets used in our SPA.  Google's Gemini AI is also a very good option.
 
-Start your ChatGPT session, by feeding it the `preconditioning prompt <https://github.com/elsampsa/cutefront/blob/main/prompt.md>`_.
+Start your ChatGPT session, by feeding it the `preconditioning prompt <https://raw.githubusercontent.com/elsampsa/cutefront/main/prompt.md>`_.
 After that, it is ready for your service.
 
 You can consider the prompts used in generating the widgets as detailed definitions / declarations of your software components.

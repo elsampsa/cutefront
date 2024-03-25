@@ -16,11 +16,11 @@ LLMs, such as ChatGPT, have seen most (if not all) of this world's javascript, c
 Furthermore, CuteFront widgets are clean, logical and relatively short entities, so we can expect LLMs to perform well in their generation.
 
 However, before starting to request ready-made widgets from your LLM of choice, you need to explain it a bit what CuteFront
-is all about with a *preconditioning prompt*.
+is all about with a short *preconditioning prompt*.
 
-You can find the up-to-date prompt from `here <https://github.com/elsampsa/cutefront/blob/main/prompt.md>`_
+You can find the up-to-date prompt from `here <https://raw.githubusercontent.com/elsampsa/cutefront/main/prompt.md>`_
 
-After feeding the preconditiong prompt, ChatGPT says something like this:
+After feeding it to your favorite LLM (say, `chatgpt <https://chat.openai.com/>`_ or `gemini <https://gemini.google.com/app>`_) it says something like this:
 
 *Got it! I understand the structure and the process of creating widgets in CuteFront. 
 Whenever you're ready to request a new widget, just let me know, 

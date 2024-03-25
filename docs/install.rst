@@ -1,23 +1,54 @@
 
 .. _install:
 
-Installing
-==========
+Starting a Project
+==================
 
-In this section, we will checkout the whole `CuteFront main repo <https://github.com/elsampsa/cutefront>`_,
+A. With Project Init Script
+---------------------------
+
+Here we create a minimal scaffold for a new project.
+
+Create a directory for your project and enter it:
+
+.. code-block:: bash
+
+    mkdir my_cute_app
+    cd my_cute_app
+
+.. code-block:: bash
+
+    bash <(curl -sSL https://raw.githubusercontent.com/elsampsa/cutefront/main/script/project_init.bash)
+
+Let's use ``app`` as the app subdirectory name.
+
+Now you have the necessary directory structure and the widget base library (for more details, see :ref:`code organization <codeorg>`):
+
+.. code-block:: text
+
+    my_cute_app
+    ├── app                    # your app's .js and .html files
+    ├── app.html               # your frontend entry-point
+    ├── assets                 # images, etc.
+    ├── css                    # your app's css
+    └── lib                    # *** The CuteFront Widget Library ***
+         ├── base              # ***    AS A GIT SUBMODULE        ***
+         └── bootstrap-5.2.3-dist   
+            ├── css
+            └── js
+
+
+B. With Fullstack Example
+-------------------------
+
+Here we will checkout the whole `CuteFront main repo <https://github.com/elsampsa/cutefront>`_,
 that includes the complete :ref:`Fullstack Example <fullstack>`, with python backend, dockerization, etc.
 
 The idea is, that you can then remove the parts you don't need.
 
-Alternatively, you may want to use `project init script  <https://github.com/elsampsa/cutefront/blob/main/script/project_init.bash>`_
-to start CuteFront project from a clean slate, as was done in the :ref:`Tutorial <tutorial>`.
-
-Download Fullstack Example
---------------------------
-
 .. _install-fullstack:
 
-Get the code (for example) with either of these:
+Get the code with either of these:
 
 .. code:: bash
 
@@ -40,8 +71,7 @@ You'll get this directory structure:
     └── secrets/                # .ini files for the fullstack example
 
 
-Checkout The Widget Library
----------------------------
+Next, we will checkout the widget library.
 
 .. _get_library:
 

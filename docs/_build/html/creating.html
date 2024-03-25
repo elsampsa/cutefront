@@ -74,7 +74,7 @@ works is this:
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="qtlike.html">Qt-like Widgets and Signals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Starting a Project</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library.html">Widget Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="codeorg.html">Code Organization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="state.html">State History</a></li>
@@ -371,8 +371,8 @@ manipulate it programmatically), but fortunately, it can be done to great extent
 </div>
 <p>Alternatively, you can create them in js, and then attach as children to
 <code class="docutils literal notranslate"><span class="pre">this.element</span></code>:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">thead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;thread&quot;</span><span class="p">)</span>
-<span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">thread</span><span class="p">)</span>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">thead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;thead&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// tag names &quot;div&quot;, &quot;span&quot;, etc.</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">thead</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Setting the css classes:</p>

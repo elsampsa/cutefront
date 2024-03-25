@@ -12,6 +12,7 @@ Basic references:
 - `HTML DOM API <https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement>`_
 - `List of HTML Elements <https://developer.mozilla.org/en-US/docs/Web/HTML/Element>`_
 
-More specific references:
+Some more references:
 
+- `Fontawesome <https://fontawesome.com/icons>`_
 - `Plotly Javascript Library <https://plotly.com/javascript/>`_
