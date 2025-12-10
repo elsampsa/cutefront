@@ -127,20 +127,24 @@ todo_include_todos = True
 # a list of builtin themes.
 
 # html_theme = "classic" # old'n'ugly theme
-html_theme="sphinx_rtd_theme" # you might need to install with pip3
+# html_theme="sphinx_rtd_theme" # you might need to install with pip3
 # html_theme = 'alabaster' # nice
+html_theme = "furo"  # modern theme with automatic dark mode based on system preferences
 
 # Add any paths that contain templates here, relative to this directory.
 # templates_path = ['_templates']
 ## WARNING: choose overriding as per correct style
-templates_path = ['_templates/rtd']
-# templates_path = ['_templates/alabaster']
+# templates_path = ['_templates/rtd'] # RTD theme
+# templates_path = ['_templates/alabaster'] # alabaster theme
 # templates_path = ['_templates/nada'] # keep empty.. :)
+# Furo theme doesn't need custom templates
 
 #"""
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-html_sidebars
-# some styles (like alabaster) seem to accept random extra html files into 
+# some styles (like alabaster) seem to accept random extra html files into
 # html sidebars ('sidebar-intro.html' below)
+# Furo theme manages its own sidebar, so we comment this out
+"""
 html_sidebars = {
     '**': [
         'sidebar-intro.html', # style: alabaster
@@ -150,17 +154,19 @@ html_sidebars = {
         # 'sidebar-bottom.html',
     ]
 }
+"""
 #"""
 #"""# theme specific!
 # RTD: https://sphinx-rtd-theme.readthedocs.io/en/stable/configuring.html
 # alabaster: https://alabaster.readthedocs.io/en/latest/customization.html#theme-options
 html_theme_options = {
+  # Furo theme automatically respects system dark/light mode preferences
   #'github_user'  : 'elsampsa', # alabaster
   #'github_repo'  : 'skeleton', # alabaster
   # 'analytics_id' : 'XX-XXX-X' # for google analytics tracking, uncomment this
   # 'page_width' : '60%', # make page wider # alabaster
   # 'body_max_width': 'auto', # alabaster
-  "logo_only": False # style: RTD
+  # "logo_only": False # style: RTD
 }
 # some options for the classic theme
 """

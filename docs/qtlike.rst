@@ -106,9 +106,6 @@ Furthermore, signal/slot paradigm can naturally be represented as a graph, so le
         sig: throw_ball  >--+---|-----+
         slot: catch_ball <------+
 
-This feature is used in Qt's "Qt Studio", where you can create interactions by graphically drawing lines between widgets.  
-We have the same potential with CuteFront.
-
 A more complicated topic on the state is the "state history", i.e. moving forward and backward in history, using browser forward and backward
 buttons.  You can read more about that in :ref:`State History <state_history>`.
 
@@ -121,21 +118,23 @@ Let's take a look at the ``BallPlayer`` widget class:
 
 .. code:: javascript
 
-    class BallPlayer extends Widget {
-        // A widget you can throw ball with
-        // to another widget
+
+    class BallPlayer extends Widget { /*//DOC
+        An widget that has a button to throw the ball and a text indicating if this widget has the ball 
+        or not
+        */
         constructor(id) {
             super();
             this.id = id;
             this.createElement();
             this.createState();
         }
-        // UP: signals
         createSignals() {
-            this.signals.throw_ball = new Signal(); // sends the ball to another widget
+            this.signals.throw_ball = new Signal("Sends the ball to another widget");
         }
-        // IN: slots
-        catch_ball_slot() { // receive a ball
+        catch_ball_slot() { /*//DOC
+            Sending a signal to this slot, gives the ball to this widget
+            */
             this.log(-1, "catch_ball_slot")
             this.has_ball = true
             this.setBall()
@@ -146,7 +145,7 @@ Let's take a look at the ``BallPlayer`` widget class:
                 return
             }
             this.has_ball = false // the only state variable
-            // initialize to not having a ball
+            this.setBall() // initialize to not having a ball
         }
         createElement() {
             this.element = document.getElementById(this.id)
@@ -202,8 +201,6 @@ Taking a look into ``createSignals`` and the ``_slot`` methods, **we can see at 
 Before going full throttle into creating your own interative pages and widgets,
 please look at the :ref:`Creating Widgets <creating>` section for common techniques 
 and pitfalls (in javascript, there are quite some).
-
-
 
 
 

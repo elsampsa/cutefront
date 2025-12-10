@@ -1,8 +1,8 @@
 # CuteFront
 
-A Qt-like Javascript frontend framework: widgets, signals and slots.
+*the "no-framework* javascript framework*
 
-*Programming in frontend javascript like you were doing PyQt!*
+A Qt-like Javascript frontend framework with widgets, signals and slots.
 
 ## About
 
@@ -15,16 +15,11 @@ CuteFront is a frontend framework, featuring:
 
 For full documentation, please go [here](https://elsampsa.github.io/cutefront/_build/html/index.html)
 
-You should read and understand the documentation before going further.
+## Included
 
-This repo can also be used as a *fullstack scaffold* for your projects.  It features:
-
-- FastAPI python backend and CuteFront frontend
-- Development mode using pure .js and .html only
-- Development mode using mock data without a backend
-
-CuteFront widgets can be **AI generated** using Large Language Models (LLMs), please take a look
-at the provided preconditioning prompt in [here](prompt.md).
+- AI prompts
+- VScode plugins
+- Neat integrated development environment
 
 ## Author(s)
 
@@ -32,7 +27,7 @@ Sampsa Riikonen
 
 ## Copyright
 
-(c) Sampsa Riikonen 2023
+(c) Sampsa Riikonen 2025
 
 ## License
 

@@ -17,15 +17,10 @@ CuteFront
 
    intro
    qtlike
-   tutorial
    install
    library
-   codeorg
-   state
    devenvs
    creating
-   chatgpt
-   fullstack
    cheatsheet
    links
    webdev

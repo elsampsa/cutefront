@@ -15,9 +15,3 @@ mkdir assets
 mkdir css
 git clone https://github.com/elsampsa/cutefront-lib.git 
 mv cutefront-lib lib
-cd $name
-cp ../lib/base/example.* .
-cp ../lib/base/create.bash .
-cd ..
-curl https://raw.githubusercontent.com/elsampsa/cutefront/main/frontend/nginx.py > ./nginx.py
-chmod a+x nginx.py

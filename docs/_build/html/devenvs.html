@@ -1,225 +1,388 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="./">
-<head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Creating and Using Widgets" href="creating.html" /><link rel="prev" title="Widget Library" href="library.html" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Development Environments &mdash; CuteFront  documentation</title>
+    <!-- Generated with Sphinx 7.2.6 and Furo 2024.08.06 -->
+        <title>Development Environments - CuteFront documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
+    
+    
 
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
   
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Creating and Using Widgets" href="creating.html" />
-    <link rel="prev" title="State History" href="state.html" />
-<!-- as per https://stackoverflow.com/questions/23211695/modifying-content-width-of-the-sphinx-theme-read-the-docs -->
-<link href="_static/rtd_override.css" rel="stylesheet" type="text/css">
-<script src="https://kit.fontawesome.com/1f90d3565b.js" crossorigin="anonymous"></script>
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
 
-</head>
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
 
-<body class="wy-body-for-nav">
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
 
-<!--
-  <a href="index.html" class="icon icon-home"> CuteFront
-</a>
--->
 
-<!--
-NOTE: we are starting to have "version creep" here..  at the moment, with Sphinx==7.2.6 and sphinx-rtd-theme==1.3.0 the only thing that
-works is this:
--->
-<a href="index.html">
-<img src="_static/logo.png" class="logo" style="width: 200px; height: auto; border-radius: 0px 6px 6px 0px;" alt="Logo"/>
-</a>
-    <div class="version">
-      0.0.1
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
     </div>
-
-
-<!-- font awesome comes with the rtd package.. use like this:-->
-<a href="https://github.com/elsampsa/cutefront" target="_blank" rel="noopener noreferrer"> <i class="fa-brands fa-github"></i> CuteFront @ github</a>
-<a href="https://github.com/elsampsa/cutefront/issues" target="_blank" rel="noopener noreferrer"> <i class="fas fa-bug"></i> Issue Tracker @ github</a>
-<a href="https://discord.com/channels/1116100310574837812/1116101050190012426" target="_blank" rel="noopener noreferrer"> <i class="fa-brands fa-discord"></i> Discord </a>
-
-<!-- don't even think about subclassing searchbox.html .. will never work!-->
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
+    <div class="header-center">
+      <a href="index.html"><div class="brand">CuteFront  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">CuteFront  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="qtlike.html">Qt-like Widgets and Signals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Starting a Project</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library.html">Widget Library</a></li>
-<li class="toctree-l1"><a class="reference internal" href="codeorg.html">Code Organization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="state.html">State History</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Development Environments</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#plainfile">1. Plainfile</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#native">2. Native</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#docker">3. Docker</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Development Environments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating.html">Creating and Using Widgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chatgpt.html">AI Generated Widgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fullstack.html">A Fullstack Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cheatsheet.html">Python vs JS Cheatsheet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="links.html">Links</a></li>
 <li class="toctree-l1"><a class="reference internal" href="webdev.html">Appendum: A Short History of Web Development</a></li>
 </ul>
 
-        </div>
+</div>
+</div>
+
       </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">CuteFront</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Development Environments</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="_sources/devenvs.rst.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <section id="development-environments">
-<h1>Development Environments<a class="headerlink" href="#development-environments" title="Link to this heading"></a></h1>
-<section id="plainfile">
-<span id="id1"></span><h2>1. Plainfile<a class="headerlink" href="#plainfile" title="Link to this heading"></a></h2>
-<p><em>Firefox</em></p>
-<p>In this development you can open your app’s entry point
-(<code class="docutils literal notranslate"><span class="pre">app.html</span></code> or <code class="docutils literal notranslate"><span class="pre">index.html</span></code>) directly with your browser from the disk.</p>
-<p>You would do the same for the widget’s test html files when developing and debugging a new widget.</p>
-<p>In firefox, type this into your browser’s address bar:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>file://abs/path/to/file.html
-</pre></div>
-</div>
-<p>(abs typically has one more extra <code class="docutils literal notranslate"><span class="pre">/</span></code>, i.e. the final url would look like <code class="docutils literal notranslate"><span class="pre">file:///home/user/etc</span></code>).</p>
-<p>Enable web developer tools in Firefox from the menu bar:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Tools -&gt; Browser Tools -&gt; Web Developer Tools
-</pre></div>
-</div>
-<p>And you have yourself a first class in-browser development / debugging environment.  On code
-changes you simply need to refresh the browser view.</p>
-<p>In order to be able to follow links in your <code class="docutils literal notranslate"><span class="pre">app.html</span></code>,
-you still need to give firefox a full file access and create a separate development
-profile for that.  Start firefox with:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>firefox<span class="w"> </span>-ProfileManager
-</pre></div>
-</div>
-<p>Therein, create a separate profile for firefox, called “development” and use that profile.</p>
-<p>Within then development profile, type into your firefox’s address field:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>about:config
-</pre></div>
-</div>
-<p>Search for <code class="docutils literal notranslate"><span class="pre">fileuri</span></code> &amp; set the property</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>security.fileuri.strict_origin_policy
-</pre></div>
-</div>
-<p>to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
-<p>You can start firefox in that profile with</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>firefox<span class="w"> </span>-P<span class="w"> </span>development
-</pre></div>
-</div>
-<p><strong>WARNING</strong> : the <code class="docutils literal notranslate"><span class="pre">security.fileuri.strict_origin_policy</span></code> allows firefox to
-<strong>read any file on your filesystem</strong> so be carefull not to browse in the
-web using the “development” profile!</p>
-<p>You might also prefer a more sophisticated way of isolation, say “firejail” or the like.</p>
-<p>At this stage of the development (developing individual widgets and putting initially
-together your fullstack app), you would typically use a mock datasouce
-(for more details, see datasources in <a class="reference internal" href="fullstack.html#fullstack"><span class="std std-ref">here</span></a>)</p>
-<p><em>Google Chrome</em></p>
-<p>You can achieve same unlimited file access with Google Chrome by launching it with a command-line argument:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>google-chrome<span class="w"> </span>--allow-file-access-from-files<span class="w"> </span>.
-</pre></div>
-</div>
-<p>The same words of warning as for the Firefox case (see above) apply when running Google Chrome in the special unrestricted mode.</p>
-</section>
-<section id="native">
-<span id="id2"></span><h2>2. Native<a class="headerlink" href="#native" title="Link to this heading"></a></h2>
-<p>In this mode, a reverse-proxy server (nginx) is serving you the html and js files.</p>
-<p>When using this development mode, you’d already have a backend you want to play with.</p>
-<p>A <a class="reference external" href="https://github.com/elsampsa/cutefront/blob/main/frontend/nginx.py">simple python wrapper for nginx</a> is provided, start it with</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./nginx.py<span class="w"> </span>--help
-</pre></div>
-</div>
-<p>to see the options.</p>
-<p>Refer to the <a class="reference internal" href="fullstack.html#fullstack"><span class="std std-ref">Fullstack Example</span></a> to see an actual working example.</p>
-</section>
-<section id="docker">
-<h2>3. Docker<a class="headerlink" href="#docker" title="Link to this heading"></a></h2>
-<p>Here we assume that you have initiated your project with the <a class="reference internal" href="install.html#install-fullstack"><span class="std std-ref">Fullstack Example Repo</span></a>.</p>
-<p>A docker image file <code class="docutils literal notranslate"><span class="pre">frontend/Dockerfile.dev</span></code> is provided.  It simply runs nginx with
-the provided <code class="docutils literal notranslate"><span class="pre">nginx.conf</span></code> from <code class="docutils literal notranslate"><span class="pre">frontend/docker/dev/</span></code> directory.</p>
-<p>All code in <code class="docutils literal notranslate"><span class="pre">frontend/</span></code> is mounted into a docker volume, allowing you to edit and
-“hot reload” the code live in <code class="docutils literal notranslate"><span class="pre">frontend/</span></code>.</p>
-<p>Refer to the <a class="reference internal" href="fullstack.html#fullstack"><span class="std std-ref">Fullstack Example</span></a> to see an actual working example.</p>
-</section>
-</section>
-
-
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="state.html" class="btn btn-neutral float-left" title="State History" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="creating.html" class="btn btn-neutral float-right" title="Creating and Using Widgets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+      
     </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/devenvs.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="development-environments">
+<h1>Development Environments<a class="headerlink" href="#development-environments" title="Link to this heading">¶</a></h1>
+<section id="dev-tier-1-aka-plainfile">
+<span id="devenvs"></span><h2>1. Dev Tier-1 aka “Plainfile”<a class="headerlink" href="#dev-tier-1-aka-plainfile" title="Link to this heading">¶</a></h2>
+<p><em>Develop and debug individual Cutefront components in your VSCode IDE</em></p>
+<p>The whole philosophy of Cutefront are easily-debuggable individual components.  So let’s do just that.</p>
+<ul class="simple">
+<li><p>Choose a Cutefront HTML file in your VSCode</p></li>
+<li><p>Go into the debugging tab</p></li>
+<li><p>Choose <code class="docutils literal notranslate"><span class="pre">Cutefront</span> <span class="pre">HTML</span> <span class="pre">file://</span></code> from the “Run and Debug” dropdown menu</p></li>
+</ul>
+<p>You can try this first with any of the library widgets - try it foe example with <cite>ballplayer.html</cite>.</p>
+<p>VSCode opens you google-chrome in a separate window.  It is attached into your debug session, so you can
+follow code execution on-spot and live, set breakpoints, execute the JS code step-by-step, capture signals, etc.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Your debugging target must always be the .html file NOT the .js file</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Don’t wander into the internet or anywhere else with the debug session chrome</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Remember to reinit google-chrome’s cache by right-clicking the reload button or by disabling
+caching in the developer tools</p>
+</div>
+<p>In this “DEV Tier-1” mode you can also debug, not only individual widgets, but a complete fullstack app as well.
+As there is typically no backend in this development mode, you must use mock datasources that imitate the backend.
+For more on this subject, please refer to the actual code in the <a class="reference internal" href="install.html#install"><span class="std std-ref">FastAPI fullstack example</span></a>.`</p>
+</section>
+<section id="dev-tier-2">
+<h2>2. Dev Tier-2<a class="headerlink" href="#dev-tier-2" title="Link to this heading">¶</a></h2>
+<p><em>Develop and debug Cutefront fullstack apps in your VSCode IDE</em></p>
+<p>In order to try this, you need to run the <a class="reference internal" href="install.html#install"><span class="std std-ref">FastAPI fullstack example</span></a> and start it in the development mode.</p>
+<ul class="simple">
+<li><p>Go into the debugging tab</p></li>
+<li><p>Choose <cite>Cutefront FastAPI landing</cite> from the</p></li>
+</ul>
+<p>Now:</p>
+<ul class="simple">
+<li><p>All your frontend code is still in your local directory and filesystem</p></li>
+<li><p>JS and HTML is served to us by a development server, handled by VSCode</p></li>
+<li><p>Backend is running in docker compose, exposing a local port, interacting with your</p></li>
+</ul>
+</section>
+<section id="staging-tier-3">
+<h2>3. Staging Tier-3<a class="headerlink" href="#staging-tier-3" title="Link to this heading">¶</a></h2>
+<p><em>Test your production-ready and packaged Cutefront fullstack app</em></p>
+<p>In order to try this, you need to run the <a class="reference internal" href="install.html#install"><span class="std std-ref">FastAPI fullstack example</span></a> and start it in the staging mode.</p>
+<ul class="simple">
+<li><p>Your frontend is packaged (gzipped) and served by nginx from a docker container</p></li>
+</ul>
+</section>
+</section>
 
-  <hr/>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="creating.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Creating and Using Widgets</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="library.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Widget Library</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023 Sampsa Riikonen
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Development Environments</a><ul>
+<li><a class="reference internal" href="#dev-tier-1-aka-plainfile">1. Dev Tier-1 aka “Plainfile”</a></li>
+<li><a class="reference internal" href="#dev-tier-2">2. Dev Tier-2</a></li>
+<li><a class="reference internal" href="#staging-tier-3">3. Staging Tier-3</a></li>
+</ul>
+</li>
+</ul>
 
-  <div role="contentinfo">
-    <p>&#169; Copyright 2023 Sampsa Riikonen.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
+          </div>
         </div>
       </div>
-    </section>
+      
+      
+    </aside>
   </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
-
-</body>
+</div><script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    </body>
 </html>

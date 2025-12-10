@@ -2,114 +2,68 @@
 Development Environments
 ========================
 
-.. _plainfile:
+.. _devenvs:
 
-1. Plainfile
-------------
+1. Dev Tier-1 aka "Plainfile"
+-----------------------------
 
-*Firefox*
+*Develop and debug individual Cutefront components in your VSCode IDE*
 
-In this development you can open your app's entry point 
-(``app.html`` or ``index.html``) directly with your browser from the disk.
+The whole philosophy of Cutefront are easily-debuggable individual components.  So let's do just that.
 
-You would do the same for the widget's test html files when developing and debugging a new widget.
+- Choose a Cutefront HTML file in your VSCode
+- Go into the debugging tab
+- Choose ``Cutefront HTML file://`` from the "Run and Debug" dropdown menu
 
-In firefox, type this into your browser's address bar:
+You can try this first with any of the library widgets - try it foe example with `ballplayer.html`.
 
-.. code-block:: text
+VSCode opens you google-chrome in a separate window.  It is attached into your debug session, so you can
+follow code execution on-spot and live, set breakpoints, execute the JS code step-by-step, capture signals, etc.
 
-    file://abs/path/to/file.html
+.. note::
 
-(abs typically has one more extra ``/``, i.e. the final url would look like ``file:///home/user/etc``).
+    Your debugging target must always be the .html file NOT the .js file
 
-Enable web developer tools in Firefox from the menu bar:
+.. warning::
 
-.. code-block:: text
+    Don't wander into the internet or anywhere else with the debug session chrome
 
-    Tools -> Browser Tools -> Web Developer Tools
+.. tip::
 
-And you have yourself a first class in-browser development / debugging environment.  On code
-changes you simply need to refresh the browser view.
+    Remember to reinit google-chrome's cache by right-clicking the reload button or by disabling
+    caching in the developer tools
 
-In order to be able to follow links in your ``app.html``, 
-you still need to give firefox a full file access and create a separate development 
-profile for that.  Start firefox with:
+In this "DEV Tier-1" mode you can also debug, not only individual widgets, but a complete fullstack app as well.
+As there is typically no backend in this development mode, you must use mock datasources that imitate the backend.
+For more on this subject, please refer to the actual code in the :ref:`FastAPI fullstack example <install>`.`
 
-.. code:: bash
+2. Dev Tier-2
+-------------
 
-    firefox -ProfileManager
+*Develop and debug Cutefront fullstack apps in your VSCode IDE*
 
-Therein, create a separate profile for firefox, called "development" and use that profile.
+In order to try this, you need to run the :ref:`FastAPI fullstack example <install>` and start it in the development mode.
 
-Within then development profile, type into your firefox's address field:
+- Go into the debugging tab
+- Choose `Cutefront FastAPI landing` from the 
 
-.. code-block:: text
+Now:
 
-    about:config
+- All your frontend code is still in your local directory and filesystem
+- JS and HTML is served to us by a development server, handled by VSCode
+- Backend is running in docker compose, exposing a local port, interacting with your 
 
-Search for ``fileuri`` & set the property
+3. Staging Tier-3
+-----------------
 
-.. code-block:: text
+*Test your production-ready and packaged Cutefront fullstack app*
 
-    security.fileuri.strict_origin_policy
+In order to try this, you need to run the :ref:`FastAPI fullstack example <install>` and start it in the staging mode.
 
-to ``false``.
+- Your frontend is packaged (gzipped) and served by nginx from a docker container
 
-You can start firefox in that profile with
 
-.. code-block:: bash
 
-    firefox -P development
 
-**WARNING** : the ``security.fileuri.strict_origin_policy`` allows firefox to 
-**read any file on your filesystem** so be carefull not to browse in the
-web using the "development" profile!
 
-You might also prefer a more sophisticated way of isolation, say "firejail" or the like.
-
-At this stage of the development (developing individual widgets and putting initially
-together your fullstack app), you would typically use a mock datasouce
-(for more details, see datasources in :ref:`here <fullstack>`)
-
-*Google Chrome*
-
-You can achieve same unlimited file access with Google Chrome by launching it with a command-line argument:
-
-.. code-block:: bash
-
-    google-chrome --allow-file-access-from-files .
-
-The same words of warning as for the Firefox case (see above) apply when running Google Chrome in the special unrestricted mode.
-
-.. _native:
-
-2. Native
----------
-
-In this mode, a reverse-proxy server (nginx) is serving you the html and js files.
-
-When using this development mode, you'd already have a backend you want to play with.
-
-A `simple python wrapper for nginx <https://github.com/elsampsa/cutefront/blob/main/frontend/nginx.py>`_ is provided, start it with
-
-.. code:: bash
-
-    ./nginx.py --help
-
-to see the options.  
-
-Refer to the :ref:`Fullstack Example <fullstack>` to see an actual working example.
-
-3. Docker
----------
-
-Here we assume that you have initiated your project with the :ref:`Fullstack Example Repo <install-fullstack>`.
-
-A docker image file ``frontend/Dockerfile.dev`` is provided.  It simply runs nginx with
-the provided ``nginx.conf`` from ``frontend/docker/dev/`` directory.
-
-All code in ``frontend/`` is mounted into a docker volume, allowing you to edit and
-"hot reload" the code live in ``frontend/``.
-
-Refer to the :ref:`Fullstack Example <fullstack>` to see an actual working example.
 

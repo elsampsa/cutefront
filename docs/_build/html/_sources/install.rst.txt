@@ -4,10 +4,16 @@
 Starting a Project
 ==================
 
-A. With Project Init Script
----------------------------
+Here we assume that you are using either Cursor or VSCode with AI agents.
 
-Here we create a minimal scaffold for a new project.
+Emphasis here is on VSCode + Claude Code running in the VSCode extension.
+
+From scratch
+------------
+
+Wanna play around, maybe just do a frontend-only app and not worry about backends, databases, proxies for the moment?
+
+Let's create a minimal scaffold.
 
 Create a directory for your project and enter it:
 
@@ -16,13 +22,15 @@ Create a directory for your project and enter it:
     mkdir my_cute_app
     cd my_cute_app
 
+and use this silly initialization script: TODO: UPDATE
+
 .. code-block:: bash
 
     bash <(curl -sSL https://raw.githubusercontent.com/elsampsa/cutefront/main/script/project_init.bash)
 
 Let's use ``app`` as the app subdirectory name.
 
-Now you have the necessary directory structure and the widget base library (for more details, see :ref:`code organization <codeorg>`):
+Now you have the necessary directory structure and the widget base library: 
 
 .. code-block:: text
 
@@ -31,89 +39,61 @@ Now you have the necessary directory structure and the widget base library (for 
     ├── app.html               # your frontend entry-point
     ├── assets                 # images, etc.
     ├── css                    # your app's css
-    └── lib                    # *** The CuteFront Widget Library ***
-         ├── base              # ***    AS A GIT SUBMODULE        ***
-         └── bootstrap-5.2.3-dist   
-            ├── css
-            └── js
+    ├── lib
+    │    ├── base
+    │    ├── bootstrap
+    │    |       ├── css  
+    │    |       └── js
+    │    ├── cutetools           # python package program 
+    │    ├── get_bootstrap.bash
+    │    ├── include             # bootstrap icons, fontawesome, some extra js libraries
+    │    ├── render              # widgets based on those extra js libraries
+    │    ├── static              # images, etc.
+    │    └── train               # training material for AI
+    │            └── CLAUDE.md   # context for Claude
+    ├── .vscode
+    │    ├── launch.json         # debug your cutefront widgets with vscode
+    │    └── tasks.json          
+    │
+    └── .claude
+            └── commands
+                    └── cutefront.md        
+                                # use shorthand command "/cutefront" in claude code 
+                                # to give context about cutefront
+                        current-project.md  
+                                # TODO: by you
+                                # use shorthand command "/current-project" 
+                                # in claude code to give context on your current project
 
 
-B. With Fullstack Example
--------------------------
+FastAPI Fullstack
+-----------------
 
-Here we will checkout the whole `CuteFront main repo <https://github.com/elsampsa/cutefront>`_,
-that includes the complete :ref:`Fullstack Example <fullstack>`, with python backend, dockerization, etc.
+Check out the grand FastAPI fullstack example:
 
-The idea is, that you can then remove the parts you don't need.
+.. code-block:: bash
 
-.. _install-fullstack:
+    git checkout https://github.com/elsampsa/fullstack-fastapi-cutefront
+    git submodule update --init --recursive
 
-Get the code with either of these:
+Now you have:
 
-.. code:: bash
-
-    git clone https://github.com/elsampsa/cutefront.git
-    git clone git@github.com:elsampsa/cutefront.git
-
-You'll get this directory structure:
+- The original (pristine) FastAPI fullstack example as a submodule
+- Cutefront frontend has been built on top of the fullstack example
+- Custom docker compose files run the original fullstack example with Cutefront frontend
 
 .. code-block:: text
 
-    .
-    ├── backend/                # A FastAPI backend for the fullstack example
-    ├── bash/                   # Some helper scripts
-    ├── docker-compose-dev.yml  # Fullstack example docker-compose file
-    ├── docs/                   # This documentation
-    ├── frontend/               # CuteFront frontend
-    |      |
-    |      └── lib/             # The widget library from https://github.com/elsampsa/cutefront-lib
-    |                           # (see below)
-    └── secrets/                # .ini files for the fullstack example
+    ├── cutefront/     # cutefront frontend as a git submodule
+    │                  # has all the lib,.vscode,.claude 
+    │                  # directories as in the "From Scratch" example above
+    └── full-stack-fastapi-template/
+                      # the original fullstack fastapi example
+                      # as a submodule
+    docker-compose.dev.yml
+    docker-compose.staging.yml
+    ...
+    README.md         # read for more details!
 
-
-Next, we will checkout the widget library.
-
-.. _get_library:
-
-The widget library is available at `<https://github.com/elsampsa/cutefront-lib>`_.
-
-.. git submodule add git@github.com:elsampsa/cutefront-lib.git lib
-By default, the widget library is installed as a separate `git submodule <https://gist.github.com/gitaarik/8735255>`_.  This 
-makes it possible to use different versions and branches of the widget library in your project (see more in :ref:`here <codeorg>`)
-
-The only thing you need to do is this (in the main repo's directory):
-
-.. code:: bash
-
-    git submodule init
-    git submodule update
-
-And congrats, you now have the widget library in ``frontend/lib/``.
-
-You can see the commit and branch of your current library with:
-
-.. code:: bash
-
-    git submodule status
-
-When in directory ``frontend/lib``, all git commands work on the library (sub)repository instead, i.e. please try therein ``git config --get remote.origin.url``.
-
-Finally, depending on your particular case, you might or might not want to use the widget library as git submodule, 
-but just download a zipfile from github and extract it into ``frontend/lib/``
-
-Nginx, sqlite, etc.
--------------------
-
-For the :ref:`native development mode <native>` you need additionally to install 
-sqlite3 and nginx:
-
-.. code:: bash
-
-    sudo apt-get install sqlite3 nginx
-
-
-Firefox
--------
-
-Firefox and it's web developer tools are highly recommended.  Please see also the :ref:`Plainfile <plainfile>` development environment.
+This is a ready-to-run all-included fullstack app.
 
