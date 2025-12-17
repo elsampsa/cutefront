@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <title>ListWidget Example</title>
+    <link
+        href="../bootstrap/css/bootstrap.min.css"
+        rel="stylesheet"
+    />
+</head>
+<body>
+    <div id="alex"></div>
+    <div id="bob"></div>
+    <div id="billboard"></div>
+</body>
+<script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script type="module">
+    import { BallPlayer2, BillBoard2 } from "./ballplayer2.js";
+    import { StateWidget } from "./statewidget.js";
+
+    var alex = new BallPlayer2("alex");
+    var bob = new BallPlayer2("bob");
+    var billboard = new BillBoard2("billboard");
+
+    // Configure serialization
+    // Only billboard writes to history since it's the "final" widget in the signal chain
+    // (throw → catch + billboard update). This avoids multiple history entries per throw.
+    alex.setSerializationKey("alex").setSerializationWrite(false);
+    bob.setSerializationKey("bob").setSerializationWrite(false);
+    billboard.setSerializationKey("score").setSerializationWrite(true);
+
+    alex.setLogLevel(-1);
+    bob.setLogLevel(-1);
+    billboard.setLogLevel(-1);
+
+    // ball from alex to bob
+    alex.signals.throw_ball.connect(() => bob.catch_ball_slot());
+
+    // ball from bob to alex
+    bob.signals.throw_ball.connect(() => alex.catch_ball_slot());
+
+    // inform billboard about the game
+    // alex throws
+    alex.signals.throw_ball.connect(() => billboard.ball_throw_slot());
+    // bob throws
+    bob.signals.throw_ball.connect(() => billboard.ball_throw_slot());
+
+    // give ball initially to alex
+    alex.catch_ball_slot();
+
+    // Create StateWidget and register all widgets
+    const stateWidget = new StateWidget();
+    stateWidget.setLogLevel(-1);
+    stateWidget.register(alex, bob, billboard);
+
+    window.genDocs = ["alex", "bob", "billboard"];
+</script>

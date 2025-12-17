@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Tab Widget Test</title>
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container-fluid">
+        <h1>Tab Widget Test</h1>
+        <div id="myTabs"></div>
+
+        <div id="widget1">
+            <h2>Widget 1 Content</h2>
+            <p>This is the content of widget 1.</p>
+        </div>
+        <div id="widget2">
+            <h2>Widget 2 Content</h2>
+            <p>This is the content of widget 2.</p>
+        </div>
+        <div id="widget3">
+            <h2>Widget 3 Content</h2>
+            <p>This is the content of widget 3.</p>
+        </div>
+    </div>
+
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script type="module">
+        import { TabWidget } from './tabwidget.js';
+        import { ElementWidget, DummyWidget } from './widget.js';
+
+        // Create some sample widgets to put in tabs
+        const widget1 = new ElementWidget("widget1");
+        const widget2 = new ElementWidget("widget2");
+        const widget3 = new ElementWidget("widget3");
+
+        // Create and set up the Tab widget
+        const tabWidget = new TabWidget("myTabs");
+        tabWidget.setItems({
+            widget1: [widget1, "eka"],
+            widget2: [widget2, "toka"],
+            widget3: [widget3, "kolkki"]
+        })
+        // Connect to the tabChanged signal
+        const dummyWidget = new DummyWidget();
+        tabWidget.signals.tabChanged.connect(
+            dummyWidget.slot.bind(dummyWidget)
+        );
+
+        tabWidget.setLogLevel(-1); // For debugging
+    </script>
+</body>
+</html>

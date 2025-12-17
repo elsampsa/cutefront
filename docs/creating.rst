@@ -4,8 +4,11 @@
 Creating and Using Widgets
 ==========================
 
-The best way to learn to create widgets, is to study the code in
-the :ref:`widget library <library>`.  This section serves as a reference.
+The best way to learn to create widgets, is to study the code in 
+the :ref:`widget library <library>` and in the FastAPI fullstack example.
+
+Of course, typically you don't write the widgets yourself, but let your favorite AI buddy to do 
+the grunt work.  Your role is mainly testing and keeping your buddy in check.
 
 Subclassing a Widget
 --------------------
@@ -14,25 +17,32 @@ Creating a new widget is always done in the same way:
 
 .. code:: javascript
 
-    import { Widget, Signal, randomID } from './widget.js';
-    // import { Widget, Signal, randomID } from '../lib/base/widget.js'; // app-specific widget
-    class CrudButtonsWidget extends Widget {
-        // widget definition here
+    import { Widget, Signal, randomID } from './widget.js'; // we're creating a library widget
+    // import { Widget, Signal, randomID } from '../lib/base/widget.js'; // we're creating an app-specific widget
+    class CrudButtonsWidget extends Widget { /*//DOC
+        Explain your class in here
+        */
     }
 
 If you're creating an app-specific widget into the ``app`` directory,
-as described in :ref:`code organization <codeorg>`, remember to
+as described in :ref:`project organization <install>`, remember to
 use the correct relative path, i.e.:
 
 .. code:: javascript
 
     import { Widget, Signal } from '../lib/base/widget.js';
 
+
+.. tip:: 
+
+    Use the /*//DOC syntax when writing docstrings for your class and for your _slot functions: they will help you
+    down the line with autodocumentation
+
+
 Constructor
 -----------
 
-Constructor always takes in an ``id`` string.  Typically it is the id of the html element
-the widget attaches to
+Constructor takes in an ``id`` string.  It is the id of the html element the widget attaches to
 
 .. code:: javascript
 
@@ -42,12 +52,45 @@ the widget attaches to
         this.createState();
     }
 
-Note that ``super()`` sets ``this.id`` and 
-calls ``createSignals`` (see below) automatically.
+Note that ``super()`` sets ``this.id`` and  calls ``createSignals`` (see below) automatically.
 
-If you use class inheritance, call ``createElement()`` and
-``createState()`` only in the base class, not in the inherited classes
-(i.e., no need to call them multiple times).
+Your widget can also be a "floating" widget that is attached later onto something (HTML element or another widget), in this
+case define ``id`` as ``null``.
+
+If you plan to subclass your widget and subclasses are setting initialization parameters, use the *builder pattern* instead:
+
+.. code:: javascript
+
+    constructor(id) {
+        super(id);
+    }
+
+    setSome(pars) {
+        // do something with the pars here
+        this.createElement();
+        this.createState();
+        return this; // chainable method
+    }
+
+Now when you instantiate the widget:
+
+.. code:: javascript
+
+    const yourWidget = YourWidget("id").setSome(pars);
+
+i.e. ``setSome`` is responsible in creating the HTML elements and the state, as they might depend in the ``pars`` and
+you can also subclass the method ``setSome`` easily.
+
+.. warning::
+
+    In object-oriented Javascript, you cannot call subclassed member functions from the constructor (like you would do in python)
+
+.. tip:: 
+
+    When writing object-oriented (OO) code and inheritance, your inheritance diagram should be max.
+    3 layers deep.  If it gets deeper than that, you should consider using the "delegate pattern" instead, i.e.
+    create separate classes that have clear separate of concerns.  Take a look for example into the DataSource, DataModel and
+    DataWidget implementation in the FastAPI fullstack example.
 
 Logging
 -------
@@ -79,15 +122,13 @@ Define signals like this, into the ``this.signals`` "namespace":
 
 .. code:: javascript
 
-    createSignals() { /*
-        After each line, declare what datatype the signal carries and when it is emitted.
-        */
-        this.signals.create = new Signal(); // Carries nothing.  Emitted on new record creating.
-        this.signals.update = new Signal(); // Carries nothing.  Emitted on record update.
-        this.signals.delete = new Signal(); // Carries uuid string of the datum.  Emitted when a record is deleted
+    createSignals() {
+        this.signals.create = new Signal('Carries nothing.  Emitted on new record creating.');
+        this.signals.update = new Signal('Carries nothing.  Emitted on record update.');
+        this.signals.delete = new Signal('Carries uuid string of the datum.  Emitted when a record is deleted');
     }
 
-In the comments, you should always write what kind of variable / data structure the signal is carrying
+In the comments, you should always declare what kind of variable / data structure the signal is carrying
 
 Initialize State
 ----------------
@@ -110,7 +151,7 @@ Let's consider a slot that receives a signal carrying a json object "datum"
 
 .. code:: javascript
 
-    current_datum_slot(datum) { /*
+    current_datum_slot(datum) { /*//DOC
         Comment here what kind of data the slot expects:
         datatype and/or a nested json object scheme.
         You can also implement a datatype check.
@@ -132,80 +173,11 @@ to do this.  Consider situation where you send an object to a slot and then it i
 elsewhere in the code: in such situation your slot function needs to create its own copy 
 of the object in order to keep it's state under control.
 
-.. _docstrings:
+.. tip:: 
 
-Creating Autodocumentation
---------------------------
-
-Structuring the code in the CuteFront way, makes reading it easy:
-
-Taking a quick look into the the subclassed ``createSignals`` and
-various (well commented) ``slot`` functions immediately gives you a clear
-idea of the widget's API, while looking at ``createState`` shows you all the 
-internal state variables of the widget.
-
-The associated, minimal testing ``html`` file demonstrates actual use with
-dummy data.
-
-To facilitate autodocumentation even further, `a python script <https://github.com/elsampsa/cutefront/blob/main/script/docextract.py>`_ 
-is provided that documents your widget's API, when you write comments enclosed in ``/*//DOC`` and ``*/``.  Like this:
-
-.. code:: javascript
-
-    class SampleListWidget extends Widget { /*//DOC
-        A list of samples with their datetime strings and statuses 
-        (polished or not).
-        */
-
-    ...
-    ...
-
-    createSignals() {
-            this.signals.new_sample = new Signal(); /*//DOC 
-            Carries a sample object {uuid:string, datetime:string, data:2D profile}.  
-            Emitted when a new sample is added to this list (i.e. a "relay" signal).
-            */
-            this.signals.chosen_sample = new Signal(); /*//DOC 
-            Carries a sample object {uuid:string, datetime:string, data:2D profile}.
-            Emitted when a sample is clicked highlighted in the list
-            */
-        }
-
-        new_sample_slot(sample) { /*//DOC
-            input is an object with
-            uuid: uuid string
-            datetime: datetime string
-            data: a 2D profile
-            */
-            this.signals.new_sample.emit(sample);
-            this.createSampleItem(sample);
-        }
-
-    ...
-    ...
-
-When requesting markdown format, the script gives this output:
-
-.. code:: text
-
-    ### SampleListWidget
-    - file: `samplelist.js`
-    - inherits: `Widget`
-    - A list of samples with their datetime strings and statuses
-        <br> (polished or not).
-    - SIGNAL: new_sample
-        <br> Carries a sample object {uuid:string, datetime:string, data:2D profile}.
-        <br> Emitted when a new sample is added to this list (i.e. a "relay" signal).
-    - SIGNAL: chosen_sample
-        <br> Carries a sample object {uuid:string, datetime:string, data:2D profile}.
-        <br> Emitted when a sample is clicked highlighted in the list
-    - SLOT: new_sample_slot(sample)
-        <br> input is an object with
-        <br> uuid: uuid string
-        <br> datetime: datetime string
-        <br> data: a 2D profile
-    ...
-    ...
+    Slots of your widget should be order and timing-independent: calling two different slots
+    either one first, should put the widget into the same state.  This will avoid you a lot of
+    headache and race-conditions down the line.
 
 Using the DOM
 -------------
@@ -253,15 +225,15 @@ However, *id attributes should be unique*, so let's fix that code a bit:
 Which keeps the ``id`` argument for each widget instance unique.
 
 ``createElement`` is the most "nasty" part of your widget you need to write (who wants to write HTML and
-manipulate it programmatically), but fortunately, it can be done to great extent using :ref:`AI assistants <chatgpt>`.
+manipulate it programmatically), but fortunately, your AI buddy is there to help!
 
 ``createElement`` should always start the same way:
 
 .. code:: javascript
 
     createElement() {
-        this.element = document.getElementById(this.id)
-        if (this.element == null) {
+        this.autoElement();
+        if (this.element == null) { // if this is not a floating widget..
             this.err("could not find element with id", this.id)
             return
         }
@@ -269,6 +241,12 @@ manipulate it programmatically), but fortunately, it can be done to great extent
         // attach callbacks to signals, etc.
     }
 
+
+``autoElement()`` inspects ``this.id`` (which you set in constructor when calling ``super(id)``):
+
+- if ``this.id`` is an HTML element, sets ``this.element = this.id``
+- if ``this.id`` is a string, searches for the id in the DOM and sets the corresponding DOM element to ``this.element``
+- if ``this.id`` is null or undefined, create a new orphan div element for ``this.element``
 
 Creating new child elements for ``this.element`` is most conveniently done like this:
 
@@ -324,22 +302,9 @@ clicked, you would do this in ``createElement``:
 
 .. code:: javascript
 
-    this.alert_button.onclick = (event) => { // CORRECT
+    this.alert_button.onclick = (event) => {
         this.internalMethod()
     }
-
-However, NOT like this:
-
-.. code:: javascript
-
-    this.alert_button.onclick =  this.internalMethod // WRONG WRONG WRONG
-
-i.e. *always* define a lambda function.
-
-In the former case, ``this`` refers correctly to the present widget object
-instance while in the latter case ``this`` will become foobar.  Please see below
-for the pitfalls with ``this``.
-
 
 Emitting Signals
 ----------------
@@ -360,8 +325,7 @@ Many times you just send nothing with the signal, i.e. like this:
 
     this.signals.signal_name.emit()
 
-If you want to emit a signal directly from an html element callback, this is the correct
-way to do it (see previous subsection and the "The Trouble with This" subsection below):
+If you want to emit a signal directly from an html element callback, just do this:
 
 .. code:: javascript
 
@@ -378,50 +342,71 @@ a signal from the former to a slot of the latter, is done like this:
 
 .. code:: javascript
 
-    from_widget.signals.signal_name.connect(
-        to_widget.slot_name.bind(to_widget));
+    from_widget.signals.signal_name.connect((par) => {
+            to_widget.slot_name(par)
+        })
 
-Let's recap that:
+i.e. use always a lambda function.
+
+Subwidgets
+----------
+
+.. _subwidgets:
+
+Widgets can be nested in hierarchies. A typical example would be a "mother" widget that represents tabs or sections
+and then each one of those sections is another "child" widget.
+
+For this purpose we introduce more namespaces in addition to the ones discussed already.
 
 .. code:: javascript
 
-    FROM.signals.signal_name.connect(
-        TO.slot_name.bind(TO));
+    this.signals // namespace for signals
+    some_slot // slot functions end always with _slot
+    this.widgets // namespace for subwidgets
+    this.components // namespace for subwidgets that are not visible for the API user
+    this.input_fields // namespace for InputField instances
 
-What is that ``bind`` and why ``TO`` is repeated?  This has to do with
-the curiosities of ``this`` in javascript (see below).
-
-You might also want to pass the signal through a lambda function, in order
-to do something more than just to connect it directly to a slot:
+Suppose we have a ``TabWidget`` instance with different tabs.  Each tab encapsulates another widget.  One of the tabs encapsulates
+a widget from ``UserData`` class.  You would address an input field representing user's name like this:
 
 .. code:: javascript
 
-    from_widget.signals.signal_name.connect(
-        (par) => {
-            // do more stuff
-            console.log("signal sending par", par);
-            to_widget.slot_name.bind(to_widget)(par)
-        }
-    )
+    tabWidget.widgets.sectionWidget.widgets.userData.input_fields.name
 
+When connecting signals and slots of composite widgets, you use this namespace addressing, i.e.
 
-Create test HTML
-----------------
+.. code:: javascript
 
-Each widget should always be accompanied with corresponding, minimal test html file.  This html file
-can then be opened in the :ref:`plainfile development environment <plainfile>`.
+    someWidget.user_signal.connect((userdata) => {
+        tabWidget.widgets.sectionWidget.widgets.userData.data_slot(userdata)
+        })
+
+Or you might want to isolate the API at higher level:
+
+.. code:: javascript
+
+    someWidget.user_signal.connect((userdata) => {
+        tabWidget.data_slot(userdata)
+        })
+
+In that case you would have defined ``data_slot`` for ``TabWidget`` which would then take care of routing the
+signal to its internal, deeper level widgets.
+
+Test HTML
+---------
+
+Each widget is always accompanied with corresponding, minimal test html file.  This html file
+can then be opened in the :ref:`plainfile development environment <devenvs>`.
 
 It can also be used for automatic testing, with selenium and the like.
 
 Let's suppose you have:
 
-- Defined ``MyWidget`` in file ``mywidget.js`` in the :ref:`app directory <codeorg>`
+- Defined ``MyWidget`` in file ``mywidget.js``
 - ``MyWidget`` has only one signal named ``ping``
 
 An example corresponding ``mywidget.html`` test html is below.  For app-specific widgets, you would
-place it in the ``app`` folder.  Again, be carefull with the ``<link href=..>`` to set the correct path for
-css inclusion and with ``<script src=..>`` for javascript inclusion, depending on your 
-:ref:`code organization scheme <codeorg>`.
+place it in the ``app`` folder.  
 
 .. code:: html
 
@@ -431,9 +416,9 @@ css inclusion and with ``<script src=..>`` for javascript inclusion, depending o
     <meta charset="utf-8">
     <title>Widget Test</title>
     <!-- for app-specific widgets: -->
-    <link href="../lib/bootstrap-5.2.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- if you use fontawesome:
-    link href="./lib/include/fontawesome/css/all.min.css" rel="stylesheet" 
+    link href="../lib/include/fontawesome/css/all.min.css" rel="stylesheet" 
     -->
     </head>
     <body>
@@ -443,7 +428,7 @@ css inclusion and with ``<script src=..>`` for javascript inclusion, depending o
 
     </body>
     <!-- for app-specific widgets: -->
-    <script src="../lib/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script type="module">
     /* // define mock data if you need that
     var data = [
@@ -456,8 +441,8 @@ css inclusion and with ``<script src=..>`` for javascript inclusion, depending o
     widget.setLogLevel(-1); // debugging
 
     // connect your widget's signals to the DummyWidget
-    widget.signals.ping.connect(
-        dummy_widget.slot.bind(dummy_widget) // simply dumps the signal data to the console
+    widget.signals.ping.connect((par) => {
+        dummy_widget.slot(par) // simply dumps the signal data to the console
     );
 
     // test your slots by calling directly
@@ -472,62 +457,6 @@ css inclusion and with ``<script src=..>`` for javascript inclusion, depending o
 
     </script>
 
-
-.. _this_problem:
-
-The Trouble with "this"
------------------------
-
-Javascript's ``this`` object is not, unfortunately completely equivalent 
-to python's ``self`` object, but a much more 
-`tedious thing <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this>`_
-
-When called inside an object instance's member function ``this`` refers
-to the current object (like in Python).  However, if the member function is
-passed to another function, ``this`` context changes and refers to the another
-function instead - in order to avoid this, use lambda functions to define signal
-callbacks (as suggested above).
-
-``this`` can be bound explicitly to the current object with
-`bind <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind>`_.
-This is used when connecting signals to slots as discussed above.
-
-As a rule of thumb, always when passing an object member function as a parameter,
-always use ``bind``.  When creating callbacks in object methods, 
-always define a local lambda function.
-
-
-Parent / Child Widget Structures
---------------------------------
-
-In some cases, widgets should instantiate other widgets (child widgets).
-
-A typical case is a widget that implements a list of items (say, a list of cards, each card having several fields corresponding to some data).
-
-Say, you would have ``YourListWidget`` (parent) that instantiates and caches several ``YourListItemWidget`` (child) instances.
-
-Then ``YourListItemWidget`` would look something like this:
-
-.. code:: javascript
-
-    constructor() { // we don't need the id as the html element is created by the widget itself
-        super(null); 
-        this.createElement();
-        this.createState();
-        }
-
-    createElement() {
-        // does not use this.id to hook up to an existing html element in the html code
-        // but creates a new element from scratch instead
-        this.element = document.createElement("tr"); // i.e. instead of document.getElementById(this.id)
-        // etc. etc.
-    }
-
-    getElement() { // maybe called by the parent widget
-        return this.element
-    }
-
-There are quite many ways to manage the intercommunication between the parent and its child widgets and the details are up to you.
 
 
 

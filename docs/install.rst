@@ -26,26 +26,23 @@ and use this silly initialization script: TODO: UPDATE
 
 .. code-block:: bash
 
-    bash <(curl -sSL https://raw.githubusercontent.com/elsampsa/cutefront/main/script/project_init.bash)
-
-Let's use ``app`` as the app subdirectory name.
+    bash <(curl -sSL https://raw.githubusercontent.com/elsampsa/cutefront/main/new_project.bash)
 
 Now you have the necessary directory structure and the widget base library: 
 
 .. code-block:: text
 
     my_cute_app
-    ├── app                    # your app's .js and .html files
-    ├── app.html               # your frontend entry-point
-    ├── assets                 # images, etc.
-    ├── css                    # your app's css
-    ├── lib
+    ├── app/                   # TODO: put here your app's .js and .html files
+    │    ├── lib/              # library for your app-specific widgets
+    │    ├── static/           # app static assets
+    |    └── landing.html      # your frontend's entry-point
+    │
+    ├── lib                    # cutefront base widget library as a git submodule
     │    ├── base
     │    ├── bootstrap
     │    |       ├── css  
     │    |       └── js
-    │    ├── cutetools           # python package program 
-    │    ├── get_bootstrap.bash
     │    ├── include             # bootstrap icons, fontawesome, some extra js libraries
     │    ├── render              # widgets based on those extra js libraries
     │    ├── static              # images, etc.
@@ -57,10 +54,10 @@ Now you have the necessary directory structure and the widget base library:
     │
     └── .claude
             └── commands
-                    └── cutefront.md        
-                                # use shorthand command "/cutefront" in claude code 
+                    └── cute-frontend.md
+                                # use shorthand command "/cute-frontend" in claude code 
                                 # to give context about cutefront
-                        current-project.md  
+                        current-project.md
                                 # TODO: by you
                                 # use shorthand command "/current-project" 
                                 # in claude code to give context on your current project
@@ -95,5 +92,6 @@ Now you have:
     ...
     README.md         # read for more details!
 
-This is a ready-to-run all-included fullstack app.
+This is a ready-to-run all-included fullstack app.  It is also the SOTA reference on how to use Cutefront.
+
 

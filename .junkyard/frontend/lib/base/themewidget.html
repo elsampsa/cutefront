@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ThemeWidget Test</title>
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>ThemeWidget Test</h1>
+        <p class="text-body">This text should change color based on theme.</p>
+
+        <div class="card bg-body-tertiary p-3 mb-3">
+            <p>This card uses theme-aware background.</p>
+        </div>
+
+        <div class="btn-group" role="group">
+            <button id="btn-light" class="btn btn-outline-primary">Light</button>
+            <button id="btn-dark" class="btn btn-outline-primary">Dark</button>
+            <button id="btn-system" class="btn btn-outline-primary">System</button>
+        </div>
+
+        <div class="mt-3">
+            <strong>Current mode:</strong> <span id="current-mode"></span><br>
+            <strong>Effective theme:</strong> <span id="effective-theme"></span>
+        </div>
+    </div>
+
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script type="module">
+        import { ThemeWidget } from './themewidget.js';
+        import { DummyWidget } from './widget.js';
+
+        const themeWidget = new ThemeWidget();
+        const dummyWidget = new DummyWidget();
+
+        themeWidget.setLogLevel(-1);
+
+        // Display current state
+        function updateDisplay() {
+            document.getElementById('current-mode').textContent = themeWidget.getMode();
+            document.getElementById('effective-theme').textContent = themeWidget.getEffectiveTheme();
+        }
+
+        // Connect signal to dummy widget and update display
+        themeWidget.signals.theme_changed.connect((data) => {
+            dummyWidget.slot(data);
+            updateDisplay();
+        });
+
+        // Button handlers
+        document.getElementById('btn-light').onclick = () => themeWidget.set_theme_slot('light');
+        document.getElementById('btn-dark').onclick = () => themeWidget.set_theme_slot('dark');
+        document.getElementById('btn-system').onclick = () => themeWidget.set_theme_slot('system');
+
+        // Initial display
+        updateDisplay();
+    </script>
+</body>
+</html>

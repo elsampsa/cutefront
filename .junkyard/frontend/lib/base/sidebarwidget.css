@@ -1,0 +1,18 @@
+.sidebar-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+    width: 280px; /* Or your preferred width */
+    max-width: 100%;
+    overflow-y: auto;
+  }
+  
+  @media (max-width: 767.98px) { /* Adjust breakpoint as needed */
+    .sidebar-wrapper {
+      position: static;
+      width: 100%;
+      overflow-y: visible;
+    }
+  }

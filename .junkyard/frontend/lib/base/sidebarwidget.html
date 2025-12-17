@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>SidebarWidget Test</title>
+        <link
+            href="../bootstrap/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <link
+            href="../include/bootstrap-icons/css/bootstrap-icons.min.css"
+            rel="stylesheet"
+        />
+        <link href="../include/fontawesome/css/all.min.css" rel="stylesheet" />
+        <link href="./sidebarwidget.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="row">
+            <div id="sidebar"></div>
+        </div>
+        <div class="row">
+            <button id="testbutton">Try activateTree</button>
+        </div>
+    </body>
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script type="module">
+        import { SidebarMenu, SidebarMenuItem } from "./sidebarwidget.js";
+        import { StateWidget } from "./statewidget.js";
+
+        let sidebar = new SidebarMenu("sidebar");
+        sidebar.setLogLevel(-1);
+
+        // Configure serialization
+        sidebar.setSerializationKey("nav").setSerializationWrite(true);
+
+        let dashboardItem = new SidebarMenuItem(
+            "Dashboard",
+            "dashboard",
+            "fas fa-home"
+        );
+        let itemsItem = new SidebarMenuItem("Items", "items", "fas fa-box");
+        let userSettingsItem = new SidebarMenuItem(
+            "User Settings",
+            "user-settings",
+            "fas fa-cog"
+        );
+        let adminItem = new SidebarMenuItem("Admin", "admin", "fas fa-user");
+
+        let subItem1 = new SidebarMenuItem("Sub Item 1", "sub-item-1");
+        let subItem2 = new SidebarMenuItem("Sub Item 2", "sub-item-2");
+        let subItem3 = new SidebarMenuItem("Sub Item 3", "sub-item-3");
+
+        let subsubitem1 = new SidebarMenuItem(
+            "Sub Sub Item 1",
+            "sub-sub-item-1"
+        );
+
+        adminItem.setItems({
+            subItem1: subItem1,
+            subItem2: subItem2,
+            subItem3: subItem3,
+        });
+        subItem3.setItems({ subsubitem1: subsubitem1 });
+
+        sidebar.setItems({
+            dashboardItem: dashboardItem,
+            itemsItem: itemsItem,
+            userSettingsItem: userSettingsItem,
+            adminItem: adminItem,
+        });
+
+        dashboardItem.signals.clicked.connect((id) =>
+            console.log("Dashboard item clicked:", id)
+        );
+        subItem1.signals.clicked.connect((id) =>
+            console.log("Sub Item 1 clicked:", id)
+        );
+        document.getElementById("testbutton").addEventListener("click", () => {
+            console.log("activateTree");
+            sidebar.activateTree([3, 0]);
+        });
+
+        // Create StateWidget and register
+        const stateWidget = new StateWidget();
+        stateWidget.setLogLevel(-1);
+        stateWidget.register(sidebar);
+
+        window.genDocs = ["sidebar"];
+    </script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>PopupList Widget Test</title>
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>PopupList Widget Test</h1>
+        <button id="show-popup" class="btn btn-primary">Show Popup</button>
+        <div id="result" class="mt-3"></div>
+        <div id="popup-container"></div>
+    </div>
+
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script type="module">
+        import { PopupList } from './popuplist.js';
+        import { DummyWidget } from './widget.js';
+
+        const dummyWidget = new DummyWidget();
+        const popupList = new PopupList("popup-container");
+        popupList.setLogLevel(-1);
+
+        const items = ["Apple", "Banana", "Cherry", "Date", "Elderberry"];
+        popupList.setItems(items);
+
+        popupList.signals.itemSelected.connect(
+            (par) => {
+                dummyWidget.slot(`Item selected with name ${par.item} and datum ${par.datum}`);
+            }
+        );
+
+        popupList.signals.closed.connect(
+            (datum) => {
+                dummyWidget.slot(`Popup closed with datum ${datum}`);
+            }
+        );
+
+        document.getElementById("show-popup").onclick = (event) => {
+            const rect = event.target.getBoundingClientRect();
+            console.log(">", rect)
+            popupList.set_datum_slot("kokkelis");
+            popupList.show_slot(rect.left, rect.bottom + 5);
+        };
+    </script>
+</body>
+</html>

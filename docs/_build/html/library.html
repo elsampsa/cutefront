@@ -209,6 +209,9 @@
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Widget Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="devenvs.html">Development Environments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating.html">Creating and Using Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State de/Serialization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rest.html">REST Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tooling.html">Tooling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cheatsheet.html">Python vs JS Cheatsheet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="links.html">Links</a></li>
 <li class="toctree-l1"><a class="reference internal" href="webdev.html">Appendum: A Short History of Web Development</a></li>
@@ -254,28 +257,21 @@
         <article role="main" id="furo-main-content">
           <section id="widget-library">
 <span id="library"></span><h1>Widget Library<a class="headerlink" href="#widget-library" title="Link to this heading">¶</a></h1>
-<p>By now, you have checked out or downloaded the widget library
-as was instructed in <span class="xref std std-ref">here</span> from
-<a class="reference external" href="https://github.com/elsampsa/cutefront-lib">github</a>.</p>
+<p>By now, you have checked out or downloaded the widget library from
+<a class="reference external" href="https://github.com/elsampsa/cutefront-lib">github</a> as was discussed in previous sections.</p>
 <section id="basic-widgets">
 <h2>Basic Widgets<a class="headerlink" href="#basic-widgets" title="Link to this heading">¶</a></h2>
-<p>Please take a look into <code class="docutils literal notranslate"><span class="pre">frontend/lib/base</span></code>.  Some fundamental files therein:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">widget.js</span></code> : the motherclass of all widgets</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">example.js</span></code> : an example on widget subclassing</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">example.html</span></code> : html file corresponding to <code class="docutils literal notranslate"><span class="pre">example.js</span></code></p></li>
-</ul>
-<p>Note that:</p>
-<ul class="simple">
 <li><p>Each widget component lives in its own <code class="docutils literal notranslate"><span class="pre">.js</span></code> file</p></li>
 <li><p>Each widget component has an accompanying <code class="docutils literal notranslate"><span class="pre">.html</span></code> file for minimal interactive testing and demonstration of the widget</p></li>
 </ul>
-<p>You can test each of the widgets by simply accessing their test/demo html files.</p>
-<p>TODO: mention the plainfile</p>
+<p>You can test each of the widgets by simply accessing their test/demo html files and using the “plainfile” development environment
+mention in <a class="reference internal" href="devenvs.html#devenvs"><span class="std std-ref">here</span></a>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>There is no guarantee that all the widgets and their corresponding html file are up-to-date
-In this respect, I am working towards an automatized CI/CD system</p>
+- CuteFront is work in progress</p>
 </div>
 </section>
 </section>

@@ -1,0 +1,123 @@
+{
+  "name": "cutefront-api-explorer",
+  "displayName": "CuteFront API Explorer",
+  "description": "Navigate CuteFront widget hierarchy with inheritance info",
+  "version": "0.1.0",
+  "publisher": "cutefront",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:javascript",
+    "onLanguage:html"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cutefront.showApiTree",
+        "title": "CuteFront: Show API Tree",
+        "icon": "$(symbol-class)"
+      },
+      {
+        "command": "cutefront.generateApiDocs",
+        "title": "CuteFront: Generate API Documentation",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "cutefront.showInApiTree",
+        "title": "CuteFront: Show Current File in API Tree"
+      },
+      {
+        "command": "cutefront.refreshTree",
+        "title": "CuteFront: Refresh API Tree",
+        "icon": "$(refresh)"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "cutefrontApiTree",
+          "name": "CuteFront API Tree"
+        }
+      ]
+    },
+    "menus": {
+      "editor/title": [
+        {
+          "command": "cutefront.showApiTree",
+          "when": "resourceLangId == javascript || resourceLangId == html",
+          "group": "navigation"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "cutefront.refreshTree",
+          "when": "view == cutefrontApiTree",
+          "group": "navigation"
+        },
+        {
+          "command": "cutefront.generateApiDocs",
+          "when": "view == cutefrontApiTree",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "cutefront.showInApiTree",
+          "when": "view == cutefrontApiTree"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "cutefront.generateApiDocs",
+          "when": "resourceExtname == .html",
+          "group": "cutefront"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "CuteFront",
+      "properties": {
+        "cutefront.apiDocsPath": {
+          "type": "string",
+          "default": "api-docs.yaml",
+          "description": "Path to the api-docs.yaml file (relative to workspace root)"
+        },
+        "cutefront.pythonPath": {
+          "type": "string",
+          "default": "python3",
+          "description": "Path to Python executable"
+        },
+        "cutefront.showInheritedMembers": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show inherited slots and signals in the tree view"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@types/node": "20.x",
+    "@types/js-yaml": "^4.0.5",
+    "@typescript-eslint/eslint-plugin": "^6.4.1",
+    "@typescript-eslint/parser": "^6.4.1",
+    "eslint": "^8.47.0",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}

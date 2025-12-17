@@ -21,6 +21,9 @@ CuteFront
    library
    devenvs
    creating
+   state
+   rest
+   tooling
    cheatsheet
    links
    webdev

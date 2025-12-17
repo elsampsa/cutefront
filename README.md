@@ -21,6 +21,15 @@ For full documentation, please go [here](https://elsampsa.github.io/cutefront/_b
 - VScode plugins
 - Neat integrated development environment
 
+## In this repo
+
+The central starting point for CuteFront and:
+
+- Introductory docs in `docs/`
+- Junkyard of legacy stuff and ideas in `.junkyard/`
+- Cutetools python package in `cutetools/`: API tree builder and cli browser for AI agents
+- API tree and enhanced JS file navigation for vscode in `vscode-plugins/`
+
 ## Author(s)
 
 Sampsa Riikonen

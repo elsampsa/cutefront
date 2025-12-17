@@ -1,0 +1,61 @@
+<!-- this is a template file you can use to create the minimal test html file for your widget -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Widget Example</title>
+<!-- choose import scheme: app-specific or base widget ---->
+<link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" -->
+</head>
+<body>
+
+<!-- TODO: put correct html element here -->
+<!--element id="test-element" class="">
+</element-->
+
+<button id="test-button">test something</button>
+
+</body>
+<!-- choose import scheme: app-specific or base widget ---->
+<script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- script src="../bootstrap/js/bootstrap.bundle.min.js"></script -->
+
+<!-- 
+additional libraries are typically in ../lib/include/
+plotly:
+<script src="../lib/include/plotly/js/plotly-2.20.0.min.js"></script> 
+marked:
+<script src="../lib/include/marked/js/marked.min.js"></script>
+-->
+
+<script type="module">
+
+// define mock data if you need that
+var data = [
+];
+
+import { DummyWidget } from '../lib/base/widget.js'; // app specific
+// import { DummyWidget } from './widget.js'; // base widget
+import { MyWidget } from './mywidget.js';
+var dummy_widget = new DummyWidget();
+var widget = new MyWidget("test-element");
+
+widget.setLogLevel(-1); // debugging
+
+// connect signals
+widget.signals.signal_name.connect(
+    dummy_widget.slot.bind(dummy_widget) // simply dumps the signal data to the console
+);
+
+// test your slots
+widget.some_slot();
+
+let button = document.getElementById("test-button");
+
+button.onclick = () => {
+    widget.some_slot();
+};
+
+window.genDocs = ["widget"]; // used by APITree autodocs
+</script>

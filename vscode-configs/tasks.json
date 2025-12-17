@@ -1,0 +1,43 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start HTTP Server for CuteFront",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                "-m",
+                "http.server",
+                "9090"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/cutefront"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "custom",
+                "pattern": {
+                    "regexp": "^never match$"
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": ".",
+                    "endsPattern": "Serving HTTP"
+                }
+            },
+            "presentation": {
+                "reveal": "silent",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Stop HTTP Server for CuteFront",
+            "type": "shell",
+            "command": "pkill -f 'python3 -m http.server 9090' || true",
+            "presentation": {
+                "reveal": "silent",
+                "panel": "shared"
+            }
+        }
+    ]
+}

@@ -1,0 +1,159 @@
+<!--
+Beginning of file "statewidget.html"
+Test file for StateWidget and the new state serialization API.
+Demonstrates how widgets register with StateWidget and how state is serialized to/from URL.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>StateWidget Test</title>
+<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h2>StateWidget Test</h2>
+    <p>This tests the new state serialization system. Check the URL bar as you interact with the widgets.</p>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Counter Widget 1 (writes to history)</div>
+                <div class="card-body">
+                    <div id="counter1"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Counter Widget 2 (no history write)</div>
+                <div class="card-body">
+                    <div id="counter2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <h4>Test Instructions:</h4>
+        <ol>
+            <li>Click +/- buttons to change counter values</li>
+            <li>Watch the URL bar update with serialized state</li>
+            <li>Counter1 creates history entries (use browser back/forward)</li>
+            <li>Counter2 only updates URL without creating history</li>
+            <li>Copy URL with state and paste in new tab to restore state</li>
+        </ol>
+    </div>
+
+    <div class="mt-4">
+        <h4>Debug Output:</h4>
+        <pre id="debug"></pre>
+    </div>
+</div>
+
+</body>
+<script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+<script type="module">
+
+import { Widget, Signal } from './widget.js';
+import { StateWidget } from './statewidget.js';
+
+// A simple counter widget that implements the new serialization API
+class CounterWidget extends Widget { /*//DOC
+    A simple counter widget for testing state serialization.
+    Has +/- buttons and displays current count.
+    */
+    constructor(id) {
+        super(id);
+        this.createElement();
+        this.createState();
+    }
+    createSignals() {
+        this.signals.state_change = new Signal("State change. Carries { serializationKey, serializationValue, write }");
+    }
+    createElement() {
+        this.autoElement();
+        if (this.element == null) {
+            this.err("could not find element with id", this.id);
+            return;
+        }
+        this.element.innerHTML = `
+            <div class="d-flex align-items-center gap-3">
+                <button class="btn btn-primary btn-minus">-</button>
+                <span class="counter-value fs-3">0</span>
+                <button class="btn btn-primary btn-plus">+</button>
+            </div>
+        `;
+        this.counterValue = this.element.querySelector('.counter-value');
+        const minusBtn = this.element.querySelector('.btn-minus');
+        const plusBtn = this.element.querySelector('.btn-plus');
+
+        minusBtn.onclick = () => {
+            this.setCount(this.getCount() - 1);
+            this.serialize();
+        };
+        plusBtn.onclick = () => {
+            this.setCount(this.getCount() + 1);
+            this.serialize();
+        };
+    }
+    createState() {
+        if (this.element == null) return;
+        this.counterValue.textContent = '0';
+    }
+    getCount() {
+        return parseInt(this.counterValue.textContent);
+    }
+    setCount(value) {
+        this.counterValue.textContent = value.toString();
+    }
+    // New serialization API implementation
+    getSerializationValue() {
+        return this.getCount().toString();
+    }
+    setState(serializationValue) {
+        const num = parseInt(serializationValue);
+        if (!isNaN(num)) {
+            this.setCount(num);
+        }
+    }
+}
+
+// Create widgets
+const counter1 = new CounterWidget("counter1");
+const counter2 = new CounterWidget("counter2");
+
+///*
+// Configure serialization
+counter1.setSerializationKey("c1").setSerializationWrite(true);  // Creates history entries
+counter2.setSerializationKey("c2").setSerializationWrite(false); // No history entries
+//*/
+
+// Set debug logging
+counter1.setLogLevel(-1);
+counter2.setLogLevel(-1);
+
+// Create StateWidget and register our counters
+const stateWidget = new StateWidget();
+stateWidget.setLogLevel(-1);
+stateWidget.register(counter1, counter2);
+
+// Debug output
+const debugEl = document.getElementById('debug');
+function updateDebug() {
+    debugEl.textContent = `URL: ${window.location.href}
+StateWidget.state: ${JSON.stringify(stateWidget.state, null, 2)}
+counter1 value: ${counter1.getCount()}
+counter2 value: ${counter2.getCount()}`;
+}
+
+// Update debug on state changes
+counter1.signals.state_change.connect(updateDebug);
+counter2.signals.state_change.connect(updateDebug);
+window.addEventListener('popstate', () => setTimeout(updateDebug, 100));
+
+// Initial debug update
+updateDebug();
+
+</script>
+</html>

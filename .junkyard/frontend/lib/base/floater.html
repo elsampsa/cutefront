@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Floater Example</title>
+<!-- import scheme: base widget ---->
+<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<p>look out for the floater</p>
+
+</body>
+<!-- import scheme: base widget ---->
+<script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script type="module">
+
+import { DummyWidget } from './widget.js';
+import { Floater } from './floater.js';
+var dummy_widget = new DummyWidget();
+var widget = new Floater("../static/cutefront.png");
+
+widget.setLogLevel(-1); // debugging
+
+// connect signals
+widget.signals.clicked.connect( () =>
+    dummy_widget.slot()
+);
+
+</script>

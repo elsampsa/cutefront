@@ -1,0 +1,105 @@
+<!--
+Beginning of file "hatelike.html"
+Every widget comes with accompanying html code for basic visualization and testing
+This is for class HateLike in file "hatelike.js"
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>HateLike Test</title>
+
+<!--
+
+The local folder structure is this.  We need to use relative imports both in the .js file and
+in this .html file:
+
+app/
+    app-specific widgets
+lib/
+    include/
+        fontawesome/
+    bootstrap-x.x.x-dist/
+        js/
+        css/
+    base/
+        library widgets
+    train/
+        this widget and html for your training
+
+So we need to add always:
+<link href="RELATIVE-PATH-TO/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+and into the <script> part:
+<script src="RELATIVE-PATH-TO/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+and for importing base widget:
+import { DummyWidget } from 'RELATIVE-PATH-TO/lib/base/widget.js';
+-->
+
+<!-- So in this special case:-->
+<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!--
+If we'd use fontawesome:
+<link href="RELATIVE-PATH-TO/lib/include/fontawesome/css/all.min.css" rel="stylesheet">
+-->
+</head>
+<body>
+
+<!-- widget javascript code will hook into these: -->
+<div class="accordion" id="test1"></div>
+<div class="accordion" id="test2"></div>
+
+<!-- You can create buttons, etc. here to test interaction with the widget: -->
+<button id="test-button">test something</button>
+
+</body>
+<script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- 
+additional libraries:
+plotly:
+<script src="RELATIVE-PATH-TO/lib/include/plotly/js/plotly-2.20.0.min.js"></script> 
+marked:
+<script src="RELATIVE-PATH-TO/lib/include/marked/js/marked.min.js"></script>
+-->
+
+<script type="module">
+
+import { DummyWidget } from '../base/widget.js';
+import { HateLike } from './hatelike.js';
+var dummy_widget = new DummyWidget();
+var test1 = new HateLike("test1");
+var test2 = new HateLike("test2");
+
+test1.setLogLevel(-1); // debugging
+test2.setLogLevel(-1); // debugging
+
+/* Connect signals for debugging with DummyWiget that simply dumps the signal data to the console
+
+Important: when connecting widget's signal to another widget's slot, always use this explicit syntax:
+*/
+test1.signals.message.connect( (msg) =>
+    dummy_widget.slot(msg)
+);
+test2.signals.message.connect( (msg) =>
+    dummy_widget.slot(msg)
+);
+// connect signal from one widget to another
+test1.signals.message.connect( (msg) => // signal from test1 to test2
+    test2.input_text_slot(msg)
+);
+test2.signals.message.connect( (msg) => // signal from test2 to test1
+    test1.input_text_slot(msg)
+);
+
+// if user requests signal sending buttons for the test html, use always this syntax
+let button = document.getElementById("test-button"); // if we'd use the test button
+button.onclick = () => {
+    test1.input_text_slot("I like it");
+};
+
+/* final note: when creating these test html files, they must be stripped-down simple html.  No "eye candy" or anything
+complicated.  Just plain buttons that test the features.
+There can be button "Run All tests" that tests all functionalities at once.
+*/
+
+</script>
+</html>

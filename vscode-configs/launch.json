@@ -1,0 +1,78 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+        "name": "Cutefront HTML file://",
+        "type": "chrome",
+        "request": "launch",
+        "file":"${file}?testing=true&test-panel=true&network-testing=true",
+        "webRoot":"${fileDirname}",
+        "runtimeArgs": [
+            "--allow-file-access-from-files",
+            "--auto-open-devtools-for-tabs",
+            "--disable-http-cache",
+            "--disk-cache-size=0"
+        ],
+        },
+
+        {
+        "name": "Cutefront FastAPI landing",
+        "type": "chrome",
+        "request": "launch",
+        "url": "http://localhost:9090/app/landing.html?testing=true&test-panel=true&network-testing=true",
+        "webRoot": "${workspaceFolder}/cutefront",
+        "runtimeArgs": [
+            "--auto-open-devtools-for-tabs",
+            "--disable-http-cache",
+            "--disk-cache-size=0"
+        ],
+        "preLaunchTask": "Start HTTP Server for CuteFront",
+        "postDebugTask": "Stop HTTP Server for CuteFront"
+        },
+
+        {
+        "name": "Cutefront FastAPI layout",
+        "type": "chrome",
+        "request": "launch",
+        "url": "http://localhost:9090/app/layout.html?testing=true&test-panel=true&network-testing=true",
+        "webRoot": "${workspaceFolder}/cutefront",
+        "runtimeArgs": [
+            "--auto-open-devtools-for-tabs",
+            "--disable-http-cache",
+            "--disk-cache-size=0"
+        ],
+        "preLaunchTask": "Start HTTP Server for CuteFront",
+        "postDebugTask": "Stop HTTP Server for CuteFront"
+        },
+
+        {
+        "name": "Cutefront FastAPI reset",
+        "type": "chrome",
+        "request": "launch",
+        "url": "http://localhost:9090/app/reset.html?token=kokkelis&testing=true",
+        "webRoot": "${workspaceFolder}/cutefront",
+        "runtimeArgs": [
+            "--auto-open-devtools-for-tabs",
+            "--disable-http-cache",
+            "--disk-cache-size=0"
+        ],
+        "preLaunchTask": "Start HTTP Server for CuteFront",
+        "postDebugTask": "Stop HTTP Server for CuteFront"
+        },
+
+        {
+        "name": "Debug FastAPI Project backend: Python Debugger",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "uvicorn",
+        "args": [
+            "app.main:app",
+            "--reload"
+        ],
+        "cwd": "${workspaceFolder}/backend",
+        "jinja": true,
+        "envFile": "${workspaceFolder}/.env",
+    },
+    ]
+}

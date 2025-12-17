@@ -5,7 +5,7 @@
 Intro
 =====
 
-*CuteFront is a lightweight, quick and modular javascript frontend framework*
+*CuteFront aka widget.js, is a lightweight, quick and modular javascript frontend framework*
 
 Features
 --------
@@ -76,4 +76,4 @@ Cute-What?
 
 *Qt and Qt logo are registered trademarks of the Qt company*
 
-I have nothing to do with the Qt company - and this project is called *Cute*Front
+I have nothing to do with the Qt company - and this project is called CuteFront

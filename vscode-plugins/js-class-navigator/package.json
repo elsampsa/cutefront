@@ -1,0 +1,36 @@
+{
+  "name": "js-class-navigator",
+  "displayName": "JS Class Navigator",
+  "description": "Simple navigation to class definitions in JavaScript ES6 modules",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:javascript",
+    "onLanguage:html"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "javascript",
+        "aliases": ["JavaScript", "js"],
+        "extensions": [".js"]
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "eslint": "^8.28.0"
+  }
+}

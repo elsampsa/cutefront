@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>NetworkSimulatorWidget Test</title>
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>NetworkSimulatorWidget Test</h1>
+        <p>The network simulator widget should appear as a floating panel in the bottom-right corner.</p>
+        <p>Click the header to expand/collapse it.</p>
+        <p>Select different options to see the widget emit signals.</p>
+
+        <div class="alert alert-info mt-3">
+            <strong>Last signal emitted:</strong>
+            <div id="signal-output" class="mt-2 font-monospace small"></div>
+        </div>
+    </div>
+
+    <!-- The widget will attach here (or create floating element if no id provided) -->
+    <div id="network-sim"></div>
+
+</body>
+<script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script type="module">
+    import { DummyWidget } from './widget.js';
+    import { NetworkSimulatorWidget } from './networksimulatorwidget.js';
+
+    // Create the widget
+    const networkSimWidget = new NetworkSimulatorWidget('network-sim');
+    networkSimWidget.setLogLevel(-1); // debugging
+
+    // Create output element for displaying signals
+    const signalOutput = document.getElementById('signal-output');
+
+    // Connect signal to display what's emitted
+    networkSimWidget.signals.simulator_changed.connect((simulator) => {
+        if (simulator === null) {
+            signalOutput.textContent = 'null (no simulation)';
+            signalOutput.className = 'mt-2 font-monospace small text-muted';
+        } else {
+            signalOutput.textContent = `${simulator.constructor.name}: ${simulator.getDescription()}`;
+            signalOutput.className = 'mt-2 font-monospace small text-danger fw-bold';
+        }
+        console.log('Simulator changed:', simulator);
+    });
+
+    window.genDocs = ["networkSimWidget"];
+</script>
+</html>

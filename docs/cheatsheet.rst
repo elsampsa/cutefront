@@ -2,7 +2,7 @@
 Python vs JS Cheatsheet
 =======================
 
-*This cheat-sheet is handy for all of you who throttle between python and javascript*
+Nowadays your AI buddy remembers the syntax for you.  However, this section might come handy for python developers (like myself).
 
 None
 ----

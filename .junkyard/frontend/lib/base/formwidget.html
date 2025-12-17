@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>FormWidget Example</title>
+        <link
+            href="../bootstrap/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <link
+            href="../include/bootstrap-icons/css/bootstrap-icons.min.css"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div id="test-element"></div>
+
+        <button id="create">Create</button>
+        <button id="update">Update</button>
+        <button id="set-datum">Send/set mock data</button>
+        <button id="clear-datum">Send/set null data</button>
+        <button id="fill-valid">Fill Valid Data</button>
+        <button id="fill-invalid">Fill Invalid Data</button>
+        <button id="activate-debug">Activate Debug Mode</button>
+    </body>
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script type="module">
+        // mock data
+        var data = [
+            {
+                uuid: "123456",
+                name: "John",
+                surname: "Doe",
+                email: "john.doe@gmail.com",
+                age: 51,
+                coolness: true,
+                bio: "A cool person who loves coding.",
+                password: "secret123",
+                password_confirm: "secret123",
+                country: "us"
+            },
+            {
+                uuid: "654321",
+                name: "Joanna",
+                surname: "Doe",
+                email: "joanna.doe@gmail.com",
+                age: 18,
+                coolness: false,
+                bio: "Just starting out in the tech world.",
+                password: "mypass456",
+                password_confirm: "mypass456",
+                country: "uk"
+            },
+        ];
+
+        import { DummyWidget } from "./widget.js";
+        import { FormWidget } from "./formwidget.js";
+        import {
+            FreeStringFormField,
+            IntegerFormField,
+            BooleanFormField,
+            EmailFormField,
+            TextAreaFormField,
+            SelectFormField
+        } from "./formfield.js";
+        import { PasswordFormField, SimplePasswordRequirement } from "./password.js";
+
+        var dummy_widget = new DummyWidget();
+        var widget = new FormWidget("test-element", "User Data");
+
+        widget.setLogLevel(-1); // debugging
+
+        // connect signals
+        widget.signals.create.connect((datum) => dummy_widget.slot(datum));
+        widget.signals.update.connect((datum) => dummy_widget.slot(datum));
+
+        // Create password fields with friend relationship and requirement
+        var passwordField = new PasswordFormField("Password", "Enter your password")
+            .setRequirement(new SimplePasswordRequirement(8));
+        var passwordConfirmField = new PasswordFormField("Confirm Password", "Re-enter password", {friend: passwordField});
+
+        // Create select field
+        var countryField = new SelectFormField("Country", "Select your country");
+
+        // Create the datamodel using instantiated FormField objects
+        var datamodel = {
+            name: new FreeStringFormField("First Name", "The first name of the person"),
+            surname: new FreeStringFormField("Last Name", "The surname of the person"),
+            email: new EmailFormField("Email", "The email address"),
+            age: new IntegerFormField("Age", "Age of the person in years"),
+            bio: new TextAreaFormField("Biography", "Tell us about yourself", {rows: 5}),
+            coolness: new BooleanFormField("Is this person cool?", "Cool or not"),
+            password: passwordField,
+            password_confirm: passwordConfirmField,
+            country: countryField
+        };
+
+        widget.datamodel_slot(datamodel); // tell form what data to expect
+
+        // Set options for the select field (simulating data from backend)
+        countryField.set_options_slot([
+            {value: "us", label: "United States"},
+            {value: "uk", label: "United Kingdom"},
+            {value: "ca", label: "Canada"},
+            {value: "au", label: "Australia"},
+            {value: "de", label: "Germany"}
+        ]);
+
+        let create = document.getElementById("create");
+        let update = document.getElementById("update");
+        let set = document.getElementById("set-datum");
+        let clear = document.getElementById("clear-datum");
+        let fillValid = document.getElementById("fill-valid");
+        let fillInvalid = document.getElementById("fill-invalid");
+        let activateDebug = document.getElementById("activate-debug");
+
+        create.onclick = () => {
+            widget.create_slot();
+        };
+        update.onclick = () => {
+            widget.update_slot();
+        };
+        set.onclick = () => {
+            widget.current_datum_slot(data[0]);
+        };
+        clear.onclick = () => {
+            widget.current_datum_slot(null);
+        };
+        fillValid.onclick = () => {
+            widget.fillValid();
+        };
+        fillInvalid.onclick = () => {
+            widget.fillInvalid();
+        };
+        activateDebug.onclick = () => {
+            widget.activate_debug_slot();
+        };
+
+        window.genDocs = ["widget"];
+    </script>
+</html>

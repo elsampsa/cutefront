@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>ContainerWidget Test</title>
+        <link
+            href="../bootstrap/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Sidebar -->
+                <div id="sidebar" class="col-12 col-md-2">
+                    <button id="show-home">Show Home</button>
+                    <button id="show-items">Show Items</button>
+                    <button id="show-settings">Show Settings</button>
+                    <button id="show-admin">Show Admin</button>
+                </div>
+                <!-- Main content -->
+                <div id="main-group" class="col-12 col-md-10"></div>
+            </div>
+        </div>
+    </body>
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script type="module">
+        import { Widget } from "./widget.js";
+        import { ContainerWidget } from "./containerwidget.js";
+
+        // Quick mock widget for testing
+        class MockContentWidget extends Widget {
+            constructor(title) {
+                super(null); // No ID needed as we create our own element
+                this.title = title;
+                this.createElement();
+            }
+            createSignals() {}
+            createElement() {
+                this.autoElement(); // basically just: this.element = document.createElement('div');
+                this.element.innerHTML = `
+            <h2>${this.title}</h2>
+            <p>This is the ${this.title.toLowerCase()} content.</p>
+        `;
+            }
+        }
+
+        // Create container and content widgets
+        const container = new ContainerWidget("main-group");
+        const home = new MockContentWidget("Home");
+        const items = new MockContentWidget("Items");
+        const settings = new MockContentWidget("Settings");
+        const admin = new MockContentWidget("Admin");
+
+        container.setLogLevel(-1); // debugging
+
+        // Add widgets to container
+        container.setItems({
+            home: home,
+            items: items,
+            settings: settings,
+            admin: admin,
+        });
+
+        console.log(">>", container.widgets);
+
+        // Test buttons
+        document.getElementById("show-home").onclick = () => {
+            container.show_slot(container.widgets.home);
+        };
+        document.getElementById("show-items").onclick = () => {
+            container.show_slot(container.widgets.items);
+        };
+        document.getElementById("show-settings").onclick = () => {
+            container.show_slot(container.widgets.settings);
+        };
+        document.getElementById("show-admin").onclick = () => {
+            container.show_slot(container.widgets.admin);
+        };
+
+        window.genDocs = ["container"];
+    </script>
+</html>

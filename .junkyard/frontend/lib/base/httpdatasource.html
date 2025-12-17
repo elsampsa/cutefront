@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>HTTPDataSource Test</title>
+    <style>
+        body { font-family: monospace; margin: 20px; }
+        button { margin: 5px; padding: 5px 10px; }
+        .section { border: 1px solid #ccc; margin: 10px 0; padding: 10px; }
+        #data-display { background: #f5f5f5; padding: 10px; white-space: pre; }
+        #test-log { background: #f5f5f5; padding: 10px; white-space: pre-wrap; max-height: 200px; overflow-y: scroll; }
+    </style>
+</head>
+<body>
+    <h1>HTTPDataSource Test</h1>
+    
+    <!-- CRUD Operations -->
+    <div class="section">
+        <h3>CRUD Operations</h3>
+        <button id="read">READ</button>
+        <button id="create">CREATE</button>
+        <button id="update">UPDATE (first item)</button>
+        <button id="delete">DELETE (first item)</button>
+    </div>
+
+    <!-- Custom Methods -->
+    <div class="section">
+        <h3>Custom Methods</h3>
+        <button id="me">me() - Get current user</button>
+        <button id="reset">reset() - Reset password</button>
+        <button id="post-form">postForm() - Send form data</button>
+    </div>
+
+    <!-- Pagination -->
+    <div class="section">
+        <h3>Pagination</h3>
+        <button id="page1">Page 1, Size 3</button>
+        <button id="page2">Page 2, Size 3</button>
+        <button id="page3">Page 3, Size 3</button>
+        <button id="no-page">No Pagination</button>
+    </div>
+
+    <!-- Auth Testing -->
+    <div class="section">
+        <h3>Authentication</h3>
+        <button id="valid-token">Set Valid Token</button>
+        <button id="invalid-token">Set Invalid Token</button>
+        <button id="clear-token">Clear Token</button>
+    </div>
+
+    <!-- Results -->
+    <div class="section">
+        <h3>Data Display</h3>
+        <div id="data-display"></div>
+    </div>
+
+    <!-- Test Log -->
+    <div class="section">
+        <h3>Test Log</h3>
+        <button id="clear-log">Clear Log</button>
+        <button id="run-all">Run All Tests</button>
+        <div id="test-log"></div>
+    </div>
+
+    <script type="module">
+        import { HTTPDataSource } from './httpdatasource.js';
+        import { AuthModel } from './authmodel.js';
+        import { QueryParamPagination } from './pagination.js';
+        import { setupMockServer } from './mockserver.js';
+        import { DataModel } from './datamodel.js';
+        import { FreeStringFormField, EmailFormField } from './formfield.js';
+
+        // Simple data model using FormField instances
+        class TestDataModel extends DataModel {
+            constructor() {
+                super();
+                this.create = {
+                    name: new FreeStringFormField("Name", "User's name"),
+                    email: new EmailFormField("Email", "User's email address"),
+                };
+                this.read = this.create;
+                this.update = this.create;
+            }
+
+            getMockData(n) {
+                const items = [];
+                for (let i = 0; i < n; i++) {
+                    items.push({
+                        id: String(i + 1),
+                        name: `User${i + 1}`,
+                        email: `user${i + 1}@example.com`
+                    });
+                }
+                return items;
+            }
+        }
+
+        const dataModel = new TestDataModel();
+        
+        // Setup mock server with extended endpoints
+        const mockServer = setupMockServer({ 
+            data: dataModel.getMockData(10),
+        });
+        
+        // Extend mock server to handle custom endpoints
+        const originalFetch = window.fetch;
+        window.fetch = async function(url, options = {}) {
+            const urlObj = new URL(url);
+            const pathname = urlObj.pathname;
+            
+            // Handle /me endpoint
+            if (pathname === '/me') {
+                await new Promise(resolve => setTimeout(resolve, 100));
+                return Promise.resolve({
+                    ok: true,
+                    status: 200,
+                    statusText: 'OK',
+                    headers: new Headers({ 'content-type': 'application/json' }),
+                    json: () => Promise.resolve({
+                        id: 'current-user',
+                        name: 'Current User',
+                        email: 'current@example.com'
+                    }),
+                    text: () => Promise.resolve(JSON.stringify({
+                        id: 'current-user',
+                        name: 'Current User',
+                        email: 'current@example.com'
+                    }))
+                });
+            }
+            
+            // Handle /reset/{email} endpoint
+            if (pathname.startsWith('/reset/')) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+                const email = pathname.split('/').pop();
+                return Promise.resolve({
+                    ok: true,
+                    status: 200,
+                    statusText: 'OK',
+                    headers: new Headers({ 'content-type': 'application/json' }),
+                    json: () => Promise.resolve({
+                        message: `Password reset sent to ${email}`
+                    }),
+                    text: () => Promise.resolve(JSON.stringify({
+                        message: `Password reset sent to ${email}`
+                    }))
+                });
+            }
+            
+            // Handle /form endpoint
+            if (pathname === '/form') {
+                await new Promise(resolve => setTimeout(resolve, 100));
+                return Promise.resolve({
+                    ok: true,
+                    status: 200,
+                    statusText: 'OK',
+                    headers: new Headers({ 'content-type': 'application/json' }),
+                    json: () => Promise.resolve({
+                        message: 'Form data received',
+                        received: 'form-data'
+                    }),
+                    text: () => Promise.resolve(JSON.stringify({
+                        message: 'Form data received',
+                        received: 'form-data'
+                    }))
+                });
+            }
+            
+            // Default to mock server for /data endpoints
+            return originalFetch.call(this, url, options);
+        };
+        
+        // Create HTTPDataSource
+        const authModel = new AuthModel();
+        const paginationStrategy = new QueryParamPagination();
+        
+        const dataSource = new HTTPDataSource()
+            .setBaseUrl('https://mock-api.example.com')
+            .setAuthModel(authModel)
+            .setPaginationStrategy(paginationStrategy)
+            .setDataModel(dataModel)
+            .setUUIDKey('id');
+        
+        authModel.set({ token: 'valid-token' });
+        
+        // Helper functions
+        function log(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            document.getElementById('test-log').textContent += `[${timestamp}] ${message}\n`;
+        }
+        
+        function clearLog() {
+            document.getElementById('test-log').textContent = '';
+        }
+        
+        function displayData(data) {
+            document.getElementById('data-display').textContent = 
+                JSON.stringify(data, null, 2);
+        }
+        
+        async function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        
+        // CRUD operations
+        async function readData() {
+            try {
+                log('Reading data...');
+                const data = await dataSource.read();
+                displayData(data);
+                
+                if (data.data) {
+                    log(`Success: ${data.data.length} items (page ${data.currentPage})`);
+                } else {
+                    log(`Success: ${data.length} items`);
+                }
+            } catch (error) {
+                log(`Error: ${error.message}`);
+                displayData({ error: error.message });
+            }
+        }
+        
+        async function createData() {
+            try {
+                const datum = {
+                    name: 'New User',
+                    email: 'newuser@example.com'
+                };
+                log('Creating item...');
+                const result = await dataSource.create(datum);
+                log(`Success: Created item with ID ${result.id}`);
+                await readData();
+            } catch (error) {
+                log(`Error: ${error.message}`);
+            }
+        }
+        
+        async function updateData() {
+            try {
+                const currentData = mockServer.getData();
+                if (currentData.length === 0) {
+                    log('Error: No data to update');
+                    return;
+                }
+                
+                const firstItem = currentData[0];
+                const updatedItem = {
+                    ...firstItem,
+                    name: 'Updated ' + firstItem.name
+                };
+                
+                log('Updating first item...');
+                const result = await dataSource.update(updatedItem);
+                log(`Success: Updated item ${result.id}`);
+                await readData();
+            } catch (error) {
+                log(`Error: ${error.message}`);
+            }
+        }
+        
+        async function deleteData() {
+            try {
+                const currentData = mockServer.getData();
+                if (currentData.length === 0) {
+                    log('Error: No data to delete');
+                    return;
+                }
+                
+                const firstId = currentData[0].id;
+                log(`Deleting item ${firstId}...`);
+                await dataSource.delete(firstId);
+                log(`Success: Deleted item ${firstId}`);
+                await readData();
+            } catch (error) {
+                log(`Error: ${error.message}`);
+            }
+        }
+        
+        // Custom method tests
+        async function testMe() {
+            try {
+                log('Calling me()...');
+                const result = await dataSource.me();
+                displayData(result);
+                log(`Success: Got current user ${result.name}`);
+            } catch (error) {
+                log(`Error: ${error.message}`);
+            }
+        }
+        
+        async function testReset() {
+            try {
+                const datum = { email: 'user@example.com' };
+                log('Calling reset()...');
+                const result = await dataSource.reset(datum);
+                displayData(result);
+                log(`Success: ${result.message}`);
+            } catch (error) {
+                log(`Error: ${error.message}`);
+            }
+        }
+        
+        async function testPostForm() {
+            try {
+                const datum = {
+                    name: 'Form User',
+                    email: 'form@example.com'
+                };
+                log('Calling postForm()...');
+                const result = await dataSource.postForm(datum);
+                displayData(result);
+                log(`Success: ${result.message}`);
+            } catch (error) {
+                log(`Error: ${error.message}`);
+            }
+        }
+        
+        async function setPage(page, size) {
+            try {
+                if (page === null) {
+                    dataSource.setPage(null);
+                    log('Pagination disabled');
+                } else {
+                    dataSource.setPage({ currentPage: page, pageSize: size });
+                    log(`Set to page ${page}, size ${size}`);
+                }
+                await readData();
+            } catch (error) {
+                log(`Error: ${error.message}`);
+            }
+        }
+        
+        function setAuth(token) {
+            if (token) {
+                dataSource.setAuth({ token: token });
+                log(`Token set: ${token}`);
+            } else {
+                dataSource.setAuth({ token: null });
+                log('Token cleared');
+            }
+        }
+        
+        async function runAllTests() {
+            clearLog();
+            log('Starting automated tests...');
+            
+            await readData();
+            await delay(300);
+            
+            await createData();
+            await delay(300);
+            
+            await updateData();
+            await delay(300);
+            
+            await testMe();
+            await delay(300);
+            
+            await testReset();
+            await delay(300);
+            
+            await testPostForm();
+            await delay(300);
+            
+            await setPage(1, 3);
+            await delay(300);
+            
+            await setPage(2, 3);
+            await delay(300);
+            
+            await deleteData();
+            await delay(300);
+            
+            setAuth('invalid-token');
+            await delay(100);
+            await readData();
+            await delay(300);
+            
+            setAuth('valid-token');
+            await delay(100);
+            await setPage(null);
+            
+            log('Tests completed');
+        }
+        
+        // Event listeners
+        document.getElementById('read').onclick = readData;
+        document.getElementById('create').onclick = createData;
+        document.getElementById('update').onclick = updateData;
+        document.getElementById('delete').onclick = deleteData;
+        
+        document.getElementById('me').onclick = testMe;
+        document.getElementById('reset').onclick = testReset;
+        document.getElementById('post-form').onclick = testPostForm;
+        
+        document.getElementById('page1').onclick = () => setPage(1, 3);
+        document.getElementById('page2').onclick = () => setPage(2, 3);
+        document.getElementById('page3').onclick = () => setPage(3, 3);
+        document.getElementById('no-page').onclick = () => setPage(null);
+        
+        document.getElementById('valid-token').onclick = () => setAuth('valid-token');
+        document.getElementById('invalid-token').onclick = () => setAuth('invalid-token');
+        document.getElementById('clear-token').onclick = () => setAuth(null);
+        
+        document.getElementById('clear-log').onclick = clearLog;
+        document.getElementById('run-all').onclick = runAllTests;
+        
+        // Initialize
+        readData();
+    </script>
+</body>
+</html>

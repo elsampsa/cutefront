@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>LoadingIndicatorWidget Test</title>
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>LoadingIndicatorWidget Test</h1>
+        <p>This widget shows different states based on how long an operation takes:</p>
+        <ul>
+            <li><strong>0-200ms:</strong> Silent (no overlay)</li>
+            <li><strong>200ms-2s:</strong> Show spinner only</li>
+            <li><strong>2s-5s:</strong> Show "Network delay... please wait"</li>
+            <li><strong>5s+:</strong> Show "Network operation took too long"</li>
+        </ul>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title">Test Buttons</h5>
+                <p class="text-muted">Click these to simulate operations of different durations:</p>
+                <div class="btn-group-vertical gap-2" role="group">
+                    <button id="test-instant" class="btn btn-success">Instant (100ms)</button>
+                    <button id="test-fast" class="btn btn-info">Fast (300ms - shows spinner briefly)</button>
+                    <button id="test-normal" class="btn btn-primary">Normal (1s - shows spinner)</button>
+                    <button id="test-slow" class="btn btn-warning">Slow (3s - shows "delay" message)</button>
+                    <button id="test-veryslow" class="btn btn-danger">Very Slow (7s - shows "too long" message)</button>
+                </div>
+
+                <hr class="my-3">
+
+                <h6>Multiple Operations:</h6>
+                <button id="test-multiple" class="btn btn-secondary">Start 3 operations (different speeds)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- The loading indicator widget will be attached here -->
+    <div id="loading-indicator"></div>
+
+</body>
+<script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script type="module">
+    import { LoadingIndicatorWidget } from './loadingindicatorwidget.js';
+
+    // Create the loading indicator
+    const loadingWidget = new LoadingIndicatorWidget('loading-indicator');
+    loadingWidget.setLogLevel(-1); // debugging
+
+    // Helper function to simulate an operation
+    function simulateOperation(name, durationMs) {
+        console.log(`Starting operation: ${name} (${durationMs}ms)`);
+        loadingWidget.loading_start_slot(name);
+
+        setTimeout(() => {
+            console.log(`Completed operation: ${name}`);
+            loadingWidget.loading_success_slot(name);
+        }, durationMs);
+    }
+
+    // Button event handlers
+    document.getElementById('test-instant').onclick = () => {
+        simulateOperation('instant', 100);
+    };
+
+    document.getElementById('test-fast').onclick = () => {
+        simulateOperation('fast', 300);
+    };
+
+    document.getElementById('test-normal').onclick = () => {
+        simulateOperation('normal', 1000);
+    };
+
+    document.getElementById('test-slow').onclick = () => {
+        simulateOperation('slow', 3000);
+    };
+
+    document.getElementById('test-veryslow').onclick = () => {
+        simulateOperation('veryslow', 7000);
+    };
+
+    document.getElementById('test-multiple').onclick = () => {
+        simulateOperation('op1', 2000);
+        setTimeout(() => simulateOperation('op2', 3000), 500);
+        setTimeout(() => simulateOperation('op3', 1500), 1000);
+    };
+
+    window.genDocs = ["loadingWidget"];
+</script>
+</html>

@@ -209,6 +209,9 @@
 <li class="toctree-l1"><a class="reference internal" href="library.html">Widget Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="devenvs.html">Development Environments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating.html">Creating and Using Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State de/Serialization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rest.html">REST Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tooling.html">Tooling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cheatsheet.html">Python vs JS Cheatsheet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="links.html">Links</a></li>
 <li class="toctree-l1"><a class="reference internal" href="webdev.html">Appendum: A Short History of Web Development</a></li>
@@ -257,8 +260,8 @@
 <section id="let-s-play-ball">
 <span id="ballgame"></span><h2>Let’s play ball<a class="headerlink" href="#let-s-play-ball" title="Link to this heading">¶</a></h2>
 <p>In CuteFront, there is only plain html and javascript.
-Javascript and html are in the same <code class="docutils literal notranslate"><span class="pre">.html</span></code> file, while each widget class is
-in a separate <code class="docutils literal notranslate"><span class="pre">.js</span></code> file.</p>
+Each widget class is in a separate <code class="docutils literal notranslate"><span class="pre">.js</span></code> file, while instantiation and signal connections
+are created in the html file.</p>
 <p>A code example tells more than thousand explanatory words, so let’s get straight to it
 with some javascript:</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">BallPlayer</span><span class="p">,</span><span class="w"> </span><span class="nx">BillBoard</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./ballplayer.js&#39;</span><span class="p">;</span>
@@ -267,22 +270,22 @@ with some javascript:</p>
 <span class="kd">var</span><span class="w"> </span><span class="nx">billboard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">BillBoard</span><span class="p">(</span><span class="s2">&quot;billboard&quot;</span><span class="p">)</span>
 
 <span class="c1">// ball from alex to bob</span>
-<span class="nx">alex</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
-<span class="w">    </span><span class="nx">bob</span><span class="p">.</span><span class="nx">catch_ball_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">bob</span><span class="p">)</span>
-<span class="p">)</span>
+<span class="nx">alex</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">connect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">bob</span><span class="p">.</span><span class="nx">catch_ball_slot</span><span class="p">()</span>
+<span class="p">})</span>
 <span class="c1">// ball from bob to alex</span>
-<span class="nx">bob</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
-<span class="w">    </span><span class="nx">alex</span><span class="p">.</span><span class="nx">catch_ball_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">alex</span><span class="p">)</span>
-<span class="p">)</span>
+<span class="nx">bob</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">connect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">alex</span><span class="p">.</span><span class="nx">catch_ball_slot</span><span class="p">()</span>
+<span class="p">})</span>
 <span class="c1">// inform billboard about the game</span>
 <span class="c1">// alex throws</span>
-<span class="nx">alex</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
-<span class="w">    </span><span class="nx">billboard</span><span class="p">.</span><span class="nx">ball_throw_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">billboard</span><span class="p">)</span>
-<span class="p">)</span>
+<span class="nx">alex</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">connect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">billboard</span><span class="p">.</span><span class="nx">ball_throw_slot</span><span class="p">()</span>
+<span class="p">})</span>
 <span class="c1">// bob throws</span>
-<span class="nx">bob</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
-<span class="w">    </span><span class="nx">billboard</span><span class="p">.</span><span class="nx">ball_throw_slot</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">billboard</span><span class="p">)</span>
-<span class="p">)</span>
+<span class="nx">bob</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">throw_ball</span><span class="p">.</span><span class="nx">connect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">billboard</span><span class="p">.</span><span class="nx">ball_throw_slot</span><span class="p">()</span>
+<span class="p">})</span>
 
 <span class="c1">// give ball initially to alex</span>
 <span class="nx">alex</span><span class="p">.</span><span class="nx">catch_ball_slot</span><span class="p">()</span>
@@ -413,12 +416,17 @@ It then produces dynamically all the html code required by the widget and hooks 
 that are used by the widget (for more about <code class="docutils literal notranslate"><span class="pre">createElement</span></code>, see <a class="reference internal" href="creating.html#createelement"><span class="std std-ref">here</span></a>).</p></li>
 <li><p>Slots methods have names ending in <code class="docutils literal notranslate"><span class="pre">_slot</span></code>.  This is where the signals from other widgets are connected to.</p></li>
 </ul>
-<p>To put it simply, slot methods change the internal state of the widget
-(created initially in <code class="docutils literal notranslate"><span class="pre">createState</span></code>), and emit signals to other widgets.</p>
+<p>Lets state this formally:</p>
+<ul class="simple">
+<li><p>Widgets have an internal state (created initially by <code class="docutils literal notranslate"><span class="pre">createState</span></code>)</p></li>
+<li><p>That internal state can be modified by calling their slots (typically triggered by signals from other widgets)</p></li>
+<li><p>The change in the internal state can result in visual changes of the widget</p></li>
+<li><p>The change in the internal state can result in the widget emitting a signal (which is connected to other widgets)</p></li>
+</ul>
 <p>Taking a look into <code class="docutils literal notranslate"><span class="pre">createSignals</span></code> and the <code class="docutils literal notranslate"><span class="pre">_slot</span></code> methods, <strong>we can see at a single glance the API of the widget.</strong></p>
 <p>Before going full throttle into creating your own interative pages and widgets,
 please look at the <a class="reference internal" href="creating.html#creating"><span class="std std-ref">Creating Widgets</span></a> section for common techniques
-and pitfalls (in javascript, there are quite some).</p>
+and pitfalls.</p>
 </section>
 </section>
 

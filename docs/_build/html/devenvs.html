@@ -209,6 +209,9 @@
 <li class="toctree-l1"><a class="reference internal" href="library.html">Widget Library</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Development Environments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating.html">Creating and Using Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state.html">State de/Serialization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rest.html">REST Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tooling.html">Tooling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cheatsheet.html">Python vs JS Cheatsheet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="links.html">Links</a></li>
 <li class="toctree-l1"><a class="reference internal" href="webdev.html">Appendum: A Short History of Web Development</a></li>
@@ -254,16 +257,17 @@
         <article role="main" id="furo-main-content">
           <section id="development-environments">
 <h1>Development Environments<a class="headerlink" href="#development-environments" title="Link to this heading">¶</a></h1>
+<p id="devenvs">Please see that the provided <code class="docutils literal notranslate"><span class="pre">launch.json</span></code> is in your project’s <code class="docutils literal notranslate"><span class="pre">.vscode</span></code> directory.</p>
 <section id="dev-tier-1-aka-plainfile">
-<span id="devenvs"></span><h2>1. Dev Tier-1 aka “Plainfile”<a class="headerlink" href="#dev-tier-1-aka-plainfile" title="Link to this heading">¶</a></h2>
+<h2>1. Dev Tier-1 aka “Plainfile”<a class="headerlink" href="#dev-tier-1-aka-plainfile" title="Link to this heading">¶</a></h2>
 <p><em>Develop and debug individual Cutefront components in your VSCode IDE</em></p>
 <p>The whole philosophy of Cutefront are easily-debuggable individual components.  So let’s do just that.</p>
 <ul class="simple">
 <li><p>Choose a Cutefront HTML file in your VSCode</p></li>
-<li><p>Go into the debugging tab</p></li>
+<li><p>Go into VSCode debugging tab</p></li>
 <li><p>Choose <code class="docutils literal notranslate"><span class="pre">Cutefront</span> <span class="pre">HTML</span> <span class="pre">file://</span></code> from the “Run and Debug” dropdown menu</p></li>
 </ul>
-<p>You can try this first with any of the library widgets - try it foe example with <cite>ballplayer.html</cite>.</p>
+<p>You can try this first with any of the library widgets - try it for example with <code class="docutils literal notranslate"><span class="pre">ballplayer.html</span></code>.</p>
 <p>VSCode opens you google-chrome in a separate window.  It is attached into your debug session, so you can
 follow code execution on-spot and live, set breakpoints, execute the JS code step-by-step, capture signals, etc.</p>
 <div class="admonition note">
@@ -281,21 +285,21 @@ caching in the developer tools</p>
 </div>
 <p>In this “DEV Tier-1” mode you can also debug, not only individual widgets, but a complete fullstack app as well.
 As there is typically no backend in this development mode, you must use mock datasources that imitate the backend.
-For more on this subject, please refer to the actual code in the <a class="reference internal" href="install.html#install"><span class="std std-ref">FastAPI fullstack example</span></a>.`</p>
+For more on this subject, please refer to the actual code in the <a class="reference internal" href="install.html#install"><span class="std std-ref">FastAPI fullstack example</span></a>.</p>
 </section>
 <section id="dev-tier-2">
 <h2>2. Dev Tier-2<a class="headerlink" href="#dev-tier-2" title="Link to this heading">¶</a></h2>
 <p><em>Develop and debug Cutefront fullstack apps in your VSCode IDE</em></p>
 <p>In order to try this, you need to run the <a class="reference internal" href="install.html#install"><span class="std std-ref">FastAPI fullstack example</span></a> and start it in the development mode.</p>
 <ul class="simple">
-<li><p>Go into the debugging tab</p></li>
-<li><p>Choose <cite>Cutefront FastAPI landing</cite> from the</p></li>
+<li><p>Go into VSCode debugging tab</p></li>
+<li><p>Choose <cite>Cutefront FastAPI landing</cite> from the dropdown menu</p></li>
 </ul>
 <p>Now:</p>
 <ul class="simple">
 <li><p>All your frontend code is still in your local directory and filesystem</p></li>
-<li><p>JS and HTML is served to us by a development server, handled by VSCode</p></li>
-<li><p>Backend is running in docker compose, exposing a local port, interacting with your</p></li>
+<li><p>JS and HTML is served by a development server, handled by VSCode</p></li>
+<li><p>Backend is running in docker compose, exposing a local port and serving frontend</p></li>
 </ul>
 </section>
 <section id="staging-tier-3">

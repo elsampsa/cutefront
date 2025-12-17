@@ -1,0 +1,268 @@
+# ==== Class hierarchy.  Using the composition-pattern instead of deep object inheritance ====
+
+# using the class inheritance yaml notation
+# set*, get* and *_slot methods are always part of the public API
+
+DataModel: # TODO
+  about: | 
+    this object declares datatypes and checker functions, i.e:
+    {
+      // datamodel has metadata of all data fields
+      name: {
+          label: "First Name",
+          help: "The first name of the person",
+          check: checkStr,
+      },
+      surname: {
+          label: "Last Name",
+          help: "The surname of the person",
+          check: checkStr,
+      },
+        ...
+    }
+    all that info can be sent in a signal to, say, downstream widgets
+    that can pick up the functions to check form fields
+    in fact, do we need this class or can we just use a JS vanilla object as above?
+    then checkStr, etc. functions can be defined in a separate file.. no need to create yet
+    another class?
+    .. oh yes lets keep.  we can encapsulate here create, update, etc. as JS vanilla objects
+
+AuthModel:
+    about: |
+        Handles authentication details, injected into HTTPDataSource
+        need to subclass this to simpleTokenAuth?
+    state:
+        token: authentication token
+        refreshToken: for token refresh
+        # could have other auth types (API keys, OAuth, etc.)
+    methods:
+        getAuthHeaders(): | 
+            returns headers object for HTTP requests
+            e.g. { "Authorization": "Bearer abc123" }
+        set(token, refreshToken?): |
+            updates authentication credentials
+            TODO: generic enough for subclassing?
+        handleUnauthorized(): |
+            handles 401 responses, tries token refresh
+            returns true if retry should happen
+
+PaginationStrategy:
+    about: |
+        Knows how to modify HTTP requests for specific API pagination style
+        This should also include sorting etc. stuff?
+        Anyways, we can subclass as needed!
+        TODO: subclass to SimpleServerPaginationStrategy?
+    state:
+        currentPage: current page number
+        pageSize: items per page  
+        totalItems: total items (if known)
+    methods:
+        set(obj): |
+          set the state of this object.  generic in order to conform to different stragegy subclasses?
+        modifyRequest(requestConfig): |
+            takes HTTP request config, adds pagination params
+            e.g. adds ?page=2&pageSize=10 to URL
+        parseResponse(response): |
+            extracts pagination info from API response
+            updates totalItems, returns actual data array
+        getPaginationInfo(): |
+            returns { currentPage, totalPages, pageSize, totalItems }
+
+# ==== CORE DATA LAYER ====
+
+DataSource:
+    about: |
+        Abstract interface for data operations
+    methods:
+        read(): | 
+            read data, return a list of datums
+        create(datum): |
+            insert a datum, returns created datum with ID
+        update(datum): |
+            update existing datum by ID
+        delete(id): |
+            delete datum by ID
+        setPage(paginationInfo): |
+            set the current pagination/sorting etc. info
+
+    DummyDataSource:
+        about: |
+            In-memory data for testing/development
+        components:
+            dataModel: DataModel()
+        state:
+            data: array of cached in-memory datums
+            paginationInfo: curret pagination/sorting etc. (generic)
+        # *** override ***
+        read(): |
+            if this.currentPage: return slice of data for current page
+            else: return all data
+        create(datum): |
+            add to data array with generated ID
+        update(datum): |
+            find by ID in data array, replace
+        delete(id): |
+            remove from data array
+        setPage(paginationInfo): |
+            set the current pagination/sorting etc. info
+
+    HTTPDataSource:
+        about: |
+            Data from HTTP backend API
+            Uses AuthModel and PaginationStrategy for API calls
+            NOTE: no data caching
+        components:
+            dataModel: DataModel()
+            authModel?: AuthModel object (optional)
+            paginationStrategy?: | 
+              PaginationStrategy object (optional)
+              uses paginationInfo
+        state:
+            baseUrl: API base URL
+            endpoints: object with CRUD endpoint paths
+            paginationInfo: curret pagination/sorting etc. (generic)
+        methods:
+            setAuthModel(authModel): |
+                inject authentication handler
+            setPaginationStrategy(strategy): |
+                inject pagination handler
+            setBaseUrl(url): |
+                set API base URL
+        # *** override ***
+        read(): |
+            build HTTP GET request to read endpoint
+            if paginationStrategy: let it modify the request
+            if authModel: add auth headers
+            make HTTP call
+            if paginationStrategy: let it parse response
+            return data array
+        create(datum): |
+            build HTTP POST request to create endpoint  
+            if authModel: add auth headers
+            make HTTP call, return created datum
+        update(datum): |
+            build HTTP PUT request to update endpoint
+            if authModel: add auth headers  
+            make HTTP call, return updated datum
+        delete(id): |
+            build HTTP DELETE request to delete endpoint
+            if authModel: add auth headers
+            make HTTP call
+        setPage(paginationInfo): |
+            uses paginationStrategy.set
+        setAuth(authInfo): |
+            uses authModel.set
+
+
+# ==== UI COORDINATION LAYER ====
+
+DataSourceWidget:
+    about: |
+        Coordinates data operations with UI signals/slots
+        Handles pagination state for UI
+        NOTE: this is not a UI component itself.  Just sends signals to downstream UI components
+        NOTE: no data caching
+        NOTE: datasource doesn't do any error checking.  This is done (a) interactively in the UI by the downstream widgets
+        and also (b) by the DataSource itself .. if it fails then create_slot etc. emit error signals
+    components:
+        dataSource:
+          components:
+            authModel:
+            paginationStrategy:
+            dataModel:
+            
+    state: # we'd like to avoid any state caching here
+    signals:
+        data: carries current data (paginated or all)
+        datamodel_create: 'carries dataModel.create.  Can be connected to donwstream widgets: forms etc. so that they can perform their own checking'
+        datamodel_read: carries dataSource.dataModel.read
+        datamodel_update: carries dataSource.dataModel.update
+        pagination_changed: carries pagination info for UI
+        error: carries error messages
+    
+    # *** CRUD slots ***
+    # NOTE: these slots can't be async functions, so we need to go from
+    # HTTPDataSource's async functions into sync ones
+    read_slot(): | 
+        data = dataSource.read()
+        # If dataSource has pagination info, emit it first
+        if dataSource.paginationStrategy:
+            paginationInfo = dataSource.paginationStrategy.getPaginationInfo()
+            signals.pagination_changed.emit(paginationInfo)
+        signals.data.emit(data)
+    
+    create_slot(datum): |
+        results = dataSource.create(datum)
+        upon any error (validation or http error), emit signals.error
+        call read_slot()
+
+    update_slot(datum): |
+        similar to create_slot
+
+    delete_slot(uuid): |
+        similar to create_slot
+
+    # *** other slots ***
+
+    set_page_slot(pageInfo): |
+        # Tell dataSource to update its page state
+        dataSource.setPage(pageInfo)
+        
+        # Re-read data with new page
+        read_slot()
+    
+    set_auth_slot(authInfo): |
+        dataSource.setAuth(authInfo)
+
+    model_slot(): |
+        trigger the emission all datamodel signals for UI forms
+        signals.datamodel_create.emit(datamodel_create)
+        signals.datamodel_read.emit(datamodel_read)
+        signals.datamodel_update.emit(datamodel_update)
+
+# ==== USAGE EXAMPLES ====
+
+# using the instantiated-object yaml notation
+
+# Basic in-memory data
+dummyDataSourceWidget:
+    class: DummyDataSourceWidget
+    components:
+        dataSource: DummyDataSource()
+        dataModel: # TODO
+
+# HTTP without pagination  
+httpDataSourceWidget:
+    class: HTTPDataSourceWidget
+    components:
+      dataSource: 
+          instance: | 
+            HTTPDataSource() 
+            .setBaseUrl("https://api.example.com")
+            .setAuthModel(AuthModel().setToken("abc123"))
+            .setDataModel(CustomDataModel())
+          components:
+            authModel:
+            paginationStrategy:
+            dataModel:
+
+# HTTP with pagination
+paginatedDataSourceHttpWidget:
+    class: HTTPDataSourceWidget()
+    dataSource: HTTPDataSource()
+        .setBaseUrl("https://api.example.com")  
+        .setAuthModel(AuthModel().setToken("abc123"))
+        .setPaginationStrategy(QueryParamPagination())
+    dataModel: # TODO
+
+# Different pagination styles possible examples:
+restApiWidget:
+    paginationStrategy: QueryParamPagination()  # ?page=2&pageSize=10
+    
+graphqlWidget:
+    paginationStrategy: BodyPagination()        # POST with pagination in body
+    
+cursorWidget:
+    paginationStrategy: CursorPagination()      # ?after=cursor123&limit=10
+
+

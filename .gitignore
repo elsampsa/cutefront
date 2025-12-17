@@ -9,3 +9,16 @@ Untitled*.ipynb
 scrap/
 backend/my_backend/api_v1/alembic/versions/*.py
 TODO.md
+*.zip
+*.pyc
+versions/*revision.py
+
+# npm and Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+.npm
+.yarn-integrity

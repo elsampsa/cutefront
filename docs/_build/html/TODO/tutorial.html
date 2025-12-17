@@ -1,0 +1,707 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <!-- Generated with Sphinx 7.2.6 and Furo 2024.08.06 -->
+        <title>Tutorial - CuteFront documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">CuteFront  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">CuteFront  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../qtlike.html">Qt-like Widgets and Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Starting a Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../library.html">Widget Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devenvs.html">Development Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../creating.html">Creating and Using Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../state.html">State de/Serialization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rest.html">REST Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tooling.html">Tooling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cheatsheet.html">Python vs JS Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../links.html">Links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../webdev.html">Appendum: A Short History of Web Development</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/TODO/tutorial.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Link to this heading">¶</a></h1>
+<p id="id1">In this ~30 minutes tutorial, we will create a Single Page Application (SPA).  It is a web frontend
+for an (imaginary) industrial machine learning application.</p>
+<p><strong>All widget’s are initially created using generative AI</strong>.</p>
+<p>Next we will describe in detail our imaginative/mock industrial production line system.  If you are extremely impatient, you might
+want to hop directory into <a class="reference internal" href="#tutorial-start"><span class="std std-ref">creating the code</span></a>.</p>
+<p>The main purpose of this mock web-frontend excercise is to demonstrate the various interactions and global state mess that can
+arise even in a simple web UI case and how it can be easily solved with CuteFront.</p>
+<img alt="TODO/images/industrial_app.png" src="TODO/images/industrial_app.png" />
+<p>You can also try it on-line in <a class="reference external" href="https://elsampsa.github.io/cutefront/app3.html">here</a></p>
+<p>The production line features:</p>
+<ul class="simple">
+<li><p>Thin sheets of some Very Expensive Material that move on a conveyor belt and which are inspected by machine vision</p></li>
+<li><p>The Very Expensive Material sheets have bumps that must be polished away</p></li>
+<li><p>Samples are picked up by a robotic arm and polished using a blade</p></li>
+</ul>
+<p>The SPA features:</p>
+<ul class="simple">
+<li><p>A widget (1) showing the status of the production line (statuses of conveyor belt, robotic arm and the polishing blade)</p></li>
+<li><p>2D height profile widgets (2) of sheets of the Very Expensive Sample Material</p></li>
+<li><p>A list widget (3) of past, inspected height profiles.  Each list item includes timestamp and a sample status (polished or not)</p></li>
+</ul>
+<p>SPA interactions are:</p>
+<ul class="simple">
+<li><p>There are two height profile widgets.  The first height profile is always updated to the <em>latest data received</em> from the production line</p></li>
+<li><p>The second height profile corresponds to the sample <em>user has clicked</em> in the list of past height profiles</p></li>
+<li><p>When <em>user clicks</em> on a height profile (either first or second one), the corresponding <em>list item is chosen</em> in the list</p></li>
+<li><p>When <em>user clicks</em> on a list item, the second height profile <em>shows the corresponding height profile</em></p></li>
+<li><p>Each list item / sheet of Very Expensive Material has a sample status (polished or not) that is updated some time in the future
+(when the blade has polished the sample succesfully)</p></li>
+</ul>
+<p>As we can see, even in this very simple mock application, there starts to be quite some amount of interactions in the SPA that
+can easily create a global state mess.</p>
+<p>When developing systematically with CuteFront, these are the steps you will do</p>
+<ul class="simple">
+<li><p>Identify all the widgets that you need.  In our case there are four of them: (1) StatusWidget, (2) ProfileWidget, (3) SampleListWidget and
+(4) SampleItemWidget (that are instantiated as child widgets of SampleListWidget).</p></li>
+<li><p>All widgets will be reusable for other projects / extending the system in the future.</p></li>
+<li><p>Map all SPA interactions into signals and slots -&gt; now you know the signals and slots required by your widgets.  This is where most of the brain
+work goes into.</p></li>
+<li><p>Start creating widgets.  This is where the AI LLM assistants come into play.</p></li>
+<li><p>Create main html file where you connect all widgets with signals and slots.</p></li>
+</ul>
+<p>Even though coding in the CuteFront way, makes the (complex) application interactions very tractable, it is a good practice to additionally
+write the widgets and their signals and slots into a diagram, where one can see the whole situation at a glance.  There is one
+at the <a class="reference internal" href="#himo"><span class="std std-ref">end of this section</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>So no more of those un-reusable/un-maintained Vue.js apps that make weird/crazy stuff when clicking on an item and nobody knows / remembers why!</p>
+</div>
+<section id="create-directory-structure">
+<span id="tutorial-start"></span><h2>1. Create Directory Structure<a class="headerlink" href="#create-directory-structure" title="Link to this heading">¶</a></h2>
+<p>Create a directory for your project and enter it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>my_cute_app
+<span class="nb">cd</span><span class="w"> </span>my_cute_app
+</pre></div>
+</div>
+<p>Execute <a class="reference external" href="https://github.com/elsampsa/cutefront/blob/main/script/project_init.bash">project init script</a> directly from github in your project directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>&lt;<span class="o">(</span>curl<span class="w"> </span>-sSL<span class="w"> </span>https://raw.githubusercontent.com/elsampsa/cutefront/main/script/project_init.bash<span class="o">)</span>
+</pre></div>
+</div>
+<p>Let’s use <code class="docutils literal notranslate"><span class="pre">app3</span></code> as the app subdirectory name.</p>
+<p>Now you have the necessary directory structure and the widget base library (for more details, see <a class="reference internal" href="../SCRAP/codeorg.html#codeorg"><span class="std std-ref">code organization</span></a>):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>my_cute_app
+├── app3                   # your app&#39;s .js and .html files
+├── app3.html              # your frontend entry-point
+├── assets                 # images, etc.
+├── css                    # your app&#39;s css
+└── lib                    # *** The CuteFront Widget Library ***
+     ├── base              # ***    AS A GIT SUBMODULE        ***
+     └── bootstrap-5.2.3-dist
+        ├── css
+        └── js
+</pre></div>
+</div>
+</section>
+<section id="create-widgets-using-ai">
+<h2>2. Create Widgets using AI<a class="headerlink" href="#create-widgets-using-ai" title="Link to this heading">¶</a></h2>
+<p>Next we will use ChatGPT, to generate the various widgets used in our SPA.  Google’s Gemini AI is also a very good option.</p>
+<p>Start your ChatGPT session, by feeding it the <a class="reference external" href="https://raw.githubusercontent.com/elsampsa/cutefront/main/prompt.md">preconditioning prompt</a>.
+After that, it is ready for your service.</p>
+<p>You can consider the prompts used in generating the widgets as detailed definitions / declarations of your software components.</p>
+<p>For example, consider writing them as clean markup (.md) documents that you can then include into the directory accompanying the code.  Or include
+them into a wiki page.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>ChatGPT is prone to make some minor mistakes, forget things or writing things <em>almost</em> in the correct/optimal way but not quite.
+So you need to know what you are doing and actually understand what CuteFront is about.  Working with ChatGPT is a conversational and iterative process.
+Corrected and iterated files are provided in this example.</p>
+</div>
+<p><em>A. Status Panel Widget</em></p>
+<p><code class="xref download docutils literal notranslate"><span class="pre">statuspanel.js</span></code> and <code class="xref download docutils literal notranslate"><span class="pre">statuspanel.html</span></code>. Try on-line <a class="reference external" href="https://elsampsa.github.io/cutefront/app3/statuspanel.html">here</a></p>
+<p>Create the first widget with this prompt:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Please create a widget class &quot;StatusPanel&quot; showing the status of various microservices.
+The widget should use an existing &lt;table&gt; element of class &quot;table&quot; of the html file.
+The header of the table should have columns &quot;Service&quot; and &quot;Status&quot;.
+Each row of the table corresponds to a different service and it&#39;s status.
+The services are: &quot;Conveyor Belt&quot;, &quot;Robot Arm&quot;, &quot;Polishing Blade&quot;.
+Status should be shown with boostrap&#39;s &quot;badge&quot; css class.
+There are three possible statuses for each service: &quot;ok&quot;, &quot;error&quot; and &quot;n/a&quot;.
+&quot;ok&quot; should be shown with boostrap&#39;s &quot;bg-success&quot; class, &quot;error&quot; with bootstrap&#39;s &quot;bg-danger&quot; class, while &quot;n/a&quot; should show in &quot;bg-secondary&quot; class.
+
+The widget should have the following slots for setting each service&#39;s status:
+
+- belt_status_slot(status)
+- arm_status_slot(status)
+- blade_status_slot(status)
+
+Parameter status is a string that is either &quot;ok&quot;, &quot;error&quot; and &quot;n/a&quot;.
+In the test html, provide test buttons that can be used to set each service&#39;s status to any of the three statuses.
+</pre></div>
+</div>
+<p>The more explicit you are, the better, of course.  Also basic knowledge of bootstrap styling and any other javascript/css library you are using is a must
+(for that, please see the <a class="reference internal" href="../links.html#links"><span class="std std-ref">links section</span></a>).</p>
+<p>Put the resulting <code class="docutils literal notranslate"><span class="pre">statuspanel.js</span></code> and <code class="docutils literal notranslate"><span class="pre">statuspanel.html</span></code> into the <code class="docutils literal notranslate"><span class="pre">app3/</span></code> directory.</p>
+<p>Now we’d like to see the newly created widget and test it’s basic functionality, so launch the chrome browser
+in a special permitive file access mode:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>app3
+google-chrome<span class="w"> </span>--allow-file-access-from-files<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Enable from the menus <code class="docutils literal notranslate"><span class="pre">More</span> <span class="pre">tools</span> <span class="pre">-&gt;</span> <span class="pre">Developer</span> <span class="pre">Tools</span></code>.</p>
+<p>Choose <code class="docutils literal notranslate"><span class="pre">statuspanel.html</span></code>.  Now you can see and test the new widget.</p>
+<p>Sometimes ChatGPT forgots to initialize a variable, assign unique UUIDs
+to html elements created dynamically in <code class="docutils literal notranslate"><span class="pre">createState</span></code>, not using the <code class="docutils literal notranslate"><span class="pre">_slot</span></code> functions adequately in the html part
+of the code, etc. small bugs, but after drawing it’s attention to these problems, it fixes them allright.</p>
+<p>Once you have iterated with ChatGPT and tested the correct functionality of <code class="docutils literal notranslate"><span class="pre">statuspanel.html</span></code>, the final thing you should do,
+is to put in-place correct docstrings, as instructed in <span class="xref std std-ref">here</span>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>when launching google-chrome with the aforementioned permitive file access, be sure <strong>not to browse the internet</strong>,
+as the browser has unlimited access to your file system.  You can achieve the same file access also in
+Firefox with the <span class="xref std std-ref">“plainfile” development environment</span>.</p>
+</div>
+<p><em>B. Profile Widget</em></p>
+<p><code class="xref download docutils literal notranslate"><span class="pre">profile.js</span></code> and <code class="xref download docutils literal notranslate"><span class="pre">profile.html</span></code>. Try on-line <a class="reference external" href="https://elsampsa.github.io/cutefront/app3/profile.html">here</a></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Please create a widget class &quot;ProfileWidget&quot;, showing a 2D grayscale heatmap with size of x=800px and y=200px.
+The widget should use an existing &lt;div&gt; element of the html file.
+Widget modifies the &lt;div&gt; element&#39;s (bootstrap) class attributes so that it has &quot;row&quot; and &quot;m-3&quot; attributes and a shadow.
+Please add also some nice class attribute that centers and maximizes the heatmap size.
+
+Widget&#39;s slots:
+
+sample_slot(data)
+    - data format: {
+        uuid: uuid string
+        data: 2D array with dimensions x=500, y=100 at range (0,255)
+    }
+    - updates heatmap data
+    - caches uuid as a state variable
+    - if data.uuid and data.data are null, then the widget state and heatmap is initialized
+
+Widget&#39;s signals:
+
+clicked
+    - emitted when user clicks the heatmap
+    - carries the uuid state variable
+
+Please use plotly for the heatmap visualization.
+The widget&#39;s state is initialized to both uuid and heatmap to null.
+When uuid is null, there should be no heatmap visible, but just an empty html element with the dimensions of (800, 200).
+
+In the test html there should be two buttons: (1) clear (that initializes wdget&#39;s state) and (2) send (sends a random heatmap)
+</pre></div>
+</div>
+<p><em>C. SampleListWidget and SampleListItemWidget</em></p>
+<p><code class="xref download docutils literal notranslate"><span class="pre">samplelist.js</span></code> and <code class="xref download docutils literal notranslate"><span class="pre">samplelist.html</span></code>. Try on-line <a class="reference external" href="https://elsampsa.github.io/cutefront/app3/samplelist.html">here</a></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Please create two widget classes into the same file.
+The classes are &quot;SampleListWidget&quot; and it&#39;s child widget &quot;SampleItemWidget&quot;.
+
+## SampleListWidget
+
+SampleListWidget implements a tabulated list of samples.
+Each row corresponds to a separate SampleItemWidget.
+
+SampleListWidget should use an existing &lt;table&gt; element of class &quot;table&quot; of the html file.
+SampleListWidget&#39;s slots:
+
+new_sample_slot(sample)
+    - sample object format : {
+        uuid: uuid string
+        datetime: datetime string
+        data: 2D array
+    }
+    - Emits signal new_sample with the sample data
+    - Creates a new SampleItemWidget with the data
+
+choose_sample_slot(uuid)
+    - uuid: uuid string
+    - saves uuid as a state variable (say, this.current_uuid)
+    - highlights SampleItemWidget corresponding to the uuid in the list
+
+sample_clicked_slot(uuid)
+    - uuid: uuid string
+    - receives a uuid from SampleItemWidget that has been clicked
+    - emit signal chosen_sample with sample object
+
+polished_slot(uuid)
+    - uuid: uuid string
+    - calls SampleItemWidget&#39;s (that corresponds to the uuid) &quot;polished_slot&quot;
+
+SampleListWidget should also have methods to remove all the child widgets
+(i.e. to clear the list) and to remove a certain child widget corresponding
+to a certain uuid.
+
+SampleListWidget&#39;s signals:
+
+new_sample
+    - carries a sample object (see new_sample_slot)
+
+chosen_sample
+    - carries a sample object
+
+### SampleItemWidget
+
+SampleItemWidget is always initialized with a new immutable sample object at the constructor.
+It also features an internal state variable &quot;polished&quot; that should be initialized to false.
+Each SampleItemWidget corresponds to a row in the table of the parent widget.
+Each row should indicate a datetime string and status &quot;polished&quot; / &quot;unpolished&quot;
+&quot;polished&quot; should be shown with boostrap&#39;s &quot;text-success&quot; class, &quot;unpolished&quot; with bootstrap&#39;s &quot;test-warning&quot; class
+
+The &quot;polished&quot; state variable should be only in the HTML DOM.
+
+SampleItemWidget shall have method &quot;getHTML()&quot; that is used by its parent to get it&#39;s HTML
+and attaching it to it&#39;s own DOM.  If you have a better solution, be my guest!
+
+SampleItemWidget has slot &quot;polished()&quot; that sets the internal state variable &quot;polished&quot; to true.
+
+SampleItemWidget has a signal named &quot;clicked&quot; that carries it&#39;s uuid and which is connected to its parent widget.
+
+In the test html, please initialize SampleListWidget with three uuid
+test values 1,2 ja 3 (by calling it&#39;s new_sample_slot function)
+Create also some buttons:
+A button that sends a signal and mock data to SampleListWidget&#39;s &quot;new_sample_slot&quot;
+(it can use random test uuid values &gt; 3)
+A button that sends a signal to choose_sample_slot (values between 1-3)
+
+SampleListWidget&#39;s &quot;new_sample&quot; and &quot;chosen_sample&quot; signals should be connected
+to functions that prints out the data object&#39;s uuid with a message starting with &quot;new_sample:&quot;
+etc.
+
+Please remember also to handle error cases for inexistent or non-initialized uuids, etc.
+
+Thank you!
+</pre></div>
+</div>
+<p>Put the resulting <code class="docutils literal notranslate"><span class="pre">samplelist.js</span></code> and <code class="docutils literal notranslate"><span class="pre">samplelist.html</span></code> into the <code class="docutils literal notranslate"><span class="pre">app3/</span></code> directory, etc.</p>
+</section>
+<section id="create-main-spa-html">
+<h2>3. Create Main SPA HTML<a class="headerlink" href="#create-main-spa-html" title="Link to this heading">¶</a></h2>
+<p>By now you have iterated with ChatGPT and produced files that work correctly, testing them by loading
+the test html files in your browser, etc.</p>
+<p>So you should have the following directories and files:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>your-directory/
+
+    app3/        # the widgets we just created
+        profile.html
+        profile.js
+        statuspanel.html
+        statuspanel.js
+        samplelist.html
+        samplelist.js
+
+    app3.html    # the main application html
+    assets/
+    css/
+    lib/
+</pre></div>
+</div>
+<p>At this stage you might want to generate <span class="xref std std-ref">autodocumentation using the docstrings</span>.</p>
+<p>Next we create the main html entry point code for your app into <cite>app3.html</cite>.  Let’s use our AI assistant for that as well:</p>
+<p><code class="xref download docutils literal notranslate"><span class="pre">app3.html</span></code>. Try on-line <a class="reference external" href="https://elsampsa.github.io/cutefront/app3.html">here</a></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Please create me an html file (app3.html) where we create a layout for placing all our widgets, instantiate
+the widgets and connect their signals and slots together.
+
+The app3.html is in directory &quot;.&quot; and the widgets are in &quot;./app3/&quot; folder.
+
+Here are the name of the widget instances and their classes (instance name, class name):
+
+profile_latest = ProfileWidget
+profile_chosen = ProfileWidget
+status = StatusWidget
+sample_list = SampleListWidget
+
+I&#39;d like to have roughly the following layout:
+
++-----------------+-----------------+
+| profile_latest  |    status       |
+|                 |    sample_list  |
+| profile_chosen  |                 |
++-----------------+-----------------+
+  test button area
+
+Connect the signals to slots like this:
+
+profile_latest.signals.clicked -&gt; sample_list.choose_sample_slot
+profile_chosen.signals.clicked -&gt; sample_list.choose_sample_slot
+sample_list.signals.new_sample -&gt; profile_latest.sample_slot
+sample_list.signals.chosen_sample -&gt; profile_chosen.sample_slot
+
+In the test button area I want buttons that simulate signals sent to the system:
+
+- buttons for setting each possible state of the status panel
+- &quot;send-new-sample&quot; : sends a signal to sample_list&#39;s new_sample slot.
+  uuids can be integer numbers starting from 0 and incrementing by one at each new sample.
+
+- &quot;polish-sample&quot; : sends a signal to sample_list&#39;s polished_slot.
+  the uuid can be the latest integer uuid sent with &quot;send-new-sample&quot; button
+</pre></div>
+</div>
+</section>
+<section id="himo-diagram">
+<span id="himo"></span><h2>4. HIMO Diagram<a class="headerlink" href="#himo-diagram" title="Link to this heading">¶</a></h2>
+<p>For each Widget, <code class="docutils literal notranslate"><span class="pre">IN</span></code> lists the slots (and input/setter methods),
+while <code class="docutils literal notranslate"><span class="pre">UP</span></code> lists all signals (and output/getter methods).</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sample_data:
+    uuid (str)
+    datetime (str)
+    2D profile (2D array)
+
+StatusWidget status : production line status
+    STATE:
+        - service status are encode into DOM HTML
+    IN:
+        - belt_status_slot(string: &quot;ok&quot;, &quot;error&quot; or &quot;n/a&quot;)
+        - arm_status_slot(string: &quot;ok&quot;, &quot;error&quot; or &quot;n/a&quot;)
+        - blade_status_slot(string: &quot;ok&quot;, &quot;error&quot; or &quot;n/a&quot;)
+
+SampleListWidget sample_list : list of all arrived samples
+    STATE:
+        - List of current child widgets (can be encoded into the DOM HTML)
+        - Currently chosen/highlighted child widget (can be encoded into the DOM HTML)
+    UP:
+        - signal: new_sample(sample_data)
+            - connect to profile_latest:sample_slot(sample_data)
+        - signal: chosen_sample(sample_data)
+            - connect to profile_chose:sample_slot(sample_data)
+    IN:
+        - new_sample_slot(sample_data)
+            - add new SampleItemWidget child widget
+            - emit signal:new_sample(sample_data)
+        - choose_sample_slot(uuid) : from outside SampleListWidget
+            - choose which SampleItemWidget to highlight from the
+              child widgets
+        - sample_clicked_slot(uuid) : from child widgets
+            - choose which SampleItemWidget to highlight from the
+              child widgets
+            - emig signal:chosen_sample(sample_data)
+        - polished_slot(uuid) : from outside SampleListWidget
+            - indicates a sample uuid whose status should be updated
+              to &quot;polished&quot;
+
+    Child Widgets:
+        - SampleItemWidget(sample_data)
+            STATE:
+                - immutable variable: sample_data
+                - polished=false (can be encoded into the DOM HTML)
+            UP:
+                - signal: clicked(uuid)
+                    - connect to parent widget sample_clicked_slot(uuid)
+            IN:
+                - polished_slot()
+                    - indicates that this sample&#39;s status should be updated
+                      to polished=true
+        - SampleItemWidget(sample_data)
+            ...
+        - SampleItemWidget(sample_data)
+            ...
+        ...
+
+ProfileWidget profile_latest (2D profile of latest sample)
+    STATE:
+        - uuid (uuid of the sample)
+        - 2D data (in plotly graphical element)
+    UP:
+        - signal: clicked(uuid)
+            - connect to sample_list:choose_sample_slot
+    IN:
+        - sample_slot(sample_data)
+            - visualize 2D sample data
+
+ProfileWidget profile_chosen (2D profile of chosen sample)
+    (identical to profile_latest)
+</pre></div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023 Sampsa Riikonen
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Tutorial</a><ul>
+<li><a class="reference internal" href="#create-directory-structure">1. Create Directory Structure</a></li>
+<li><a class="reference internal" href="#create-widgets-using-ai">2. Create Widgets using AI</a></li>
+<li><a class="reference internal" href="#create-main-spa-html">3. Create Main SPA HTML</a></li>
+<li><a class="reference internal" href="#himo-diagram">4. HIMO Diagram</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

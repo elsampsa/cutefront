@@ -8,8 +8,8 @@ Let's play ball
 ---------------
 
 In CuteFront, there is only plain html and javascript.  
-Javascript and html are in the same ``.html`` file, while each widget class is
-in a separate ``.js`` file.
+Each widget class is in a separate ``.js`` file, while instantiation and signal connections
+are created in the html file.
 
 A code example tells more than thousand explanatory words, so let's get straight to it
 with some javascript:
@@ -22,22 +22,22 @@ with some javascript:
     var billboard = new BillBoard("billboard")
 
     // ball from alex to bob
-    alex.signals.throw_ball.connect(
-        bob.catch_ball_slot.bind(bob)
-    )
+    alex.signals.throw_ball.connect(() => {
+        bob.catch_ball_slot()
+    })
     // ball from bob to alex
-    bob.signals.throw_ball.connect(
-        alex.catch_ball_slot.bind(alex)
-    )
+    bob.signals.throw_ball.connect(() => {
+        alex.catch_ball_slot()
+    })
     // inform billboard about the game
     // alex throws
-    alex.signals.throw_ball.connect(
-        billboard.ball_throw_slot.bind(billboard)
-    )
+    alex.signals.throw_ball.connect(() => {
+        billboard.ball_throw_slot()
+    })
     // bob throws
-    bob.signals.throw_ball.connect(
-        billboard.ball_throw_slot.bind(billboard)
-    )
+    bob.signals.throw_ball.connect(() => {
+        billboard.ball_throw_slot()
+    })
 
     // give ball initially to alex
     alex.catch_ball_slot()
@@ -193,14 +193,19 @@ All widgets define ``createSignals``, ``createState`` and ``createElement`` meth
   that are used by the widget (for more about ``createElement``, see :ref:`here <createelement>`).
 - Slots methods have names ending in ``_slot``.  This is where the signals from other widgets are connected to.
 
-To put it simply, slot methods change the internal state of the widget 
-(created initially in ``createState``), and emit signals to other widgets.
+Lets state this formally:
+
+- Widgets have an internal state (created initially by ``createState``)
+- That internal state can be modified by calling their slots (typically triggered by signals from other widgets)
+- The change in the internal state can result in visual changes of the widget
+- The change in the internal state can result in the widget emitting a signal (which is connected to other widgets)
 
 Taking a look into ``createSignals`` and the ``_slot`` methods, **we can see at a single glance the API of the widget.**
 
 Before going full throttle into creating your own interative pages and widgets,
 please look at the :ref:`Creating Widgets <creating>` section for common techniques 
-and pitfalls (in javascript, there are quite some).
+and pitfalls.
+
 
 
 

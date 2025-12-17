@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DummyDataSource Test</title>
+    <style>
+        body { font-family: monospace; margin: 20px; }
+        button { margin: 5px; padding: 5px 10px; }
+        .section { border: 1px solid #ccc; margin: 10px 0; padding: 10px; }
+        .error { color: red; }
+        .success { color: green; }
+        #data-display { background: #f5f5f5; padding: 10px; white-space: pre; }
+    </style>
+</head>
+<body>
+    <h1>DummyDataSource CRUD Test</h1>
+    
+    <!-- Test Controls -->
+    <div class="section">
+        <h3>CRUD Operations</h3>
+        <button onclick="readData()">READ</button>
+        <button onclick="createData()">CREATE (random data)</button>
+        <button onclick="updateData()">UPDATE (first item)</button>
+        <button onclick="deleteData()">DELETE (first item)</button>
+    </div>
+
+    <!-- Pagination -->
+    <div class="section">
+        <h3>Pagination</h3>
+        <button onclick="setPage(1, 5)">Page 1, Size 5</button>
+        <button onclick="setPage(2, 5)">Page 2, Size 5</button>
+        <button onclick="setPage(1, 10)">Page 1, Size 10</button>
+        <button onclick="setPage(1, 0)">No Pagination</button>
+    </div>
+
+    <!-- Results -->
+    <div class="section">
+        <h3>Data</h3>
+        <div id="data-display"></div>
+    </div>
+
+    <!-- Test Log -->
+    <div class="section">
+        <h3>Test Log</h3>
+        <button onclick="clearLog()">Clear Log</button>
+        <button onclick="runAllTests()">Run All Tests</button>
+        <div id="test-log"></div>
+    </div>
+
+    <script type="module">
+        import { DummyDataSource } from './datasource.js';
+        
+        // Create global instance for testing
+        window.dataSource = new DummyDataSource();
+        
+        window.readData = function() {
+            const data = dataSource.read();
+            displayData(data);
+            log('READ', data.length + ' items returned');
+        };
+        
+        window.createData = function() {
+            const randomNames = ['Alice', 'Bob', 'Charlie', 'Diana', 'Eve'];
+            const randomSurnames = ['Smith', 'Johnson', 'Brown', 'Davis', 'Wilson'];
+            const randomDomains = ['example.com', 'test.org', 'demo.net'];
+            
+            const datum = {
+                name: randomNames[Math.floor(Math.random() * randomNames.length)],
+                surname: randomSurnames[Math.floor(Math.random() * randomSurnames.length)],
+                email: `user${Date.now()}@${randomDomains[Math.floor(Math.random() * randomDomains.length)]}`,
+                age: Math.floor(Math.random() * 50) + 18
+            };
+            
+            const result = dataSource.create(datum);
+            
+            if (typeof result === 'string') {
+                log('CREATE ERROR', result);
+            } else {
+                log('CREATE SUCCESS', `Created item with ID ${result.id}`);
+                readData();
+            }
+        };
+        
+        window.updateData = function() {
+            const allData = dataSource.data;
+            if (allData.length === 0) {
+                log('UPDATE ERROR', 'No data to update');
+                return;
+            }
+            
+            const firstItem = allData[0];
+            const updatedItem = {
+                ...firstItem,
+                name: 'UPDATED_' + firstItem.name,
+                age: (firstItem.age || 25) + 1
+            };
+            
+            const result = dataSource.update(updatedItem);
+            
+            if (typeof result === 'string') {
+                log('UPDATE ERROR', result);
+            } else {
+                log('UPDATE SUCCESS', `Updated item with ID ${result.id}`);
+                readData();
+            }
+        };
+        
+        window.deleteData = function() {
+            const allData = dataSource.data;
+            if (allData.length === 0) {
+                log('DELETE ERROR', 'No data to delete');
+                return;
+            }
+            
+            const firstId = allData[0].id;
+            const result = dataSource.delete(firstId);
+            
+            if (typeof result === 'string') {
+                log('DELETE ERROR', result);
+            } else {
+                log('DELETE SUCCESS', `Deleted item with ID ${firstId}`);
+                readData();
+            }
+        };
+        
+        window.setPage = function(page, size) {
+            if (size === 0) {
+                dataSource.setPage(null); // No pagination
+                log('PAGINATION', 'Disabled pagination');
+            } else {
+                dataSource.setPage({ currentPage: page, pageSize: size });
+                log('PAGINATION', `Set to page ${page}, size ${size}`);
+            }
+            readData();
+        };
+        
+        window.clearLog = function() {
+            document.getElementById('test-log').innerHTML = '';
+        };
+        
+        function displayData(data) {
+            if (typeof data === 'string') {
+                document.getElementById('data-display').textContent = 'Error: ' + data;
+                return;
+            }
+            
+            document.getElementById('data-display').textContent = JSON.stringify(data, null, 2);
+        }
+        
+        function log(action, message) {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = `[${timestamp}] ${action}: ${message}\n`;
+            document.getElementById('test-log').textContent += logEntry;
+        }
+        
+        // Initialize
+        readData();
+    </script>
+</body>
+</html>

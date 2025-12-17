@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <title>ListWidget Example</title>
+    <!-- import scheme: base widget ---->
+    <link
+        href="../bootstrap/css/bootstrap.min.css"
+        rel="stylesheet"
+    />
+</head>
+<body>
+    <div id="alex"></div>
+    <div id="bob"></div>
+    <div id="billboard"></div>
+</body>
+<!-- import scheme: base widget ---->
+<script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+<script type="module">
+    import { BallPlayer, BillBoard } from "./ballplayer.js";
+
+    var alex = new BallPlayer("alex");
+    var bob = new BallPlayer("bob");
+    var billboard = new BillBoard("billboard");
+
+    // set logging levels for the widgets
+    alex.setLogLevel(-1);
+    bob.setLogLevel(-1);
+    billboard.setLogLevel(-1);
+
+    // ball from alex to bob
+    alex.signals.throw_ball.connect(() => bob.catch_ball_slot());
+    // if there would be a parameter passed with the ball, then that can be seen explicitly
+    // in this notation, i.e.:
+    // alex.signals.throw_ball.connect((number) => bob.catch_ball_slot(number));
+
+    // ball from bob to alex
+    bob.signals.throw_ball.connect(() => alex.catch_ball_slot());
+    // inform billboard about the game
+    // alex throws
+    alex.signals.throw_ball.connect(() => billboard.ball_throw_slot());
+    // bob throws
+    bob.signals.throw_ball.connect(() => billboard.ball_throw_slot());
+
+    // give ball initially to alex
+    alex.catch_ball_slot();
+
+    // a helper for autodocumentation
+    window.genDocs = ["alex", "bob", "billboard"];
+</script>
