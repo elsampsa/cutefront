@@ -1,8 +1,6 @@
-# CuteFront
+# CuteFront aka widget.js
 
 *the "no-framework* javascript framework*
-
-A Qt-like Javascript frontend framework with widgets, signals and slots.
 
 ## About
 
