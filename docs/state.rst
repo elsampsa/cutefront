@@ -15,7 +15,7 @@ It also makes it possible to use the browser's forward and backward buttons to n
 
 Widgets that wish to de/serialize their state need to define a few methods.
 
-.. code:: javascripts:
+.. code:: javascript:
 
     // define this signal in createSignals():
     this.signals.state_change = new Signal("State change. Carries { serializationKey, serializationValue, write }");
@@ -29,7 +29,7 @@ When a widget's state changes and it wants to save that state, it should call in
 
 ``StateWidget`` is responsible for gathering all key value pairs from all widgets and creating the overall serialization into the URL browser bar:
 
-.. code:: javascripts:
+.. code:: javascript:
 
     const stateWidget = new StateWidget();
     stateWidget.setLogLevel(-1); // debugging

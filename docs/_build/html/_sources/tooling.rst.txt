@@ -61,5 +61,3 @@ Javascript Navigation
 To make the object-oriented JS navigation better, please take a look into ``vscode-plugins/js-class-navigator/``.
 
 Its a (work-in-progress) VSCode plugin that helps you navigate object-oriented JS code.
-
-TODO: write a readme in there

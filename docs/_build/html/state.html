@@ -266,7 +266,7 @@ information about the state of the SPA which can then be deserialized in another
 same place on the page.</p>
 <p>It also makes it possible to use the browser’s forward and backward buttons to navigate your browsing history.</p>
 <p>Widgets that wish to de/serialize their state need to define a few methods.</p>
-<div class="highlight-javascripts: notranslate"><div class="highlight"><pre><span></span>// define this signal in createSignals():
+<div class="highlight-javascript: notranslate"><div class="highlight"><pre><span></span>// define this signal in createSignals():
 this.signals.state_change = new Signal(&quot;State change. Carries { serializationKey, serializationValue, write }&quot;);
 // define these two methods:
 getSerializationValue() { // serialization: returns a string that serializes this widget
@@ -277,7 +277,7 @@ setState(serializationValue) { // deserialization: how that string is turned bac
 </div>
 <p>When a widget’s state changes and it wants to save that state, it should call internally <code class="docutils literal notranslate"><span class="pre">this.serialize()</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">StateWidget</span></code> is responsible for gathering all key value pairs from all widgets and creating the overall serialization into the URL browser bar:</p>
-<div class="highlight-javascripts: notranslate"><div class="highlight"><pre><span></span>const stateWidget = new StateWidget();
+<div class="highlight-javascript: notranslate"><div class="highlight"><pre><span></span>const stateWidget = new StateWidget();
 stateWidget.setLogLevel(-1); // debugging
 ...
 // Configure state management for yourWidget:
@@ -321,7 +321,7 @@ and that a write to the browser history should be done always when <code class="
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 2023 Sampsa Riikonen
+                Copyright &#169; 2023-2026 Sampsa Riikonen
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

@@ -37,14 +37,14 @@ follow code execution on-spot and live, set breakpoints, execute the JS code ste
 
 In this "DEV Tier-1" mode you can also debug, not only individual widgets, but a complete fullstack app as well.
 As there is typically no backend in this development mode, you must use mock datasources that imitate the backend.
-For more on this subject, please refer to the actual code in the :ref:`FastAPI fullstack example <install>`.
+For more on this subject, please refer to the actual code in the :ref:`FastAPI fullstack example <fastapi>`.
 
 2. Dev Tier-2
 -------------
 
 *Develop and debug Cutefront fullstack apps in your VSCode IDE*
 
-In order to try this, you need to run the :ref:`FastAPI fullstack example <install>` and start it in the development mode.
+In order to try this, you need to run the :ref:`FastAPI fullstack example <fastapi>` and start it in the development mode.
 
 - Go into VSCode debugging tab
 - Choose `Cutefront FastAPI landing` from the dropdown menu
@@ -60,7 +60,7 @@ Now:
 
 *Test your production-ready and packaged Cutefront fullstack app*
 
-In order to try this, you need to run the :ref:`FastAPI fullstack example <install>` and start it in the staging mode.
+In order to try this, you need to run the :ref:`FastAPI fullstack example <fastapi>` and start it in the staging mode.
 
 - Your frontend is packaged (gzipped) and served by nginx from a docker container
 

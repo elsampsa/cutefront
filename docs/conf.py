@@ -65,7 +65,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'CuteFront'
-copyright = '2023 Sampsa Riikonen'
+copyright = '2023-2026 Sampsa Riikonen'
 author = 'Sampsa Riikonen'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -73,7 +73,7 @@ author = 'Sampsa Riikonen'
 # built documents.
 #
 # The short X.Y version
-version = '0.0.1' # WARNING: modified by setver.bash
+version = '1.0.0'
 # The full version, including alpha/beta/rc tags.
 # release = '1'
 

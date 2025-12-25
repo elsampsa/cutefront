@@ -1,6 +1,6 @@
 # CuteFront aka widget.js
 
-*the "no-framework* javascript framework*
+*the "no-framework" javascript framework*
 
 ## About
 

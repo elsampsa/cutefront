@@ -5,7 +5,7 @@
 Intro
 =====
 
-*CuteFront aka widget.js, is a lightweight, quick and modular javascript frontend framework*
+*CuteFront aka "widget.js", is a lightweight, quick and modular javascript frontend framework*
 
 Features
 --------
@@ -18,6 +18,7 @@ CuteFront is a semi-declarative javascript frontend framework, featuring:
 - Minimal package mainteinance: CuteFront is just html and javascript running in the browser, so it just "is"
 - Qt's touch'n'feel with widgets, signals and slots
 - Global state partitioned and cached into widgets - avoid global state mess
+- No Virtual DOM - or any other technological bloat to that matter
 
 Here is a a quick look at a typical CuteFront main html file using widgets:
 
