@@ -54,14 +54,11 @@ cat > .claude/commands/current-project.md << 'EOF'
 ---
 description: Load project context
 ---
-TODO: Describe your current project here.
+Let's do a project using "CuteFront" the no-framework JS frontend framework.
 
-This file should include:
-- Overview of your app's purpose
-- Key features and functionality
-- Custom widgets you've created in app/lib/
-- Any specific architectural decisions
-- Backend integration details (if applicable)
+Please read first file "cute-frontend.md" from this very same directory.
+
+TODO: this is a placeholder for more details on you project
 EOF
 
 echo ""
