@@ -22,3 +22,5 @@ package-lock.json
 yarn.lock
 .npm
 .yarn-integrity
+*.doctree
+*.pickle

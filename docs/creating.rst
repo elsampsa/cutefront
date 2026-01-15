@@ -333,6 +333,16 @@ If you want to emit a signal directly from an html element callback, just do thi
         this.signals.signal_name.emit(variable);
     }
 
+Emitting signals from ``href`` links, you should always use `preventDefault()` so that `#` is not added
+into the browser URL bar (creating extra browser history):
+
+.. code:: javascript
+
+   this.itemElement.onclick = (event) => {
+       event.preventDefault();  // Prevent "#"" from being added to URL
+       ...
+   };
+
 
 Connecting Signals
 ------------------

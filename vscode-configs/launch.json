@@ -1,7 +1,6 @@
 {
     "version": "0.2.0",
     "configurations": [
-
         {
         "name": "Cutefront HTML file://",
         "type": "chrome",
@@ -14,8 +13,8 @@
             "--disable-http-cache",
             "--disk-cache-size=0"
         ],
-        },
-
+        }, // TODO: adapt these to your usercase:
+        /*
         {
         "name": "Cutefront FastAPI landing",
         "type": "chrome",
@@ -74,5 +73,6 @@
         "jinja": true,
         "envFile": "${workspaceFolder}/.env",
     },
+    */
     ]
 }

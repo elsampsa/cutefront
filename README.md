@@ -34,7 +34,7 @@ Sampsa Riikonen
 
 ## Copyright
 
-(c) Sampsa Riikonen 2025
+(c) Sampsa Riikonen 2025-2026
 
 ## License
 

@@ -266,29 +266,47 @@ information about the state of the SPA which can then be deserialized in another
 same place on the page.</p>
 <p>It also makes it possible to use the browser’s forward and backward buttons to navigate your browsing history.</p>
 <p>Widgets that wish to de/serialize their state need to define a few methods.</p>
-<div class="highlight-javascript: notranslate"><div class="highlight"><pre><span></span>// define this signal in createSignals():
-this.signals.state_change = new Signal(&quot;State change. Carries { serializationKey, serializationValue, write }&quot;);
-// define these two methods:
-getSerializationValue() { // serialization: returns a string that serializes this widget
-}
-setState(serializationValue) { // deserialization: how that string is turned back into a widget state
-}
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// define this signal in createSignals():</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">state_change</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Signal</span><span class="p">(</span><span class="s2">&quot;State change. Carries { serializationKey, serializationValue, write }&quot;</span><span class="p">);</span>
+<span class="c1">// define these two methods:</span>
+<span class="nx">getSerializationValue</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* serialization: returns a string that represents</span>
+<span class="cm">    the serialization of this widget */</span>
+<span class="p">}</span>
+<span class="nx">setState</span><span class="p">(</span><span class="nx">serializationValue</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* deserialization: take that same string and modify widget</span>
+<span class="cm">    so that it goes to the desired state */</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>When a widget’s state changes and it wants to save that state, it should call internally <code class="docutils literal notranslate"><span class="pre">this.serialize()</span></code></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>As your widgets’ internal interactions grow increasingly complex, be sure that <cite>setState()</cite> only deserializes and does nothing else!
+You might end up in a situation where you accidentally call <cite>serialize()</cite> downstream every time you call <cite>setState()</cite>, messing up the state management.
+It is a good idea to use serialization guard parameter, say boolean <cite>this.serialize_</cite> to be on the safe side.</p>
+</div>
 <p><code class="docutils literal notranslate"><span class="pre">StateWidget</span></code> is responsible for gathering all key value pairs from all widgets and creating the overall serialization into the URL browser bar:</p>
-<div class="highlight-javascript: notranslate"><div class="highlight"><pre><span></span>const stateWidget = new StateWidget();
-stateWidget.setLogLevel(-1); // debugging
-...
-// Configure state management for yourWidget:
-yourWidget.setSerializationKey(&quot;your-key&quot;).setSerializationWrite(true);
-stateWidget.register(yourWidget); // remember to register all your serializable widgets here,
-// .. i.e. yourWidget1, yourWidget2, etc.
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">stateWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">StateWidget</span><span class="p">();</span>
+<span class="nx">stateWidget</span><span class="p">.</span><span class="nx">setLogLevel</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// debugging</span>
+<span class="p">...</span>
+<span class="c1">// Configure state management for yourWidget:</span>
+<span class="nx">yourWidget</span><span class="p">.</span><span class="nx">setSerializationKey</span><span class="p">(</span><span class="s2">&quot;your-key&quot;</span><span class="p">).</span><span class="nx">setSerializationWrite</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="nx">stateWidget</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="nx">yourWidget</span><span class="p">);</span><span class="w"> </span><span class="c1">// remember to register all your serializable widgets here,</span>
+<span class="c1">// .. i.e. yourWidget1, yourWidget2, etc.</span>
 </pre></div>
 </div>
 <p>This creates an URL-encoded key-value pair into the addres bar: <code class="docutils literal notranslate"><span class="pre">&amp;your-key=value</span></code>, where value is produced by <code class="docutils literal notranslate"><span class="pre">getSerializationValue()</span></code>.</p>
 <p>Using <code class="docutils literal notranslate"><span class="pre">.setSerializationWrite(true)</span></code> indicates that the URL bar should be updated (writing the composite serialization of all widgets therein)
 and that a write to the browser history should be done always when <code class="docutils literal notranslate"><span class="pre">yourWidget</span></code> serializes.</p>
+<p>One final note: when creating widgets with <code class="docutils literal notranslate"><span class="pre">href</span></code> links, use <cite>preventDefault()</cite>, otherwise you will create extra entries to the state history,
+messing it up.  So use this when</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">itemElement</span><span class="p">.</span><span class="nx">onclick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span><span class="w">  </span><span class="c1">// Prevent &quot;#&quot;&quot; from being added to URL</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">};</span>
+</pre></div>
+</div>
 <p>For more details, please see the fullstack FastAPI example.</p>
 </section>
 

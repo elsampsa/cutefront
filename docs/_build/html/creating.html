@@ -517,6 +517,14 @@ knows how to handle.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
+<p>Emitting signals from <code class="docutils literal notranslate"><span class="pre">href</span></code> links, you should always use <cite>preventDefault()</cite> so that <cite>#</cite> is not added
+into the browser URL bar (creating extra browser history):</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">itemElement</span><span class="p">.</span><span class="nx">onclick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span><span class="w">  </span><span class="c1">// Prevent &quot;#&quot;&quot; from being added to URL</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">};</span>
+</pre></div>
+</div>
 </section>
 <section id="connecting-signals">
 <h2>Connecting Signals<a class="headerlink" href="#connecting-signals" title="Link to this heading">¶</a></h2>
