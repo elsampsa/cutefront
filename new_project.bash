@@ -49,6 +49,17 @@ echo "Setting up Claude Code configuration..."
 mkdir -p .claude/commands
 curl -sSL "${REPO_BASE}/vscode-configs/cute-frontend.md" -o .claude/commands/cute-frontend.md
 
+# Create .claude/settings.json with CuteFront permissions
+cat > .claude/settings.json << 'EOF'
+{
+  "permissions": {
+    "allow": [
+      "mcp__browser__*"
+    ]
+  }
+}
+EOF
+
 # Create placeholder for current-project.md
 cat > .claude/commands/current-project.md << 'EOF'
 ---

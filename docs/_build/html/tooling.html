@@ -7,7 +7,7 @@
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2024.08.06 -->
         <title>Tooling - CuteFront documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
@@ -289,12 +289,21 @@ to the place where they were defined in your codebase.</p>
 <p>TODO: check the apiDocsPath variable (is it needed anymore)?</p>
 <p>For more details, please see the fullstack FastAPI example.</p>
 </section>
-<section id="ai-browsing">
-<h2>AI Browsing<a class="headerlink" href="#ai-browsing" title="Link to this heading">¶</a></h2>
-<p>You can tell your AI buddy to test the html it created for you by all itself, by using this command</p>
+<section id="ai-browser-automation">
+<h2>AI Browser automation<a class="headerlink" href="#ai-browser-automation" title="Link to this heading">¶</a></h2>
+<p>You can tell your AI buddy to test the html it created for you by all itself, by using this command (that comes with our python tools):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cute-browser
 </pre></div>
 </div>
+<p>If you want to use something more advanced, give VSCode’s claude extension superhuman browser power via an MCP server.</p>
+<p>Do this from your command line (emphasis on that <code class="docutils literal notranslate"><span class="pre">--scope</span> <span class="pre">user</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>claude<span class="w"> </span>mcp<span class="w"> </span>add<span class="w"> </span>--scope<span class="w"> </span>user<span class="w"> </span>browser<span class="w"> </span>--<span class="w"> </span>npx<span class="w"> </span>@agent-infra/mcp-server-browser@latest
+claude<span class="w"> </span>mcp<span class="w"> </span>add<span class="w"> </span>--scope<span class="w"> </span>user<span class="w"> </span>browser<span class="w"> </span>--<span class="w"> </span>npx<span class="w"> </span>@browsermcp/mcp@latest
+</pre></div>
+</div>
+<p>The second mcp server is taylor-made for
+<a class="reference external" href="https://chromewebstore.google.com/detail/bjfgambnhccakkhmkepdoekmckoijdlc?utm_source=item-share-cb">this extension</a></p>
+<p>Now you can tell your ai buddy (claude code vscode extension) to test whatever html for you.</p>
 </section>
 <section id="javascript-navigation">
 <h2>Javascript Navigation<a class="headerlink" href="#javascript-navigation" title="Link to this heading">¶</a></h2>
@@ -361,7 +370,7 @@ to the place where they were defined in your codebase.</p>
 <li><a class="reference internal" href="#">Tooling</a><ul>
 <li><a class="reference internal" href="#python-tools">Python tools</a></li>
 <li><a class="reference internal" href="#api-tree">API Tree</a></li>
-<li><a class="reference internal" href="#ai-browsing">AI Browsing</a></li>
+<li><a class="reference internal" href="#ai-browser-automation">AI Browser automation</a></li>
 <li><a class="reference internal" href="#javascript-navigation">Javascript Navigation</a></li>
 </ul>
 </li>

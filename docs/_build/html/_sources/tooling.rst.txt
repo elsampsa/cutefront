@@ -46,14 +46,28 @@ TODO: check the apiDocsPath variable (is it needed anymore)?
 
 For more details, please see the fullstack FastAPI example.
 
-AI Browsing
------------
+AI Browser automation
+---------------------
 
-You can tell your AI buddy to test the html it created for you by all itself, by using this command
+You can tell your AI buddy to test the html it created for you by all itself, by using this command (that comes with our python tools):
 
 .. code:: bash
 
     cute-browser
+
+If you want to use something more advanced, give VSCode's claude extension superhuman browser power via an MCP server.
+
+Do this from your command line (emphasis on that ``--scope user``):
+
+.. code:: bash
+
+    claude mcp add --scope user browser -- npx @agent-infra/mcp-server-browser@latest
+    claude mcp add --scope user browser -- npx @browsermcp/mcp@latest
+
+The second mcp server is taylor-made for 
+`this extension <https://chromewebstore.google.com/detail/bjfgambnhccakkhmkepdoekmckoijdlc?utm_source=item-share-cb>`_
+
+Now you can tell your ai buddy (claude code vscode extension) to test whatever html for you.
 
 Javascript Navigation
 ---------------------
