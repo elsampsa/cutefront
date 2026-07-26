@@ -16,6 +16,15 @@ ELEMENT_DETECTION_JS = """
         return el.dataset.autoId;
     }
 
+    // Helper to build a selector that actually resolves to this element.
+    // Must be called after getElementId(el) so el.dataset.autoId is set when needed.
+    function getElementSelector(el) {
+        if (el.id) {
+            return `[id="${el.id}"]`;
+        }
+        return `[data-auto-id="${el.dataset.autoId}"]`;
+    }
+
     // Helper to check if element is visible
     function isVisible(el) {
         const style = window.getComputedStyle(el);
@@ -59,7 +68,7 @@ ELEMENT_DETECTION_JS = """
             tag: el.tagName.toLowerCase(),
             disabled: el.disabled || false,
             bbox: getBoundingBox(el),
-            selector: `[data-auto-id="${el.dataset.autoId}"]`
+            selector: getElementSelector(el)
         });
     });
 
@@ -72,7 +81,7 @@ ELEMENT_DETECTION_JS = """
             text: getElementText(el),
             href: el.href,
             bbox: getBoundingBox(el),
-            selector: `[data-auto-id="${el.dataset.autoId}"]`
+            selector: getElementSelector(el)
         });
     });
 
@@ -88,7 +97,7 @@ ELEMENT_DETECTION_JS = """
             label: el.labels?.[0]?.innerText?.trim() || '',
             disabled: el.disabled || false,
             bbox: getBoundingBox(el),
-            selector: `[data-auto-id="${el.dataset.autoId}"]`
+            selector: getElementSelector(el)
         });
     });
 
@@ -107,7 +116,7 @@ ELEMENT_DETECTION_JS = """
             selected_value: el.value,
             disabled: el.disabled || false,
             bbox: getBoundingBox(el),
-            selector: `[data-auto-id="${el.dataset.autoId}"]`
+            selector: getElementSelector(el)
         });
     });
 
@@ -121,7 +130,7 @@ ELEMENT_DETECTION_JS = """
             checked: el.checked,
             disabled: el.disabled || false,
             bbox: getBoundingBox(el),
-            selector: `[data-auto-id="${el.dataset.autoId}"]`
+            selector: getElementSelector(el)
         });
     });
 
@@ -136,7 +145,7 @@ ELEMENT_DETECTION_JS = """
             checked: el.checked,
             disabled: el.disabled || false,
             bbox: getBoundingBox(el),
-            selector: `[data-auto-id="${el.dataset.autoId}"]`
+            selector: getElementSelector(el)
         });
     });
 

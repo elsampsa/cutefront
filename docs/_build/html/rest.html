@@ -1,16 +1,17 @@
 <!doctype html>
 <html class="no-js" lang="en" data-content_root="./">
-  <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Tooling" href="tooling.html" /><link rel="prev" title="State de/Serialization" href="state.html" />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Tooling" href="tooling.html"><link rel="prev" title="State de/Serialization" href="state.html">
+        <link rel="prefetch" href="_static/logo.png" as="image">
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2024.08.06 -->
+    <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
         <title>REST Endpoints - CuteFront documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
 
@@ -145,14 +146,10 @@
   </symbol>
 </svg>
 
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
-<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
-<label class="overlay sidebar-overlay" for="__navigation">
-  <div class="visually-hidden">Hide navigation sidebar</div>
-</label>
-<label class="overlay toc-overlay" for="__toc">
-  <div class="visually-hidden">Hide table of contents sidebar</div>
-</label>
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
 
 <a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
 
@@ -162,8 +159,7 @@
   <header class="mobile-header">
     <div class="header-left">
       <label class="nav-overlay-icon" for="__navigation">
-        <div class="visually-hidden">Toggle site navigation sidebar</div>
-        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
       </label>
     </div>
     <div class="header-center">
@@ -171,8 +167,7 @@
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
-        <button class="theme-toggle">
-          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
           <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
           <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
           <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -180,8 +175,7 @@
         </button>
       </div>
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
-        <div class="visually-hidden">Toggle table of contents sidebar</div>
-        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
   </header>
@@ -189,7 +183,6 @@
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
-  
   <div class="sidebar-logo-container">
     <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
   </div>
@@ -241,8 +234,7 @@
   </a>
 </div>
 <div class="theme-toggle-container theme-toggle-content">
-            <button class="theme-toggle">
-              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
               <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
               <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
               <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -250,16 +242,123 @@
             </button>
           </div>
           <label class="toc-overlay-icon toc-content-icon" for="__toc">
-            <div class="visually-hidden">Toggle table of contents sidebar</div>
-            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
           <section id="rest-endpoints">
 <h1>REST Endpoints<a class="headerlink" href="#rest-endpoints" title="Link to this heading">¶</a></h1>
+<section id="the-basics-datasource-and-datasourcewidget">
+<h2>The basics: DataSource and DataSourceWidget<a class="headerlink" href="#the-basics-datasource-and-datasourcewidget" title="Link to this heading">¶</a></h2>
+<p>Before schemas or validation enter the picture, every CuteFront backend connection boils down to
+just two pieces:</p>
+<ul class="simple">
+<li><p>A <strong>DataSource</strong> subclass that knows how to talk to the backend (or, for a <strong>MockDataSource</strong>,
+how to fake it).</p></li>
+<li><p>A <strong>DataSourceWidget</strong> subclass that turns the DataSource’s async calls into slots, and their
+results into signals, so the rest of your widget graph never has to deal with promises directly.</p></li>
+</ul>
+<p>The example below (<code class="docutils literal notranslate"><span class="pre">backendexample.js</span></code> and <code class="docutils literal notranslate"><span class="pre">backendexample.html</span></code>, found in the base widget
+library repo under <code class="docutils literal notranslate"><span class="pre">train/</span></code>) defines three operations - a <code class="docutils literal notranslate"><span class="pre">GET</span></code>, a <code class="docutils literal notranslate"><span class="pre">POST</span></code> with a JSON body,
+and a <code class="docutils literal notranslate"><span class="pre">POST</span></code> with <code class="docutils literal notranslate"><span class="pre">multipart/form-data</span></code> - with no <code class="docutils literal notranslate"><span class="pre">DataModel</span></code> involved at all.</p>
+<p><strong>The datasource</strong> subclasses <code class="docutils literal notranslate"><span class="pre">HTTPDataSource</span></code> (real backend) and <code class="docutils literal notranslate"><span class="pre">MockDataSource</span></code> (in-memory
+fake, handy for UI work before a backend even exists). Both expose the same method names and
+return shape, which is what lets you develop against the mock and swap in the real
+<code class="docutils literal notranslate"><span class="pre">HTTPDataSource</span></code> later without touching anything downstream:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span><span class="w"> </span><span class="nx">ExampleHTTPDataSource</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">HTTPDataSource</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="nx">getSome</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">requestConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">_buildRequestConfig</span><span class="p">(</span><span class="s1">&#39;example/some&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;GET&#39;</span><span class="w"> </span><span class="p">});</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">_makeRequest</span><span class="p">(</span><span class="nx">requestConfig</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="nx">postSome</span><span class="p">(</span><span class="nx">datum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">requestConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">_buildRequestConfig</span><span class="p">(</span><span class="s1">&#39;example/some&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">datum</span><span class="p">)</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">_makeRequest</span><span class="p">(</span><span class="nx">requestConfig</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">async</span><span class="w"> </span><span class="nx">postFormData</span><span class="p">(</span><span class="nx">datum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">formData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">_jsonToFormData</span><span class="p">(</span><span class="nx">datum</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">makeFormRequest</span><span class="p">(</span><span class="s1">&#39;example/some-form&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">formData</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nx">ExampleMockDataSource</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">MockDataSource</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">super</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Hello from the mock backend!&quot;</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">getSome</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">_simulateNetwork</span><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">structuredClone</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">postSome</span><span class="p">(</span><span class="nx">datum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">_simulateNetwork</span><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">datum</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">datum</span><span class="p">.</span><span class="nx">fail</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// lets you exercise the error path on demand, without a real backend</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;HTTP 400: Bad Request&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">status</span><span class="o">:</span><span class="w"> </span><span class="mf">400</span><span class="p">,</span>
+<span class="w">                        </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">detail</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;fail flag was set in datum&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">};</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="sb">`Server got: </span><span class="si">${</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">datum</span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="w"> </span><span class="p">};</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// postFormData() follows the same _simulateNetwork() pattern as postSome()</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>The widget</strong> subclasses <code class="docutils literal notranslate"><span class="pre">DataSourceWidget</span></code>, turning each dataSource call into a slot and each
+result into a signal:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span><span class="w"> </span><span class="nx">ExampleDataSourceWidget</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">DataSourceWidget</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">createSignals</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">super</span><span class="p">.</span><span class="nx">createSignals</span><span class="p">();</span><span class="w"> </span><span class="c1">// keep DataSourceWidget&#39;s own error/loading_* signals</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">someData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Signal</span><span class="p">(</span><span class="s2">&quot;Result of getSome(). Carries: { message: str }&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Signal</span><span class="p">(</span><span class="s2">&quot;Fired after ANY operation succeeds. Carries nothing.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">get_some_slot</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">loading_start</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;get-some&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">dataSource</span><span class="p">.</span><span class="nx">getSome</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">reply_message</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">loading_success</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;get-some&#39;</span><span class="p">);</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">success</span><span class="p">.</span><span class="nx">emit</span><span class="p">();</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">someData</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="nx">reply_message</span><span class="p">);</span>
+<span class="w">            </span><span class="p">})</span>
+<span class="w">            </span><span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">loading_error</span><span class="p">.</span><span class="nx">emit</span><span class="p">({</span><span class="nx">operation</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;get-some&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="nx">error</span><span class="p">});</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">_emitError</span><span class="p">(</span><span class="s2">&quot;Get failed&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span><span class="w"> </span><span class="c1">// emits the inherited signals.error</span>
+<span class="w">            </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// post_some_slot() / post_form_data_slot() follow the same then/catch pattern</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">_emitError()</span></code> and the <code class="docutils literal notranslate"><span class="pre">error</span></code> / <code class="docutils literal notranslate"><span class="pre">loading_*</span></code> signals come for free from <code class="docutils literal notranslate"><span class="pre">DataSourceWidget</span></code> -
+see the header comment in <code class="docutils literal notranslate"><span class="pre">train/backendexample.js</span></code> for the full rundown of what the base
+<code class="docutils literal notranslate"><span class="pre">DataSource</span></code>, <code class="docutils literal notranslate"><span class="pre">HTTPDataSource</span></code> and <code class="docutils literal notranslate"><span class="pre">DataSourceWidget</span></code> classes already give you.</p>
+<p><strong>Wiring it up</strong> in html is pure signal/slot connection - no <code class="docutils literal notranslate"><span class="pre">async</span></code>/<code class="docutils literal notranslate"><span class="pre">await</span></code> in sight:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">mockDataSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ExampleMockDataSource</span><span class="p">();</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">dataSourceWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ExampleDataSourceWidget</span><span class="p">(</span><span class="s2">&quot;datasource-widget&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">mockDataSource</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">controlWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ExampleControlWidget</span><span class="p">(</span><span class="s2">&quot;controls&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// renders the buttons, emits a signal per click</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">statusWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ExampleStatusWidget</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">);</span><span class="w">     </span><span class="c1">// shows the result in green, errors in red</span>
+
+<span class="nx">controlWidget</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">get_some</span><span class="p">.</span><span class="nx">connect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">dataSourceWidget</span><span class="p">.</span><span class="nx">get_some_slot</span><span class="p">());</span>
+<span class="nx">dataSourceWidget</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">someData</span><span class="p">.</span><span class="nx">connect</span><span class="p">((</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">statusWidget</span><span class="p">.</span><span class="nx">data_slot</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+<span class="nx">dataSourceWidget</span><span class="p">.</span><span class="nx">signals</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">connect</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">statusWidget</span><span class="p">.</span><span class="nx">error_slot</span><span class="p">(</span><span class="nx">error</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Click a button, and the chain runs itself: <strong>click -&gt; signal -&gt; slot -&gt; dataSource promise resolves
+-&gt; signal -&gt; slot</strong> updates the DOM. Nothing in between ever awaits anything by hand.</p>
+<p>Open <code class="docutils literal notranslate"><span class="pre">backendexample.html</span></code> directly in a browser (with <code class="docutils literal notranslate"><span class="pre">--allow-file-access-from-files</span></code> if
+loading straight from disk) to try it interactively - it defaults to the mock datasource, so it
+works with no backend at all.</p>
+</section>
 <section id="datamodels-and-sources">
 <h2>Datamodels and sources<a class="headerlink" href="#datamodels-and-sources" title="Link to this heading">¶</a></h2>
-<p>Cutefront comes with all the necessary machinery to communicate with your REST API endpoint.</p>
+<p>Once you need schema validation and adaptive forms on top of the pattern above, <code class="docutils literal notranslate"><span class="pre">DataModel</span></code>
+enters the picture. Cutefront comes with all the necessary machinery to communicate with your REST API endpoint.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">datamodel.js</span></code> : <code class="docutils literal notranslate"><span class="pre">DataModel</span></code> defines the structure of the data records.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">datasource.js</span></code> : <code class="docutils literal notranslate"><span class="pre">DataSource</span></code> defines CRUD operations.</p></li>
@@ -363,6 +462,7 @@ to adapt themselves to the datamodel.  The <code class="docutils literal notrans
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">REST Endpoints</a><ul>
+<li><a class="reference internal" href="#the-basics-datasource-and-datasourcewidget">The basics: DataSource and DataSourceWidget</a></li>
 <li><a class="reference internal" href="#datamodels-and-sources">Datamodels and sources</a></li>
 <li><a class="reference internal" href="#adaptive-forms">Adaptive forms</a></li>
 </ul>
@@ -377,9 +477,9 @@ to adapt themselves to the datamodel.  The <code class="docutils literal notrans
     </aside>
   </div>
 </div><script src="_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
     </body>

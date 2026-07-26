@@ -1,10 +1,128 @@
 REST Endpoints
 ==============
 
+The basics: DataSource and DataSourceWidget
+--------------------------------------------
+
+Before schemas or validation enter the picture, every CuteFront backend connection boils down to
+just two pieces:
+
+- A **DataSource** subclass that knows how to talk to the backend (or, for a **MockDataSource**,
+  how to fake it).
+- A **DataSourceWidget** subclass that turns the DataSource's async calls into slots, and their
+  results into signals, so the rest of your widget graph never has to deal with promises directly.
+
+The example below (``backendexample.js`` and ``backendexample.html``, found in the base widget
+library repo under ``train/``) defines three operations - a ``GET``, a ``POST`` with a JSON body,
+and a ``POST`` with ``multipart/form-data`` - with no ``DataModel`` involved at all.
+
+**The datasource** subclasses ``HTTPDataSource`` (real backend) and ``MockDataSource`` (in-memory
+fake, handy for UI work before a backend even exists). Both expose the same method names and
+return shape, which is what lets you develop against the mock and swap in the real
+``HTTPDataSource`` later without touching anything downstream:
+
+.. code:: javascript
+
+    class ExampleHTTPDataSource extends HTTPDataSource {
+        async getSome() {
+            const requestConfig = this._buildRequestConfig('example/some', { method: 'GET' });
+            return await this._makeRequest(requestConfig);
+        }
+
+        async postSome(datum) {
+            const requestConfig = this._buildRequestConfig('example/some', {
+                method: 'POST',
+                body: JSON.stringify(datum)
+            });
+            return await this._makeRequest(requestConfig);
+        }
+
+        async postFormData(datum) {
+            const formData = this._jsonToFormData(datum);
+            return await this.makeFormRequest('example/some-form', 'POST', formData);
+        }
+    }
+
+    class ExampleMockDataSource extends MockDataSource {
+        constructor() {
+            super();
+            this.data = { message: "Hello from the mock backend!" };
+        }
+
+        getSome() {
+            return this._simulateNetwork(async () => structuredClone(this.data));
+        }
+
+        postSome(datum) {
+            return this._simulateNetwork(async () => {
+                if (datum && datum.fail) {
+                    // lets you exercise the error path on demand, without a real backend
+                    throw { message: "HTTP 400: Bad Request", status: 400,
+                            body: { detail: "fail flag was set in datum" } };
+                }
+                return { message: `Server got: ${JSON.stringify(datum)}` };
+            });
+        }
+        // postFormData() follows the same _simulateNetwork() pattern as postSome()
+    }
+
+**The widget** subclasses ``DataSourceWidget``, turning each dataSource call into a slot and each
+result into a signal:
+
+.. code:: javascript
+
+    class ExampleDataSourceWidget extends DataSourceWidget {
+        createSignals() {
+            super.createSignals(); // keep DataSourceWidget's own error/loading_* signals
+            this.signals.someData = new Signal("Result of getSome(). Carries: { message: str }");
+            this.signals.success = new Signal("Fired after ANY operation succeeds. Carries nothing.");
+        }
+
+        get_some_slot() {
+            this.signals.loading_start.emit('get-some');
+            this.dataSource.getSome()
+                .then((reply_message) => {
+                    this.signals.loading_success.emit('get-some');
+                    this.signals.success.emit();
+                    this.signals.someData.emit(reply_message);
+                })
+                .catch((error) => {
+                    this.signals.loading_error.emit({operation: 'get-some', error: error});
+                    this._emitError("Get failed", error); // emits the inherited signals.error
+                });
+        }
+        // post_some_slot() / post_form_data_slot() follow the same then/catch pattern
+    }
+
+``_emitError()`` and the ``error`` / ``loading_*`` signals come for free from ``DataSourceWidget`` -
+see the header comment in ``train/backendexample.js`` for the full rundown of what the base
+``DataSource``, ``HTTPDataSource`` and ``DataSourceWidget`` classes already give you.
+
+**Wiring it up** in html is pure signal/slot connection - no ``async``/``await`` in sight:
+
+.. code:: javascript
+
+    var mockDataSource = new ExampleMockDataSource();
+    var dataSourceWidget = new ExampleDataSourceWidget("datasource-widget", mockDataSource);
+    var controlWidget = new ExampleControlWidget("controls"); // renders the buttons, emits a signal per click
+    var statusWidget = new ExampleStatusWidget("status");     // shows the result in green, errors in red
+
+    controlWidget.signals.get_some.connect(() => dataSourceWidget.get_some_slot());
+    dataSourceWidget.signals.someData.connect((data) => statusWidget.data_slot(data));
+    dataSourceWidget.signals.error.connect((error) => statusWidget.error_slot(error));
+
+Click a button, and the chain runs itself: **click -> signal -> slot -> dataSource promise resolves
+-> signal -> slot** updates the DOM. Nothing in between ever awaits anything by hand.
+
+Open ``backendexample.html`` directly in a browser (with ``--allow-file-access-from-files`` if
+loading straight from disk) to try it interactively - it defaults to the mock datasource, so it
+works with no backend at all.
+
 Datamodels and sources
 ----------------------
 
-Cutefront comes with all the necessary machinery to communicate with your REST API endpoint.
+Once you need schema validation and adaptive forms on top of the pattern above, ``DataModel``
+enters the picture. Cutefront comes with all the necessary machinery to communicate with your REST API endpoint.
 
 - ``datamodel.js`` : ``DataModel`` defines the structure of the data records.  
 - ``datasource.js`` : ``DataSource`` defines CRUD operations.
