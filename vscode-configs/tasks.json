@@ -11,7 +11,7 @@
                 "9090"
             ],
             "options": {
-                "cwd": "${workspaceFolder}/cutefront"
+                "cwd": "${workspaceFolder}"
             },
             "isBackground": true,
             "problemMatcher": {

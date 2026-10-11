@@ -51,9 +51,13 @@ Time to chat with the user:
 
 - App-specific widgets go under `app/`, while the base library is under `lib/`
 - Example landing page is `app/landing.html` - user can try VSCode's debug feature: in the left-hand-side vertical menu
-  choose "Run and Debug", open `app/landing.html` and pick "Cutefront HTML file://"
+  choose "Run and Debug", open `app/landing.html` and pick "Cutefront HTML file://".
+  For this, the user needs to have Google Chrome installed.
 - Tell the user about the commands we have installed:
   - `/cute-frontend` : continue this project from a clean context
   - `/cute-example` : create an example project into this project folder
   - `/current-project` : a placeholder the user may (or may not) want to edit into a shorthand command describing this project - by default it just reads `cute-frontend.md`
+- Claude Code loads these commands only at startup, so tell the user that they are available from the next session on.
+  In this session, the user can just ask in plain words (say, "create the example project"):
+  then read the corresponding file in `.claude/commands/` (say, `.claude/commands/cute-example.md`) and follow its instructions.
 - What makes cutefront different from other frameworks: ultra-lean pure JS and HTML, signal/slot paradigm, well-separated testable widgets with clear-cut APIs, no virtual DOM, and whatever *you* think about cutefront

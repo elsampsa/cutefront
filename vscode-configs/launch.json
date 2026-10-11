@@ -20,7 +20,7 @@
         "type": "chrome",
         "request": "launch",
         "url": "http://localhost:9090/app/landing.html?testing=true&test-panel=true&network-testing=true",
-        "webRoot": "${workspaceFolder}/cutefront",
+        "webRoot": "${workspaceFolder}",
         "runtimeArgs": [
             "--auto-open-devtools-for-tabs",
             "--disable-http-cache",
@@ -35,7 +35,7 @@
         "type": "chrome",
         "request": "launch",
         "url": "http://localhost:9090/app/layout.html?testing=true&test-panel=true&network-testing=true",
-        "webRoot": "${workspaceFolder}/cutefront",
+        "webRoot": "${workspaceFolder}",
         "runtimeArgs": [
             "--auto-open-devtools-for-tabs",
             "--disable-http-cache",
@@ -50,7 +50,7 @@
         "type": "chrome",
         "request": "launch",
         "url": "http://localhost:9090/app/reset.html?token=kokkelis&testing=true",
-        "webRoot": "${workspaceFolder}/cutefront",
+        "webRoot": "${workspaceFolder}",
         "runtimeArgs": [
             "--auto-open-devtools-for-tabs",
             "--disable-http-cache",
