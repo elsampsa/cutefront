@@ -1,29 +1,31 @@
 
-We start by creating a directory for the project.  
+We assume the user has created a new, empty directory for the project and started Claude Code in it.
+Below, let's refer to that directory as `my_cute_app`.
 
-Ask the user where (s)he wants to put that directory.
+First, check that the current working directory is empty.  If it's not, don't create anything yet.
+Instead, tell the user that the directory is not empty (list what's in there), explain that it should be empty
+for the project scaffold, and ask the user what to do.  For example, the user might want to remove those files,
+or create a new, empty directory, start Claude Code there and point it to this file again.
 
-Next, lets suppose the directory name is `my_cute_app`
-
-Go into that directory and then use this one-liner to create a the project scaffold:
+Create the project scaffold into the current directory with this one-liner:
 ```bash
 bash <(curl -sSL https://raw.githubusercontent.com/elsampsa/cutefront/main/new_project.bash)
 ```
 If you want to inspect that script first, feel free to do so.
 
-Now you have the necessary directory structure and the widget base library: 
+Now you have the necessary directory structure and the widget base library:
 ```
     my_cute_app
     ├── app/                    # Put here the app's .js and .html files
     │    ├── lib/               # library for app-specific widgets
     │    ├── static/            # app static assets
-    |    └── landing.html       # the frontend's entry-point
+    │    └── landing.html       # the frontend's entry-point
     │
-    ├── lib                     # cutefront base widget library cloned from git and detached from the repo
+    ├── lib/                    # cutefront base widget library, cloned from git and detached from the repo
     │    ├── base
     │    ├── bootstrap
-    │    |       ├── css  
-    │    |       └── js
+    │    │       ├── css
+    │    │       └── js
     │    ├── include            # bootstrap icons, fontawesome, some extra js libraries
     │    ├── render             # widgets based on those extra js libraries
     │    ├── static             # images, etc.
@@ -31,31 +33,27 @@ Now you have the necessary directory structure and the widget base library:
     │            └── CLAUDE.md  # context for Claude
     ├── .vscode
     │    ├── launch.json        # debug your cutefront widgets within vscode
-    │    └── tasks.json          
+    │    └── tasks.json
     │
     └── .claude
-            └── commands
-                    └── cute-project-init.md
-                                # this very file
-                        cute-frontend.md
-                                # use shorthand command "/cute-frontend" in claude code 
-                                # to restart already existing cutefron project
-                        cute-example.md
-                                # a command to create the example project
-                        current-project.md
-                                # users own short-hand command for this project
+         ├── settings.json
+         └── commands
+              ├── cute-project-init.md  # this very file
+              ├── cute-frontend.md      # "/cute-frontend": restart an existing cutefront project from a clean context
+              ├── cute-example.md       # "/cute-example": create the example project
+              └── current-project.md    # "/current-project": user's own shorthand command for this project
 ```
-Next, READ IMMEDIATELY `my_cute_app/lib/train/CLAUDE.md`.
+Next, READ IMMEDIATELY `lib/train/CLAUDE.md`.
 
-Now you know everything about cutefront framework, congrats!
+Now you know everything about the cutefront framework, congrats!
 
 Time to chat with the user:
 
-- App specific widgets are under `app/`, while the base library is under `lib/`
-- Example landing page is `landing.html` - user can try to use vscode's debug feature on the left-hand-side vertical menu 
-  choose landing html and pick "Cutefront HTML file"
+- App-specific widgets go under `app/`, while the base library is under `lib/`
+- Example landing page is `app/landing.html` - user can try VSCode's debug feature: in the left-hand-side vertical menu
+  choose "Run and Debug", open `app/landing.html` and pick "Cutefront HTML file://"
 - Tell the user about the commands we have installed:
-  /cute-frontend : when continuying this project from a clean context
-  /cute-example : create an example project into this project folder
-  /current-project : user might want to edit this for a shorthand command to continuing this project from a clean context: reads cute-frontend.md
-- What makes cutefront different from other frameworks: ultra lean pure JS and HTML, signal/slot paradigm, well separated testeable widgets with clear-cut APIs, No virtual DOM, whatever *you* think about cutefront
+  - `/cute-frontend` : continue this project from a clean context
+  - `/cute-example` : create an example project into this project folder
+  - `/current-project` : a placeholder the user may (or may not) want to edit into a shorthand command describing this project - by default it just reads `cute-frontend.md`
+- What makes cutefront different from other frameworks: ultra-lean pure JS and HTML, signal/slot paradigm, well-separated testable widgets with clear-cut APIs, no virtual DOM, and whatever *you* think about cutefront

@@ -24,3 +24,5 @@ yarn.lock
 .yarn-integrity
 *.doctree
 *.pickle
+.buildinfo.back
+.buildinfo.bak

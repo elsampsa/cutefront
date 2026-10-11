@@ -13,6 +13,17 @@ CuteFront is a frontend framework, featuring:
 
 For full documentation, please go [here](https://elsampsa.github.io/cutefront/_build/html/index.html)
 
+## Quickstart with Claude Code
+
+1. Create a new, empty directory for your project and start Claude Code in it:
+   ```bash
+   mkdir my_cute_app && cd my_cute_app && claude
+   ```
+2. Tell Claude:
+   ```text
+   Please read https://raw.githubusercontent.com/elsampsa/cutefront/main/vscode-configs/cute-project-init.md and follow its instructions
+   ```
+
 ## Included
 
 - AI prompts

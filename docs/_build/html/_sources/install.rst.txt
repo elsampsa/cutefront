@@ -13,60 +13,71 @@ From scratch
 
 Wanna play around, maybe just do a frontend-only app and not worry about backends, databases, etc?
 
-Let's create a minimal scaffold.
-
-Create a directory for your project and enter it:
+Let's create a minimal scaffold.  Create a new, empty directory for your project and start Claude Code in it:
 
 .. code-block:: bash
 
     mkdir my_cute_app
     cd my_cute_app
+    claude
 
-and use this online initialization script:
+(or open ``my_cute_app`` as your workspace root folder in VSCode and start the Claude Code extension there)
+
+Then tell Claude:
+
+.. code-block:: text
+
+    Please read 
+    https://raw.githubusercontent.com/elsampsa/cutefront/main/vscode-configs/cute-project-init.md 
+    and follow its instructions
+
+That's it!  Claude creates the project scaffold, learns cutefront and tells you what to do next.
+
+If you prefer to create the scaffold by hand, run this online initialization script in your (empty) project directory instead:
 
 .. code-block:: bash
 
     bash <(curl -sSL https://raw.githubusercontent.com/elsampsa/cutefront/main/new_project.bash)
 
-Now you have the necessary directory structure and the widget base library: 
+Either way, you now have the necessary directory structure and the widget base library:
 
 .. code-block:: text
+    :class: no-copybutton
 
     my_cute_app
-    ├── app/                   # TODO: put here your app's .js and .html files
-    │    ├── lib/              # library for your app-specific widgets
-    │    ├── static/           # app static assets
-    |    └── landing.html      # your frontend's entry-point
+    ├── app/                    # put here your app's .js and .html files
+    │    ├── lib/               # library for your app-specific widgets
+    │    ├── static/            # app static assets
+    │    └── landing.html       # your frontend's entry-point
     │
-    ├── lib                    # cutefront base widget library as a git submodule
+    ├── lib/                    # cutefront base widget library, 
+    │    │                      # cloned from git and detached from the repo
     │    ├── base
     │    ├── bootstrap
-    │    |       ├── css  
-    │    |       └── js
-    │    ├── include             # bootstrap icons, fontawesome, some extra js libraries
-    │    ├── render              # widgets based on those extra js libraries
-    │    ├── static              # images, etc.
-    │    └── train               # training material for AI
-    │            └── CLAUDE.md   # context for Claude
+    │    │       ├── css
+    │    │       └── js
+    │    ├── include            # bootstrap icons, fontawesome, some extra js libs
+    │    ├── render             # widgets based on those extra js libraries
+    │    ├── static             # images, etc.
+    │    └── train              # training material for AI
+    │            └── CLAUDE.md  # context for Claude
     ├── .vscode
-    │    ├── launch.json         # debug your cutefront widgets with vscode
-    │    └── tasks.json          
+    │    ├── launch.json        # debug your cutefront widgets with vscode
+    │    └── tasks.json
     │
     └── .claude
-            └── commands
-                    └── cute-frontend.md
-                                # use shorthand command "/cute-frontend" in claude code 
-                                # to give context about cutefront
-                        current-project.md
-                                # TODO: by you
-                                # use shorthand command "/current-project" 
-                                # in claude code to give context on your current project
+         ├── settings.json
+         └── commands
+              ├── cute-project-init.md  # project initialization instructions for Claude
+              ├── cute-frontend.md      # "/cute-frontend": give Claude context about cutefront
+              ├── cute-example.md       # "/cute-example": create the example project
+              └── current-project.md    # "/current-project": edit to describe your project
 
-
-Next, lets establish ``my_cute_app`` as the root directory of you vscode project and use Claude Code's vscode extension and give it the command ``/cute-frontend``.
-We're ready to go.
+When you come back to the project later, start Claude Code in ``my_cute_app`` and give it the command ``/cute-frontend``.
 
 Now we can test how Claude Code and Cutefront perform in creating a webapp with some potential for global state mess.  Try for example this prompt:
+
+.. code-block:: text
 
     Hi! Let's create a single-page application: a frontend for an industrial visual quality control system.
 
@@ -124,6 +135,7 @@ Now you have:
 - Custom docker compose files run the original fullstack example with Cutefront frontend
 
 .. code-block:: text
+    :class: no-copybutton
 
     ├── cutefront/     # cutefront frontend as a git submodule
     │                  # has all the lib,.vscode,.claude 

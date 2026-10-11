@@ -49,6 +49,9 @@ extensions = [
     'sphinx_copybutton'
 ]
 
+# no copy button for code blocks with ":class: no-copybutton" (e.g. directory trees)
+copybutton_selector = "div:not(.no-copybutton) > div.highlight > pre"
+
 autodoc_default_flags = ['members']
 # autosummary_generate = True
 
