@@ -15,6 +15,7 @@ CuteFront
 .. toctree::
    :maxdepth: 8
 
+   quickstart
    intro
    qtlike
    install
