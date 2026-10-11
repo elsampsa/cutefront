@@ -33,10 +33,11 @@ cat > app/landing.html << 'EOF'
 </html>
 EOF
 
-# Clone the cutefront-lib as git submodule
+# Clone cutefront-lib 
 echo "Cloning CuteFront widget library..."
-git init .
-git submodule add https://github.com/elsampsa/cutefront-lib.git lib
+git clone https://github.com/elsampsa/cutefront-lib.git ./lib
+# remove git stuff:
+rm -rf lib/.git 
 
 # Create .vscode directory and download config files
 echo "Setting up VSCode configuration..."
@@ -48,6 +49,8 @@ curl -sSL "${REPO_BASE}/vscode-configs/tasks.json" -o .vscode/tasks.json
 echo "Setting up Claude Code configuration..."
 mkdir -p .claude/commands
 curl -sSL "${REPO_BASE}/vscode-configs/cute-frontend.md" -o .claude/commands/cute-frontend.md
+curl -sSL "${REPO_BASE}/vscode-configs/cute-example.md" -o .claude/commands/cute-example.md
+curl -sSL "${REPO_BASE}/vscode-configs/cute-project-init.md" -o .claude/commands/cute-project-init.md
 
 # Create .claude/settings.json with CuteFront permissions
 cat > .claude/settings.json << 'EOF'
