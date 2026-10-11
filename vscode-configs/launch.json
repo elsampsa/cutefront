@@ -1,8 +1,21 @@
 {
     "version": "0.2.0",
     "configurations": [
-        {
-        "name": "Cutefront HTML file://",
+        { // open the html file as such
+        "name": "Cutefront HTML file",
+        "type": "chrome",
+        "request": "launch",
+        "file":"${file}",
+        "webRoot":"${fileDirname}",
+        "runtimeArgs": [
+            "--allow-file-access-from-files",
+            "--auto-open-devtools-for-tabs",
+            "--disable-http-cache",
+            "--disk-cache-size=0"
+        ]
+        },
+        { // open the html file in test-mode: with test panels, network testing, etc.
+        "name": "Cutefront HTML file DEBUG",
         "type": "chrome",
         "request": "launch",
         "file":"${file}?testing=true&test-panel=true&network-testing=true",
@@ -12,7 +25,7 @@
             "--auto-open-devtools-for-tabs",
             "--disable-http-cache",
             "--disk-cache-size=0"
-        ],
+        ]
         }, // TODO: adapt these to your usercase:
         /*
         {

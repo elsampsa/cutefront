@@ -15,7 +15,8 @@ The whole philosophy of Cutefront are easily-debuggable individual components.  
 
 - Choose a Cutefront HTML file in your VSCode
 - Go into VSCode debugging tab
-- Choose ``Cutefront HTML file://`` from the "Run and Debug" dropdown menu
+- Choose ``Cutefront HTML file`` from the "Run and Debug" dropdown menu,
+  or ``Cutefront HTML file DEBUG`` to open the page in test-mode (URL parameters ``testing=true&test-panel=true&network-testing=true``)
 
 You can try this first with any of the library widgets - try it for example with ``ballplayer.html``.
 

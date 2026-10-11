@@ -51,7 +51,8 @@ Time to chat with the user:
 
 - App-specific widgets go under `app/`, while the base library is under `lib/`
 - Example landing page is `app/landing.html` - user can try VSCode's debug feature: in the left-hand-side vertical menu
-  choose "Run and Debug", open `app/landing.html` and pick "Cutefront HTML file://".
+  choose "Run and Debug", open `app/landing.html` and pick "Cutefront HTML file"
+  (there is also "Cutefront HTML file DEBUG" that opens the page in test-mode, i.e. with the URL parameters `testing=true&test-panel=true&network-testing=true`).
   For this, the user needs to have Google Chrome installed.
 - Tell the user about the commands we have installed:
   - `/cute-frontend` : continue this project from a clean context
